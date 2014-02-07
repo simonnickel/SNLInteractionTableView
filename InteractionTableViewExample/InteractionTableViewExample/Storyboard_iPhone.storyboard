@@ -28,15 +28,16 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skt-ib-XOV">
-                                            <rect key="frame" x="201" y="10" width="42" height="21"/>
+                                            <rect key="frame" x="205" y="10" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="skt-ib-XOV" firstAttribute="leading" secondItem="rJH-QH-HBu" secondAttribute="trailing" constant="20" id="4z7-m8-xww"/>
+                                        <constraint firstItem="skt-ib-XOV" firstAttribute="leading" secondItem="rJH-QH-HBu" secondAttribute="trailing" constant="24" id="4z7-m8-xww"/>
                                         <constraint firstItem="skt-ib-XOV" firstAttribute="top" secondItem="EGe-T0-Drm" secondAttribute="top" constant="10" id="7Ad-cX-qOA"/>
                                         <constraint firstAttribute="centerX" secondItem="rJH-QH-HBu" secondAttribute="centerX" id="AUC-pY-dDM"/>
                                         <constraint firstAttribute="centerY" secondItem="rJH-QH-HBu" secondAttribute="centerY" id="fEk-fB-ic7"/>

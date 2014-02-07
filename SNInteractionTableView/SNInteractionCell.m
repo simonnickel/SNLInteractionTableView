@@ -1,20 +1,20 @@
 //
-//  SNICell.m
+//  SNInteractionCell.m
 //  InteractionTableViewExample
 //
 //  Created by Simon Nickel on 06.02.14.
 //  Copyright (c) 2014 simonnickel. All rights reserved.
 //
 
-#import "SNICell.h"
+#import "SNInteractionCell.h"
 
-@interface SNICell ()
+@interface SNInteractionCell ()
 
 @property (nonatomic) UIView *container;
 
 @end
 
-@implementation SNICell
+@implementation SNInteractionCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 simonnickel. All rights reserved.
 //
 
-#import "SNICell.h"
+#import "SNInteractionCell.h"
 
-@interface SNIETableViewCell : SNICell
+@interface SNIETableViewCell : SNInteractionCell
 @property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  SNICell.h
+//  SNInteractionCell.h
 //  InteractionTableViewExample
 //
 //  Created by Simon Nickel on 06.02.14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SNICell : UITableViewCell
+@interface SNInteractionCell : UITableViewCell
 
 @end

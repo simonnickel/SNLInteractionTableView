@@ -25,7 +25,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../SNInteractionTableView/SNICell.m"
+            filePath = "../SNInteractionTableView/SNInteractionCell.m"
             timestampString = "413472477.12103"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

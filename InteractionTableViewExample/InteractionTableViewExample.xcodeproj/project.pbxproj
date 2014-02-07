@@ -12,7 +12,7 @@
 		5A87C84918A3E75800928A4A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C84818A3E75800928A4A /* UIKit.framework */; };
 		5A87C84F18A3E75800928A4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A87C84D18A3E75800928A4A /* InfoPlist.strings */; };
 		5A87C85118A3E75800928A4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C85018A3E75800928A4A /* main.m */; };
-		5A87C85518A3E75800928A4A /* SNIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C85418A3E75800928A4A /* SNIAppDelegate.m */; };
+		5A87C85518A3E75800928A4A /* SNIEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C85418A3E75800928A4A /* SNIEAppDelegate.m */; };
 		5A87C85718A3E75800928A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A87C85618A3E75800928A4A /* Images.xcassets */; };
 		5A87C85E18A3E75800928A4A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C85D18A3E75800928A4A /* XCTest.framework */; };
 		5A87C85F18A3E75800928A4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C84418A3E75800928A4A /* Foundation.framework */; };
@@ -20,9 +20,11 @@
 		5A87C86818A3E75800928A4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A87C86618A3E75800928A4A /* InfoPlist.strings */; };
 		5A87C86A18A3E75800928A4A /* InteractionTableViewExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C86918A3E75800928A4A /* InteractionTableViewExampleTests.m */; };
 		5A87C87818A3E8BE00928A4A /* Storyboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A87C87718A3E8BE00928A4A /* Storyboard_iPhone.storyboard */; };
-		5A87C87B18A3E91A00928A4A /* SNITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C87A18A3E91A00928A4A /* SNITableViewController.m */; };
+		5A87C87B18A3E91A00928A4A /* SNIETableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C87A18A3E91A00928A4A /* SNIETableViewController.m */; };
 		5A87C88118A3E9F300928A4A /* SNInteractionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C88018A3E9F300928A4A /* SNInteractionTableView.m */; };
 		5A87C90E18A3EBCA00928A4A /* Storyboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A87C90D18A3EBCA00928A4A /* Storyboard_iPad.storyboard */; };
+		5A87C95F18A3FB1B00928A4A /* SNICell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C95E18A3FB1A00928A4A /* SNICell.m */; };
+		5A87C96518A4020500928A4A /* SNIETableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C96418A4020500928A4A /* SNIETableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +46,8 @@
 		5A87C84E18A3E75800928A4A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A87C85018A3E75800928A4A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A87C85218A3E75800928A4A /* InteractionTableViewExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InteractionTableViewExample-Prefix.pch"; sourceTree = "<group>"; };
-		5A87C85318A3E75800928A4A /* SNIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SNIAppDelegate.h; sourceTree = "<group>"; };
-		5A87C85418A3E75800928A4A /* SNIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SNIAppDelegate.m; sourceTree = "<group>"; };
+		5A87C85318A3E75800928A4A /* SNIEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SNIEAppDelegate.h; sourceTree = "<group>"; };
+		5A87C85418A3E75800928A4A /* SNIEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SNIEAppDelegate.m; sourceTree = "<group>"; };
 		5A87C85618A3E75800928A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5A87C85C18A3E75800928A4A /* InteractionTableViewExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InteractionTableViewExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A87C85D18A3E75800928A4A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -53,11 +55,15 @@
 		5A87C86718A3E75800928A4A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A87C86918A3E75800928A4A /* InteractionTableViewExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractionTableViewExampleTests.m; sourceTree = "<group>"; };
 		5A87C87718A3E8BE00928A4A /* Storyboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iPhone.storyboard; sourceTree = "<group>"; };
-		5A87C87918A3E91A00928A4A /* SNITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNITableViewController.h; sourceTree = "<group>"; };
-		5A87C87A18A3E91A00928A4A /* SNITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNITableViewController.m; sourceTree = "<group>"; };
+		5A87C87918A3E91A00928A4A /* SNIETableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNIETableViewController.h; sourceTree = "<group>"; };
+		5A87C87A18A3E91A00928A4A /* SNIETableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNIETableViewController.m; sourceTree = "<group>"; };
 		5A87C87F18A3E9F300928A4A /* SNInteractionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNInteractionTableView.h; path = ../SNInteractionTableView/SNInteractionTableView.h; sourceTree = "<group>"; };
 		5A87C88018A3E9F300928A4A /* SNInteractionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNInteractionTableView.m; path = ../SNInteractionTableView/SNInteractionTableView.m; sourceTree = "<group>"; };
 		5A87C90D18A3EBCA00928A4A /* Storyboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iPad.storyboard; sourceTree = "<group>"; };
+		5A87C95D18A3FB1A00928A4A /* SNICell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNICell.h; path = ../SNInteractionTableView/SNICell.h; sourceTree = "<group>"; };
+		5A87C95E18A3FB1A00928A4A /* SNICell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNICell.m; path = ../SNInteractionTableView/SNICell.m; sourceTree = "<group>"; };
+		5A87C96318A4020500928A4A /* SNIETableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNIETableViewCell.h; sourceTree = "<group>"; };
+		5A87C96418A4020500928A4A /* SNIETableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNIETableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +124,12 @@
 		5A87C84A18A3E75800928A4A /* InteractionTableViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				5A87C85318A3E75800928A4A /* SNIAppDelegate.h */,
-				5A87C85418A3E75800928A4A /* SNIAppDelegate.m */,
-				5A87C87918A3E91A00928A4A /* SNITableViewController.h */,
-				5A87C87A18A3E91A00928A4A /* SNITableViewController.m */,
+				5A87C85318A3E75800928A4A /* SNIEAppDelegate.h */,
+				5A87C85418A3E75800928A4A /* SNIEAppDelegate.m */,
+				5A87C87918A3E91A00928A4A /* SNIETableViewController.h */,
+				5A87C87A18A3E91A00928A4A /* SNIETableViewController.m */,
+				5A87C96318A4020500928A4A /* SNIETableViewCell.h */,
+				5A87C96418A4020500928A4A /* SNIETableViewCell.m */,
 				5A87C87718A3E8BE00928A4A /* Storyboard_iPhone.storyboard */,
 				5A87C90D18A3EBCA00928A4A /* Storyboard_iPad.storyboard */,
 				5A87C85618A3E75800928A4A /* Images.xcassets */,
@@ -164,6 +172,8 @@
 			children = (
 				5A87C87F18A3E9F300928A4A /* SNInteractionTableView.h */,
 				5A87C88018A3E9F300928A4A /* SNInteractionTableView.m */,
+				5A87C95D18A3FB1A00928A4A /* SNICell.h */,
+				5A87C95E18A3FB1A00928A4A /* SNICell.m */,
 			);
 			name = SNInteractionTableView;
 			sourceTree = "<group>";
@@ -266,9 +276,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A87C87B18A3E91A00928A4A /* SNITableViewController.m in Sources */,
+				5A87C96518A4020500928A4A /* SNIETableViewCell.m in Sources */,
+				5A87C95F18A3FB1B00928A4A /* SNICell.m in Sources */,
+				5A87C87B18A3E91A00928A4A /* SNIETableViewController.m in Sources */,
 				5A87C85118A3E75800928A4A /* main.m in Sources */,
-				5A87C85518A3E75800928A4A /* SNIAppDelegate.m in Sources */,
+				5A87C85518A3E75800928A4A /* SNIEAppDelegate.m in Sources */,
 				5A87C88118A3E9F300928A4A /* SNInteractionTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

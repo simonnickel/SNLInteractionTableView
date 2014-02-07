@@ -1,19 +1,20 @@
 //
-//  SNITableViewController.m
+//  SNIETableViewController.m
 //  InteractionTableViewExample
 //
 //  Created by Simon Nickel on 06.02.14.
 //  Copyright (c) 2014 simonnickel. All rights reserved.
 //
 
-#import "SNITableViewController.h"
+#import "SNIETableViewController.h"
+#import "SNIETableViewCell.h"
 
-@interface SNITableViewController ()
+@interface SNIETableViewController ()
 
 
 @end
 
-@implementation SNITableViewController
+@implementation SNIETableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -60,14 +61,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    SNIETableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    [cell.textLabel setText:[self.itemList objectAtIndex:indexPath.row]];
-    
+    [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];
+        
     return cell;
 }
 

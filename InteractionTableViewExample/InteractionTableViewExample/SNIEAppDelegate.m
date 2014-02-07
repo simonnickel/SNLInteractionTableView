@@ -1,14 +1,14 @@
 //
-//  SNIAppDelegate.m
+//  SNIEAppDelegate.m
 //  InteractionTableViewExample
 //
 //  Created by Simon Nickel on 06.02.14.
 //  Copyright (c) 2014 simonnickel. All rights reserved.
 //
 
-#import "SNIAppDelegate.h"
+#import "SNIEAppDelegate.h"
 
-@implementation SNIAppDelegate
+@implementation SNIEAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

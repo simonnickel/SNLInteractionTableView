@@ -1,5 +1,5 @@
 //
-//  SNITableViewController.h
+//  SNIEAppDelegate.h
 //  InteractionTableViewExample
 //
 //  Created by Simon Nickel on 06.02.14.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SNITableViewController : UITableViewController
-@property NSMutableArray *itemList;
+@interface SNIEAppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
 
 @end

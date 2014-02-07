@@ -53,6 +53,7 @@
                             <outlet property="delegate" destination="gGL-Q9-eRK" id="QVp-Kx-Hqp"/>
                         </connections>
                     </tableView>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUF-97-Gq5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -25,6 +25,8 @@
     return self;
 }
 - (void)layoutSubviews {
+    [super layoutSubviews];
+
     /*
      * setup container view and wrap it around the subviews of contentView
      */
@@ -63,13 +65,23 @@
     
     // layout container to fill contentView
     [self.container setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:10.f];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-10.f];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:10.f];
-    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-50.f];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
     [self.contentView addConstraints:@[top, bottom, left, right]];
     
-    
+    // copy settings of contentView
+    self.container.backgroundColor = self.contentView.backgroundColor;
+    self.container.tintColor = self.contentView.tintColor;
+    self.container.alpha = self.contentView.alpha;
+    /* copy these settings too, if needed
+    self.container.clearsContextBeforeDrawing = self.contentView.clearsContextBeforeDrawing;
+    self.container.opaque = self.contentView.opaque;
+    self.container.hidden = self.contentView.hidden;
+    self.container.clipsToBounds = self.contentView.clipsToBounds;
+    self.container.autoresizesSubviews = self.contentView.autoresizesSubviews;
+     */
     
     [self.container setBackgroundColor:[UIColor greenColor]];
 }

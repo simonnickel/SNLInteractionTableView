@@ -14,6 +14,7 @@ extern const double actionPanelHeight;
 extern const double seperatorHeight;
 
 @property (nonatomic) UIView *container;
+@property (nonatomic) UIView *actionPanel;
 
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;

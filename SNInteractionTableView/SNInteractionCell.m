@@ -148,6 +148,7 @@ const double seperatorHeight = 0.5;
     float distance =  (float) (gestureRecognizer.view.center.x - self.contentView.center.x);
     
     if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        [self.animator removeAllBehaviors];
 
     }
     

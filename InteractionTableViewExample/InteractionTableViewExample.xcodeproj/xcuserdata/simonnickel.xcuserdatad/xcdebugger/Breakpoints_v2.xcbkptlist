@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InteractionTableViewExample/SNIETableViewController.m"
-            timestampString = "413468648.015647"
+            timestampString = "413579130.225512"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../SNInteractionTableView/SNInteractionCell.m"
-            timestampString = "413574241.602171"
+            timestampString = "413579791.997258"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "-dynamicAnimatorDidPause:"
             landmarkType = "5">
          </BreakpointContent>

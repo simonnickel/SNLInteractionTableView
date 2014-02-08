@@ -10,4 +10,10 @@
 
 @interface SNInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
+@property (nonatomic) UIView *container;
+
+@property (nonatomic) UIColor *colorBackground;
+@property (nonatomic) UIColor *colorContainer;
+@property (nonatomic) UIColor *colorContainerSelected;
+
 @end

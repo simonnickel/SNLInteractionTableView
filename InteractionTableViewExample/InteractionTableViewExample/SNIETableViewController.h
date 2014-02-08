@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SNIETableViewController : UITableViewController
+@interface SNIETableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 @property NSMutableArray *itemList;
 
 @end

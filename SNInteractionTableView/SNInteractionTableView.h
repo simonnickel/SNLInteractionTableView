@@ -10,4 +10,6 @@
 
 @interface SNInteractionTableView : UITableView
 
+- (void)deselectSelectedRow;
+
 @end

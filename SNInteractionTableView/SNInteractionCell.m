@@ -10,7 +10,6 @@
 
 @interface SNInteractionCell ()
 
-@property (nonatomic) UIView *container;
 @property BOOL isContainerSetUp;
 
 @property (nonatomic, strong) UIDynamicAnimator *animator;
@@ -20,6 +19,7 @@
 @end
 
 @implementation SNInteractionCell
+@synthesize colorContainer = _colorContainer;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -36,6 +36,9 @@
         [self setupContainer];
         self.isContainerSetUp = YES;
     }
+    
+    self.container.backgroundColor = self.colorContainer;
+    self.contentView.backgroundColor = self.colorBackground;
 }
 
 /*
@@ -88,7 +91,9 @@
     
     
     // copy settings of contentView
-    self.container.backgroundColor = self.contentView.backgroundColor;
+    self.colorBackground = self.backgroundColor;
+    self.colorContainer = self.contentView.backgroundColor;
+
     self.container.tintColor = self.contentView.tintColor;
     self.container.alpha = self.contentView.alpha;
     /* copy these settings too, if needed
@@ -98,8 +103,6 @@
      self.container.clipsToBounds = self.contentView.clipsToBounds;
      self.container.autoresizesSubviews = self.contentView.autoresizesSubviews;
      */
-    
-    self.contentView.backgroundColor = [UIColor blackColor];
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     [panRecognizer setDelegate:self];
@@ -111,8 +114,21 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    if (selected) {
+        NSLog(@"Test");
+        self.container.backgroundColor = self.colorContainerSelected;
+    }
+    else {
+        self.container.backgroundColor = self.colorContainer;
+    }
+}
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [super setBackgroundColor:backgroundColor];
+    [self.contentView setBackgroundColor:backgroundColor];
+}
+- (void)setColorContainer:(UIColor *)colorContainer {
+    _colorContainer = colorContainer;
+    [self.container setBackgroundColor:colorContainer];
 }
 
 /*

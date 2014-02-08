@@ -10,13 +10,25 @@
 
 @implementation SNIETableViewCell
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    //self.colorBackground = self.backgroundColor;
+    //self.colorContainer = self.contentView.backgroundColor;
+    //self.colorContainerSelected = self.contentView.backgroundColor;
+    
+    [super layoutSubviews];    
+    
+    [self setBackgroundColor:[UIColor grayColor]];
+    [self setColorContainer:[UIColor whiteColor]];
+    [self setColorContainerSelected:[UIColor greenColor]];
+//    [self.container setBackgroundColor:[UIColor whiteColor]];
 }
 
 /*
@@ -27,5 +39,6 @@
     // Drawing code
 }
 */
+
 
 @end

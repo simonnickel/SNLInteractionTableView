@@ -15,6 +15,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self setAllowsMultipleSelection:NO];
+        [self setAllowsSelection:YES];
     }
     return self;
 }
@@ -27,5 +29,16 @@
     // Drawing code
 }
 */
+
+/*
+ * Selection Functions
+ */
+- (void)deselectSelectedRow {
+    NSIndexPath *selected = [self indexPathForSelectedRow];
+    [self.delegate tableView:self willDeselectRowAtIndexPath:selected];
+    [self deselectRowAtIndexPath:selected animated:YES];
+    [self.delegate tableView:self didDeselectRowAtIndexPath:selected];
+}
+
 
 @end

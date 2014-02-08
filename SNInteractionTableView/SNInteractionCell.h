@@ -11,6 +11,7 @@
 @interface SNInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
 extern const double actionPanelHeight;
+extern const double seperatorHeight;
 
 @property (nonatomic) UIView *container;
 

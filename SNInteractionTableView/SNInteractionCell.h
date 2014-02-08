@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SNInteractionCell : UITableViewCell
+@interface SNInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
 @end

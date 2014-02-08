@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A867CB718A6CC9E002F43B8 /* SNInteractionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A867CB618A6CC9E002F43B8 /* SNInteractionTableViewController.m */; };
 		5A87C84518A3E75800928A4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C84418A3E75800928A4A /* Foundation.framework */; };
 		5A87C84718A3E75800928A4A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C84618A3E75800928A4A /* CoreGraphics.framework */; };
 		5A87C84918A3E75800928A4A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C84818A3E75800928A4A /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A867CB518A6CC9E002F43B8 /* SNInteractionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNInteractionTableViewController.h; path = ../SNInteractionTableView/SNInteractionTableViewController.h; sourceTree = "<group>"; };
+		5A867CB618A6CC9E002F43B8 /* SNInteractionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNInteractionTableViewController.m; path = ../SNInteractionTableView/SNInteractionTableViewController.m; sourceTree = "<group>"; };
 		5A87C84118A3E75800928A4A /* InteractionTableViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InteractionTableViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A87C84418A3E75800928A4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A87C84618A3E75800928A4A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -170,6 +173,8 @@
 		5A87C87618A3E86F00928A4A /* SNInteractionTableView */ = {
 			isa = PBXGroup;
 			children = (
+				5A867CB518A6CC9E002F43B8 /* SNInteractionTableViewController.h */,
+				5A867CB618A6CC9E002F43B8 /* SNInteractionTableViewController.m */,
 				5A87C87F18A3E9F300928A4A /* SNInteractionTableView.h */,
 				5A87C88018A3E9F300928A4A /* SNInteractionTableView.m */,
 				5A87C95D18A3FB1A00928A4A /* SNInteractionCell.h */,
@@ -278,6 +283,7 @@
 			files = (
 				5A87C96518A4020500928A4A /* SNIETableViewCell.m in Sources */,
 				5A87C95F18A3FB1B00928A4A /* SNInteractionCell.m in Sources */,
+				5A867CB718A6CC9E002F43B8 /* SNInteractionTableViewController.m in Sources */,
 				5A87C87B18A3E91A00928A4A /* SNIETableViewController.m in Sources */,
 				5A87C85118A3E75800928A4A /* main.m in Sources */,
 				5A87C85518A3E75800928A4A /* SNIEAppDelegate.m in Sources */,

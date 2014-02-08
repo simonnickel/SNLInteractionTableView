@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SNInteractionTableViewController.h"
 
-@interface SNIETableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface SNIETableViewController : SNInteractionTableViewController
+
 @property NSMutableArray *itemList;
 
 @end

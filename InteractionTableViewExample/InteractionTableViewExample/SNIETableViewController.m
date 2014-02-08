@@ -12,8 +12,8 @@
 
 @interface SNIETableViewController ()
 
-
 @end
+
 
 @implementation SNIETableViewController
 
@@ -68,37 +68,15 @@
         cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];
-        
-    return cell;
-}
+    [cell setColorBackground:[UIColor grayColor]];
+    [cell setColorContainer:[UIColor whiteColor]];
+    [cell setColorSelected:[UIColor greenColor]];
 
-/*
- * Selection Functions
- */
-- (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath;
-}
-- (NSIndexPath *)tableView:(SNInteractionTableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ([cell isSelected]) {
-        [tableView deselectSelectedRow];
-        
-        return nil;
-    }
     
-    return indexPath;
-}
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];
+
     
-    //self.activeCell = nil;
-}
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    //[self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    
-    //self.activeCell = (ItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    return cell;
 }
 
 /*

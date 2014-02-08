@@ -10,10 +10,12 @@
 
 @interface SNInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
+extern const double actionPanelHeight;
+
 @property (nonatomic) UIView *container;
 
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;
-@property (nonatomic) UIColor *colorContainerSelected;
+@property (nonatomic) UIColor *colorSelected;
 
 @end

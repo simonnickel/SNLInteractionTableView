@@ -15,11 +15,13 @@
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 @property (nonatomic, strong) UICollisionBehavior *collision;
 @property (nonatomic, strong) UIGravityBehavior *gravity;
+@property (nonatomic, strong) NSLayoutConstraint *height;
 
 @end
 
 @implementation SNInteractionCell
-@synthesize colorContainer = _colorContainer;
+
+const double actionPanelHeight = 44;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -37,7 +39,13 @@
         self.isContainerSetUp = YES;
     }
     
-    self.container.backgroundColor = self.colorContainer;
+    if (self.isSelected) {
+        self.container.backgroundColor = self.colorSelected;
+        self.height.constant = self.contentView.frame.size.height - actionPanelHeight;
+    }
+    else
+        self.container.backgroundColor = self.colorContainer;
+    
     self.contentView.backgroundColor = self.colorBackground;
 }
 
@@ -80,23 +88,30 @@
     [self.container addConstraints:newConstraints];
     [self.contentView addSubview:self.container];
     
-    
     // layout container to fill contentView
     [self.container setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
+    //NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-1.f];
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
-    [self.contentView addConstraints:@[top, right, left, bottom]];
     
+    self.height = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: self.contentView.frame.size.height];
+
+    [self.contentView addConstraints:@[top, right, left, self.height]];
     
     // copy settings of contentView
-    self.colorBackground = self.backgroundColor;
-    self.colorContainer = self.contentView.backgroundColor;
-
-    self.container.tintColor = self.contentView.tintColor;
-    self.container.alpha = self.contentView.alpha;
-    /* copy these settings too, if needed
+    if (! self.colorBackground) {
+        self.colorBackground = self.backgroundColor;
+    }
+    if (! self.colorContainer) {
+        self.colorContainer = self.contentView.backgroundColor;
+    }
+    if (! self.colorSelected) {
+        self.colorSelected = [UIColor whiteColor];
+    }
+    /* more settings to copy, if needed
+     self.container.tintColor = self.contentView.tintColor;
+     self.container.alpha = self.contentView.alpha;
      self.container.clearsContextBeforeDrawing = self.contentView.clearsContextBeforeDrawing;
      self.container.opaque = self.contentView.opaque;
      self.container.hidden = self.contentView.hidden;
@@ -112,24 +127,6 @@
     [self.animator setDelegate:self];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    if (selected) {
-        NSLog(@"Test");
-        self.container.backgroundColor = self.colorContainerSelected;
-    }
-    else {
-        self.container.backgroundColor = self.colorContainer;
-    }
-}
-- (void)setBackgroundColor:(UIColor *)backgroundColor {
-    [super setBackgroundColor:backgroundColor];
-    [self.contentView setBackgroundColor:backgroundColor];
-}
-- (void)setColorContainer:(UIColor *)colorContainer {
-    _colorContainer = colorContainer;
-    [self.container setBackgroundColor:colorContainer];
-}
 
 /*
  * Gesture functions

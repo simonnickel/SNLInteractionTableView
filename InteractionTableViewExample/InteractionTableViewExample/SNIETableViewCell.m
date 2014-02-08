@@ -18,19 +18,6 @@
     return self;
 }
 
-- (void)layoutSubviews {
-    //self.colorBackground = self.backgroundColor;
-    //self.colorContainer = self.contentView.backgroundColor;
-    //self.colorContainerSelected = self.contentView.backgroundColor;
-    
-    [super layoutSubviews];    
-    
-    [self setBackgroundColor:[UIColor grayColor]];
-    [self setColorContainer:[UIColor whiteColor]];
-    [self setColorContainerSelected:[UIColor greenColor]];
-//    [self.container setBackgroundColor:[UIColor whiteColor]];
-}
-
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

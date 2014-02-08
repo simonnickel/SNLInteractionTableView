@@ -35,9 +35,11 @@
  */
 - (void)deselectSelectedRow {
     NSIndexPath *selected = [self indexPathForSelectedRow];
-    [self.delegate tableView:self willDeselectRowAtIndexPath:selected];
-    [self deselectRowAtIndexPath:selected animated:YES];
-    [self.delegate tableView:self didDeselectRowAtIndexPath:selected];
+    if (selected) {
+        [self.delegate tableView:self willDeselectRowAtIndexPath:selected];
+        [self deselectRowAtIndexPath:selected animated:YES];
+        [self.delegate tableView:self didDeselectRowAtIndexPath:selected];
+    }
 }
 
 

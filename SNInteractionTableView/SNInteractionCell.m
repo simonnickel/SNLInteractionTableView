@@ -40,22 +40,21 @@ const double seperatorHeight = 0.5;
         self.isContainerSetUp = YES;
     }
     
+    // set color
     if (self.isSelected) {
         self.container.backgroundColor = self.colorSelected;
         self.heightContainer.constant = self.contentView.frame.size.height - actionPanelHeight;
-
     }
     else
         self.container.backgroundColor = self.colorContainer;
-    
-    
+
+    self.contentView.backgroundColor = self.colorBackground;
+
+    // set action panel
     if (self.actionPanel) {
         [self.contentView addSubview:self.actionPanel];
         [self setupActionPanelConstraints];
     }
-    
-    
-    self.contentView.backgroundColor = self.colorBackground;
 }
 
 /*
@@ -216,9 +215,10 @@ const double seperatorHeight = 0.5;
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {
     [self.animator removeAllBehaviors];
     
-    // reset weird 1/2px bounce rotation
+    /* reset weird 1/2px bounce rotation if seperator exists
     [self.container setNeedsLayout];
     [self.container layoutIfNeeded];
+    */
 }
 
 

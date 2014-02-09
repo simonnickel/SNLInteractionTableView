@@ -59,8 +59,7 @@
     return [self.itemList count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     SNIETableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
@@ -71,6 +70,13 @@
     [cell setColorBackground:[UIColor grayColor]];
     [cell setColorContainer:[UIColor whiteColor]];
     [cell setColorSelected:[UIColor greenColor]];
+    [cell setColorActionPanel:[UIColor blueColor]];
+    
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem *a = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonA:)];
+    NSArray *items = [NSArray arrayWithObjects:flexibleItem, a, flexibleItem, nil];
+    
+    [cell setupActionPanelWithButtons:items];
 
     
     [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];
@@ -78,6 +84,11 @@
     
     return cell;
 }
+
+- (void)buttonA:(id)sender {
+    NSLog(@"A");
+}
+
 
 /*
 // Override to support conditional editing of the table view.

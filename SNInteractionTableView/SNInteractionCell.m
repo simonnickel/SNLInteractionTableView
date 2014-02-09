@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 @property (nonatomic, strong) UICollisionBehavior *collision;
 @property (nonatomic, strong) UIGravityBehavior *gravity;
-@property (nonatomic, strong) NSLayoutConstraint *height;
+@property (nonatomic, strong) NSLayoutConstraint *heightContainer;
 
 @end
 
@@ -42,10 +42,18 @@ const double seperatorHeight = 0.5;
     
     if (self.isSelected) {
         self.container.backgroundColor = self.colorSelected;
-        self.height.constant = self.contentView.frame.size.height - actionPanelHeight;
+        self.heightContainer.constant = self.contentView.frame.size.height - actionPanelHeight;
+
     }
     else
         self.container.backgroundColor = self.colorContainer;
+    
+    
+    if (self.actionPanel) {
+        [self.contentView addSubview:self.actionPanel];
+        [self setupActionPanelConstraints];
+    }
+    
     
     self.contentView.backgroundColor = self.colorBackground;
 }
@@ -96,9 +104,9 @@ const double seperatorHeight = 0.5;
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
     
-    self.height = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: self.contentView.frame.size.height];
+    self.heightContainer = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: self.contentView.frame.size.height];
 
-    [self.contentView addConstraints:@[top, right, left, self.height]];
+    [self.contentView addConstraints:@[top, right, left, self.heightContainer]];
     
     // copy settings of contentView
     if (! self.colorBackground) {
@@ -109,6 +117,9 @@ const double seperatorHeight = 0.5;
     }
     if (! self.colorSelected) {
         self.colorSelected = [UIColor whiteColor];
+    }
+    if (! self.colorActionPanel) {
+        self.colorSelected = self.backgroundColor;
     }
     /* more settings to copy, if needed
      self.container.tintColor = self.contentView.tintColor;
@@ -128,6 +139,26 @@ const double seperatorHeight = 0.5;
     [self.animator setDelegate:self];
 }
 
+- (void)setupActionPanelWithButtons:(NSArray *)buttons {
+    UIToolbar *actionPanel = [[UIToolbar alloc] init];
+    [actionPanel setTranslatesAutoresizingMaskIntoConstraints:NO];
+
+    actionPanel.items = buttons;
+
+    actionPanel.backgroundColor = self.colorBackground;
+    actionPanel.barTintColor = self.colorActionPanel;
+
+    self.actionPanel = actionPanel;
+    
+}
+- (void)setupActionPanelConstraints {
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.actionPanel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.actionPanel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.actionPanel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
+   NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.actionPanel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: actionPanelHeight];
+    
+    [self.contentView addConstraints:@[top, right, left, height]];
+}
 
 /*
  * Gesture functions

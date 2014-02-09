@@ -22,5 +22,6 @@ extern const double seperatorHeight;
 @property (nonatomic) UIColor *colorActionPanel;
 
 - (void)setupActionPanelWithButtons:(NSArray *)buttons;
+- (void)toggleVisibility:(BOOL)visibility;
 
 @end

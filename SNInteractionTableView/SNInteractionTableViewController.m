@@ -56,8 +56,7 @@
 }
 
 /*
- *  Reload cell when de/selected to de/increase size of it.
- *  Cancel selection if cell is already selected.
+ *  Toggle selection and resize cell.
  */
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     return indexPath;
@@ -78,5 +77,32 @@
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
+
+
+/*
+ *  Editing functions
+ */
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return  UITableViewCellEditingStyleNone;
+}
+-(BOOL)tableView:(UITableView*)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath*)indexPath {
+    return NO;
+}
+
+
+/*
+ * Reorder functions
+ */
+- (void)toggleCellVisibility:(BOOL)visibility AtIndexPath:(NSIndexPath *)indexPath {
+    SNInteractionCell *cell = (SNInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    [cell toggleVisibility:visibility];
+}
+
 
 @end

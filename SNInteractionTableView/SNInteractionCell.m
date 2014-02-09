@@ -56,6 +56,9 @@ const double seperatorHeight = 0.5;
         [self setupActionPanelConstraints];
     }
 }
+- (void)toggleVisibility:(BOOL)visible {
+    self.hidden = !visible;
+}
 
 /*
  *  Wrap subviews of contentView in container.

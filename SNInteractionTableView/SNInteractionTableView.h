@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SNInteractionTableViewController.h"
 
 @interface SNInteractionTableView : UITableView
+
+@property (nonatomic, assign) id <SNInteractionTableViewDelegate> delegate;
 
 - (void)deselectSelectedRow;
 

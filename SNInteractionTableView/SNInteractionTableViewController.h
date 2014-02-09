@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SNInteractionTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@protocol SNInteractionTableViewDelegate <UITableViewDelegate>
+
+- (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;
+
+- (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)toggleCellVisibility:(BOOL)visibility AtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+
+@interface SNInteractionTableViewController : UITableViewController <SNInteractionTableViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end

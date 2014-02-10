@@ -220,9 +220,9 @@ const double seperatorHeight = 0.5;
         ) {
             CGPoint outside;
             if (self.panSuccesLeft)
-                outside = CGPointMake(self.contentView.frame.size.width/2, self.contentView.center.y);
+                outside = CGPointMake(self.contentView.frame.size.width/2, self.container.center.y);
             else
-                outside = CGPointMake(-self.contentView.frame.size.width/2, self.contentView.center.y);
+                outside = CGPointMake(-self.contentView.frame.size.width/2, self.container.center.y);
                 
             [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
                              animations:^{

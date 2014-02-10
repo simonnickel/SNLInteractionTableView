@@ -26,6 +26,10 @@ extern const double seperatorHeight;
 @property (nonatomic) UIView *container;
 @property (nonatomic) UIToolbar *actionPanel;
 
+@property (nonatomic) UIView *indicatorLeft;
+@property (nonatomic) UIView *indicatorRight;
+@property (nonatomic) NSNumber *indicatorWidth;
+
 @property (nonatomic) BOOL panSuccesLeft;
 @property (nonatomic) BOOL panSuccesRight;
 @property (nonatomic) NSNumber *panSuccesAnimationLeft;
@@ -37,6 +41,8 @@ extern const double seperatorHeight;
 @property (nonatomic) UIColor *colorContainer;
 @property (nonatomic) UIColor *colorSelected;
 @property (nonatomic) UIColor *colorActionPanel;
+@property (nonatomic) UIColor *colorIndicator;
+@property (nonatomic) UIColor *colorIndicatorSuccess;
 
 - (void)setupActionPanelWithButtons:(NSArray *)buttons;
 - (void)toggleVisibility:(BOOL)visibility;

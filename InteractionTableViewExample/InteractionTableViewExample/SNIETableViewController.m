@@ -72,6 +72,8 @@
     [cell setColorContainer:[UIColor whiteColor]];
     [cell setColorSelected:[UIColor greenColor]];
     [cell setColorActionPanel:[UIColor blueColor]];
+    [cell setColorIndicator:[UIColor redColor]];
+    [cell setColorIndicatorSuccess:[UIColor greenColor]];
     
     // setup actionPanel
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];

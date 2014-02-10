@@ -39,6 +39,10 @@ const double seperatorHeight = 0.5;
 - (void)initialize {
     // wrap subviews of contentView in container
     [self setupContainer];
+    self.indicatorWidth = [NSNumber numberWithInt:50];
+    [self setupIndicatorLeft];
+    [self setupIndicatorRight];
+    
 }
 - (void)prepareForReuse {
     self.container.hidden = NO;
@@ -55,6 +59,15 @@ const double seperatorHeight = 0.5;
     }
     else
         self.container.backgroundColor = self.colorContainer;
+    
+    if (self.colorIndicator) {
+        self.indicatorLeft.backgroundColor = self.colorIndicator;
+        self.indicatorRight.backgroundColor = self.colorIndicator;
+    }
+    else {
+        self.indicatorLeft.backgroundColor = self.container.backgroundColor;
+        self.indicatorRight.backgroundColor = self.container.backgroundColor;
+    }
     
     // set action panel
     if (self.actionPanel) {
@@ -147,6 +160,35 @@ const double seperatorHeight = 0.5;
     [self.animator setDelegate:self];
 }
 
+- (void)setupIndicatorLeft {
+    [self setupIndicatorLeftOrRight:YES];
+}
+- (void)setupIndicatorRight {
+    [self setupIndicatorLeftOrRight:NO];
+}
+- (void)setupIndicatorLeftOrRight:(BOOL)isLeft {
+    NSLog(@"tset");
+    UIView *indicator = [[UIView alloc] init];
+    [indicator setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant: - [self.indicatorWidth floatValue]];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:[self.indicatorWidth floatValue]];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.container attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:[self.indicatorWidth floatValue]];
+    
+    if (isLeft) {
+        self.indicatorLeft = indicator;
+        [self.contentView addSubview:self.indicatorLeft];
+        [self.contentView addConstraints:@[top, left, height, width]];
+    }
+    else {
+        self.indicatorRight = indicator;
+        [self.contentView addSubview:self.indicatorRight];
+        [self.contentView addConstraints:@[top, right, height, width]];
+    }
+}
+
 - (void)setupActionPanelWithButtons:(NSArray *)buttons {
     self.actionPanel = [[UIToolbar alloc] init];
     self.actionPanel.backgroundColor = self.colorBackground;
@@ -193,18 +235,36 @@ const double seperatorHeight = 0.5;
         // translate pan movement
         CGPoint translatedPoint = [gestureRecognizer translationInView:gestureRecognizer.view];
         self.container.center = CGPointMake(gestureRecognizer.view.center.x+translatedPoint.x, gestureRecognizer.view.center.y);
+
+        
+        float panFactor = 0.7;
+        NSNumber *panSuccesDistanceLeft = [NSNumber numberWithInt:50 * (1/panFactor)];
+        NSNumber *panSuccesDistanceRight = [NSNumber numberWithInt: - 50 * (1/panFactor)];
+        
+        // pan left indicator
+        if (panDistance < [panSuccesDistanceLeft floatValue]) {
+            self.indicatorLeft.center = CGPointMake(self.indicatorLeft.center.x+translatedPoint.x*panFactor, gestureRecognizer.view.center.y);
+        }
+        else {
+            self.indicatorLeft.center = CGPointMake(self.indicatorLeft.frame.size.width/2, gestureRecognizer.view.center.y);
+        }
+        // pan right indicator
+        if (panDistance > [panSuccesDistanceRight floatValue]) {
+            self.indicatorRight.center = CGPointMake(self.indicatorRight.center.x+translatedPoint.x*panFactor, gestureRecognizer.view.center.y);
+        }
+        else {
+            self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width - self.indicatorRight.frame.size.width/2, gestureRecognizer.view.center.y);
+        }
+        
+        
         [gestureRecognizer setTranslation:CGPointMake(0, 0) inView:gestureRecognizer.view.superview];
-        
-        
-        NSNumber *panSuccesDistanceLeft = [NSNumber numberWithInt:50];
-        NSNumber *panSuccesDistanceRight = [NSNumber numberWithInt:50];
         
         if (panDistance > [panSuccesDistanceLeft floatValue])
             [self setPanSuccesLeft:YES];
         else
             [self setPanSuccesLeft:NO];
         
-        if (panDistance < - [panSuccesDistanceRight floatValue])
+        if (panDistance < [panSuccesDistanceRight floatValue])
             [self setPanSuccesRight:YES];
         else
             [self setPanSuccesRight:NO];
@@ -225,16 +285,16 @@ const double seperatorHeight = 0.5;
                 outside = CGPointMake(-self.contentView.frame.size.width/2, self.container.center.y);
                 
             [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
-                             animations:^{
-                                 [gestureRecognizer.view setCenter:outside];
-                             } completion:^(BOOL completed){
-                                 [self.container setHidden:YES];
-                                 //[gestureRecognizer.view setCenter:centerReset];
-                                 if (self.panSuccesLeft)
-                                     self.panSuccessActionLeft(self);
-                                 else if (self.panSuccesRight)
-                                     self.panSuccessActionRight(self);
-                             }];
+            animations:^{
+                [gestureRecognizer.view setCenter:outside];
+            } completion:^(BOOL completed){
+                [self.container setHidden:YES];
+                //[gestureRecognizer.view setCenter:centerReset];
+                if (self.panSuccesLeft)
+                    self.panSuccessActionLeft(self);
+                else if (self.panSuccesRight)
+                    self.panSuccessActionRight(self);
+            }];
         }
         // view has to bounce back
         else {
@@ -258,12 +318,54 @@ const double seperatorHeight = 0.5;
                 [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(space, 0, space, space)];
             }
             
-            if (self.panSuccesLeft)
+            // handle left action
+            if (self.panSuccesLeft) {
                 self.panSuccessActionLeft(self);
-            else if (self.panSuccesRight)
+            }
+            else {
+                [self resetIndicatorLeftOrRight:YES];
+            }
+            
+            // handle right action
+            if (self.panSuccesRight) {
                 self.panSuccessActionRight(self);
-   
+            }
+            else {
+                [self resetIndicatorLeftOrRight:NO];
+            }
         }
+    }
+}
+
+- (void)resetIndicatorLeftOrRight:(BOOL)isLeft {
+    [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+    animations:^{
+        if (isLeft)
+            self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
+        else
+            self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width + self.indicatorRight.frame.size.width/2, self.container.center.y);
+    } completion:^(BOOL completed){}];
+}
+
+@synthesize panSuccesLeft;
+@synthesize panSuccesRight;
+- (void)setPanSuccesLeft:(BOOL)panSuccess {
+    panSuccesLeft = panSuccess;
+    if (panSuccess && self.colorIndicatorSuccess) {
+        
+        self.indicatorLeft.backgroundColor = self.colorIndicatorSuccess;
+    }
+    else {
+        self.indicatorLeft.backgroundColor = self.colorIndicator;
+    }
+}
+- (void)setPanSuccesRight:(BOOL)panSuccess {
+    panSuccesRight = panSuccess;
+    if (panSuccess && self.colorIndicatorSuccess) {
+        self.indicatorRight.backgroundColor = self.colorIndicatorSuccess;
+    }
+    else {
+        self.indicatorRight.backgroundColor = self.colorIndicator;
     }
 }
 

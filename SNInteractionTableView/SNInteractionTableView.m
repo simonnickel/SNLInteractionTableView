@@ -21,6 +21,7 @@
 
 
 @implementation SNInteractionTableView
+
 - (id)init {
     return [self initWithFrame:CGRectZero];
 }

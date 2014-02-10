@@ -39,12 +39,6 @@ const double seperatorHeight = 0.5;
 - (void)initialize {
     // wrap subviews of contentView in container
     [self setupContainer];
-    
-    
-    self.actionPanel = [[UIToolbar alloc] init];
-    [self.container addSubview:self.actionPanel];
-    [self setupActionPanelConstraints];
-
 }
 - (void)prepareForReuse {
     self.container.hidden = NO;
@@ -61,6 +55,11 @@ const double seperatorHeight = 0.5;
     }
     else
         self.container.backgroundColor = self.colorContainer;
+    
+    // set action panel
+    if (self.actionPanel) {
+        [self layoutActionPanel];
+    }
 }
 
 - (void)toggleVisibility:(BOOL)visible {
@@ -149,11 +148,13 @@ const double seperatorHeight = 0.5;
 }
 
 - (void)setupActionPanelWithButtons:(NSArray *)buttons {
+    self.actionPanel = [[UIToolbar alloc] init];
     self.actionPanel.backgroundColor = self.colorBackground;
     self.actionPanel.barTintColor = self.colorActionPanel;
-    [self.actionPanel setItems:buttons];
+    self.actionPanel.items = buttons;
 }
-- (void)setupActionPanelConstraints {
+- (void)layoutActionPanel {
+    [self.contentView addSubview:self.actionPanel];
     [self.actionPanel setTranslatesAutoresizingMaskIntoConstraints:NO];
 
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.actionPanel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];

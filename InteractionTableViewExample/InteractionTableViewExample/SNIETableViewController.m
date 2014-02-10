@@ -83,6 +83,10 @@
     [cell setupActionPanelWithButtons:items];
     
     // setup pan gestures
+    [cell setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];
+    [cell setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
+    [cell setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
+    [cell setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
     [cell setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
     [cell setPanSuccessActionLeft:^(SNIETableViewCell *cell){
         [self panSuccessActionLeftOnCell:cell];

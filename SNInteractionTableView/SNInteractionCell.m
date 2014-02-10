@@ -15,6 +15,9 @@
 @property (nonatomic, strong) UIGravityBehavior *gravity;
 @property (nonatomic, strong) NSLayoutConstraint *heightContainer;
 
+@property (nonatomic, strong) UIImageView *indicatorImageViewLeft;
+@property (nonatomic, strong) UIImageView *indicatorImageViewRight;
+
 @end
 
 @implementation SNInteractionCell
@@ -175,17 +178,34 @@ const double seperatorHeight = 0.5;
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:[self.indicatorWidth floatValue]];
     NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.container attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.f];
     NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:[self.indicatorWidth floatValue]];
+
+    UIImageView *image;
     
     if (isLeft) {
+        self.indicatorImageViewLeft = [[UIImageView alloc] init];
+        image = self.indicatorImageViewLeft;
+        
         self.indicatorLeft = indicator;
         [self.contentView addSubview:self.indicatorLeft];
+        
         [self.contentView addConstraints:@[top, left, height, width]];
     }
     else {
+        self.indicatorImageViewRight = [[UIImageView alloc] init];
+        image = self.indicatorImageViewRight;
+        
         self.indicatorRight = indicator;
         [self.contentView addSubview:self.indicatorRight];
         [self.contentView addConstraints:@[top, right, height, width]];
     }
+    
+    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:indicator attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:indicator attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.f];
+
+    [image setTranslatesAutoresizingMaskIntoConstraints:NO];
+
+    [indicator addSubview:image];
+    [indicator addConstraints:@[centerX, centerY]];
 }
 
 - (void)setupActionPanelWithButtons:(NSArray *)buttons {
@@ -299,7 +319,6 @@ const double seperatorHeight = 0.5;
         else {
             // set UIDynamics to get the container back in position
             UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self.container]];
-            [collision setCollisionDelegate:self];
             UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.container]];
             UIDynamicItemBehavior *item = [[UIDynamicItemBehavior alloc] initWithItems:@[self.container]];
             item.elasticity = 0.3f;
@@ -371,6 +390,14 @@ const double seperatorHeight = 0.5;
     else {
         self.indicatorRight.backgroundColor = self.colorIndicator;
     }
+}
+- (void)setIndicatorImageLeft:(UIImage *)indicatorImageLeft {
+    _indicatorImageLeft = indicatorImageLeft;
+    [self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
+}
+- (void)setIndicatorImageRight:(UIImage *)indicatorImageRight {
+    _indicatorImageRight = indicatorImageRight;
+    [self.indicatorImageViewRight setImage:self.indicatorImageRight];
 }
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {

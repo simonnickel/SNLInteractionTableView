@@ -29,13 +29,17 @@ extern const double seperatorHeight;
 @property (nonatomic) UIView *indicatorLeft;
 @property (nonatomic) UIView *indicatorRight;
 @property (nonatomic) NSNumber *indicatorWidth;
-
-@property (nonatomic) BOOL panSuccesLeft;
-@property (nonatomic) BOOL panSuccesRight;
+@property (nonatomic) UIImage *indicatorImageLeft;
+@property (nonatomic) UIImage *indicatorImageRight;
+@property (nonatomic) UIImage *indicatorImageSuccessLeft;
+@property (nonatomic) UIImage *indicatorImageSuccessRight;
 @property (nonatomic) NSNumber *panSuccesAnimationLeft;
 @property (nonatomic) NSNumber *panSuccesAnimationRight;
 @property (strong, nonatomic) void(^panSuccessActionLeft)();
 @property (strong, nonatomic) void(^panSuccessActionRight)();
+
+@property (nonatomic) BOOL panSuccesLeft;
+@property (nonatomic) BOOL panSuccesRight;
 
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;

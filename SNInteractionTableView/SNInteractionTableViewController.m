@@ -34,8 +34,13 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    //[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
+        SNInteractionCell *cell = (SNInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        [cell prepareForReuse];
+    }
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 

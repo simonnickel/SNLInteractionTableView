@@ -39,6 +39,12 @@ const double seperatorHeight = 0.5;
 - (void)initialize {
     // wrap subviews of contentView in container
     [self setupContainer];
+    
+    
+    self.actionPanel = [[UIToolbar alloc] init];
+    [self.container addSubview:self.actionPanel];
+    [self setupActionPanelConstraints];
+
 }
 - (void)prepareForReuse {
     self.container.hidden = NO;
@@ -46,7 +52,7 @@ const double seperatorHeight = 0.5;
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     // set color
     self.contentView.backgroundColor = self.colorBackground;
     if (self.isSelected) {
@@ -55,13 +61,8 @@ const double seperatorHeight = 0.5;
     }
     else
         self.container.backgroundColor = self.colorContainer;
-
-    // set action panel
-    if (self.actionPanel) {
-        [self.contentView addSubview:self.actionPanel];
-        [self setupActionPanelConstraints];
-    }
 }
+
 - (void)toggleVisibility:(BOOL)visible {
     self.hidden = !visible;
 }
@@ -113,7 +114,7 @@ const double seperatorHeight = 0.5;
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
     
     self.heightContainer = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: self.contentView.frame.size.height];
-
+    
     [self.contentView addConstraints:@[top, right, left, self.heightContainer]];
     
     // copy settings of contentView
@@ -148,18 +149,13 @@ const double seperatorHeight = 0.5;
 }
 
 - (void)setupActionPanelWithButtons:(NSArray *)buttons {
-    UIToolbar *actionPanel = [[UIToolbar alloc] init];
-    [actionPanel setTranslatesAutoresizingMaskIntoConstraints:NO];
-
-    actionPanel.items = buttons;
-
-    actionPanel.backgroundColor = self.colorBackground;
-    actionPanel.barTintColor = self.colorActionPanel;
-
-    self.actionPanel = actionPanel;
-    
+    self.actionPanel.backgroundColor = self.colorBackground;
+    self.actionPanel.barTintColor = self.colorActionPanel;
+    [self.actionPanel setItems:buttons];
 }
 - (void)setupActionPanelConstraints {
+    [self.actionPanel setTranslatesAutoresizingMaskIntoConstraints:NO];
+
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.actionPanel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.actionPanel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.actionPanel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];

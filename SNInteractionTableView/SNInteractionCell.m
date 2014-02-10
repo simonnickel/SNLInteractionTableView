@@ -10,8 +10,6 @@
 
 @interface SNInteractionCell ()
 
-@property BOOL isContainerSetUp;
-
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 @property (nonatomic, strong) UICollisionBehavior *collision;
 @property (nonatomic, strong) UIGravityBehavior *gravity;
@@ -24,21 +22,26 @@
 const double actionPanelHeight = 44;
 const double seperatorHeight = 0.5;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Initialization code
+        [self initialize];
     }
     return self;
 }
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+- (void)initialize {
+    // wrap subviews of contentView in container
+    [self setupContainer];
+}
 - (void)layoutSubviews {
     [super layoutSubviews];
-
-    // wrap subviews of contentView in container
-    if (self.isContainerSetUp != YES) {
-        [self setupContainer];
-        self.isContainerSetUp = YES;
-    }
     
     // set color
     self.contentView.backgroundColor = self.colorBackground;
@@ -192,15 +195,19 @@ const double seperatorHeight = 0.5;
     if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
         // translate pan movement
         CGPoint translatedPoint = [gestureRecognizer translationInView:gestureRecognizer.view];
-        gestureRecognizer.view.center = CGPointMake(gestureRecognizer.view.center.x+translatedPoint.x, gestureRecognizer.view.center.y);
+        self.container.center = CGPointMake(gestureRecognizer.view.center.x+translatedPoint.x, gestureRecognizer.view.center.y);
         [gestureRecognizer setTranslation:CGPointMake(0, 0) inView:gestureRecognizer.view.superview];
         
-        if (panDistance > 50)
+        
+        NSNumber *panSuccesDistanceLeft = [NSNumber numberWithInt:50];
+        NSNumber *panSuccesDistanceRight = [NSNumber numberWithInt:50];
+        
+        if (panDistance > [panSuccesDistanceLeft floatValue])
             [self setPanSuccesLeft:YES];
         else
             [self setPanSuccesLeft:NO];
         
-        if (panDistance < -50)
+        if (panDistance < - [panSuccesDistanceRight floatValue])
             [self setPanSuccesRight:YES];
         else
             [self setPanSuccesRight:NO];

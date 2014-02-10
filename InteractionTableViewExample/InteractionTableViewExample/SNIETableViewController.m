@@ -67,6 +67,7 @@
 
     if (cell == nil) {
         cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSLog(@"init s");
     }
     
     // change colors
@@ -83,6 +84,7 @@
     [cell setupActionPanelWithButtons:items];
     
     // setup pan gestures
+    [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
     [cell setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
     [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
     [cell setPanSuccessActionLeft:^(SNIETableViewCell *cell){

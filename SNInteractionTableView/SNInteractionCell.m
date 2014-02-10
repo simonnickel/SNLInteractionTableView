@@ -167,7 +167,6 @@ const double seperatorHeight = 0.5;
     [self setupIndicatorLeftOrRight:NO];
 }
 - (void)setupIndicatorLeftOrRight:(BOOL)isLeft {
-    NSLog(@"tset");
     UIView *indicator = [[UIView alloc] init];
     [indicator setTranslatesAutoresizingMaskIntoConstraints:NO];
     
@@ -300,6 +299,7 @@ const double seperatorHeight = 0.5;
         else {
             // set UIDynamics to get the container back in position
             UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self.container]];
+            [collision setCollisionDelegate:self];
             UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.container]];
             UIDynamicItemBehavior *item = [[UIDynamicItemBehavior alloc] initWithItems:@[self.container]];
             item.elasticity = 0.3f;
@@ -321,24 +321,30 @@ const double seperatorHeight = 0.5;
             // handle left action
             if (self.panSuccesLeft) {
                 self.panSuccessActionLeft(self);
+                [self resetIndicatorLeftOrRight:YES withDelay:YES];
             }
             else {
-                [self resetIndicatorLeftOrRight:YES];
+                [self resetIndicatorLeftOrRight:YES withDelay:NO];
             }
             
             // handle right action
             if (self.panSuccesRight) {
                 self.panSuccessActionRight(self);
+                [self resetIndicatorLeftOrRight:NO withDelay:YES];
             }
             else {
-                [self resetIndicatorLeftOrRight:NO];
+                [self resetIndicatorLeftOrRight:NO withDelay:NO];
             }
         }
     }
 }
 
-- (void)resetIndicatorLeftOrRight:(BOOL)isLeft {
-    [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+- (void)resetIndicatorLeftOrRight:(BOOL)isLeft withDelay:(BOOL)withDelay {
+    float delay = 0.0;
+    if (withDelay)
+        delay = 0.5;
+        
+    [UIView animateWithDuration:0.3 delay:delay usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
     animations:^{
         if (isLeft)
             self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
@@ -347,10 +353,8 @@ const double seperatorHeight = 0.5;
     } completion:^(BOOL completed){}];
 }
 
-@synthesize panSuccesLeft;
-@synthesize panSuccesRight;
 - (void)setPanSuccesLeft:(BOOL)panSuccess {
-    panSuccesLeft = panSuccess;
+    _panSuccesLeft = panSuccess;
     if (panSuccess && self.colorIndicatorSuccess) {
         
         self.indicatorLeft.backgroundColor = self.colorIndicatorSuccess;
@@ -360,7 +364,7 @@ const double seperatorHeight = 0.5;
     }
 }
 - (void)setPanSuccesRight:(BOOL)panSuccess {
-    panSuccesRight = panSuccess;
+    _panSuccesRight = panSuccess;
     if (panSuccess && self.colorIndicatorSuccess) {
         self.indicatorRight.backgroundColor = self.colorIndicatorSuccess;
     }
@@ -377,6 +381,5 @@ const double seperatorHeight = 0.5;
     [self.container layoutIfNeeded];
     */
 }
-
 
 @end

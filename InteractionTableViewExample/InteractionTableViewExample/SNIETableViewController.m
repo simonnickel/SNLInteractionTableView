@@ -117,12 +117,12 @@
 
 /*  Uncomment this function if you need additional setup when reordering starts.
 - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Reordering Start");
+    NSLog(@"Reordering started");
 }
 */
 /*  Uncomment this function if you need additional cleanup when reordering ended.
  - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath; {
-    NSLog(@"Reordering End");
+    NSLog(@"Reordering ended");
  }
 */
 

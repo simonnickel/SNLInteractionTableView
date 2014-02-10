@@ -51,10 +51,6 @@
     
     self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [self addGestureRecognizer:self.longPress];
-
-    /*
-    self.draggingViewOpacity = 1.0;
-     */
 }
 
 /*
@@ -97,10 +93,7 @@
     }
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        
         UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-        //self.draggingRowHeight = cell.frame.size.height;
-        //[cell setSelected:NO animated:NO];
         [cell setHighlighted:NO animated:NO];
         
         // make an image from the pressed tableview cell
@@ -109,7 +102,7 @@
         UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        // create and image view that we will drag around the screen
+        // create image view to pan around
         if (!self.draggingView) {
             self.draggingView = [[UIImageView alloc] initWithImage:cellImage];
             [self addSubview:self.draggingView];
@@ -132,10 +125,7 @@
         }
 
         [self beginUpdates];
-        /*
-        [self deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        [self insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        */
+        
         if ([self.delegate respondsToSelector:@selector(startedReorderAtIndexPath:)]) {
             [self.delegate startedReorderAtIndexPath:indexPath];
         }
@@ -146,7 +136,7 @@
         self.currentIndexPath = indexPath;
         [self endUpdates];
         
-        // enable scrolling for cell
+        // setup scrolling for cell
         self.scrollDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollTableWithCell:)];
         [self.scrollDisplayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     }
@@ -159,7 +149,6 @@
         // scrolling
         CGRect rect = self.bounds;
         rect.size.height -= self.contentInset.top;
-        //CGPoint location = [gesture locationInView:self];
         
         [self updateCurrentLocation:gesture];
         
@@ -185,9 +174,8 @@
         [self endUpdates];
 
         /*
-        // reload the rows that were affected just to be safe
         NSMutableArray *visibleRows = [[self indexPathsForVisibleRows] mutableCopy];
-        //[visibleRows removeObject:indexPath];
+        [visibleRows removeObject:indexPath];
         [self reloadRowsAtIndexPaths:visibleRows withRowAnimation:UITableViewRowAnimationNone];
         */
         

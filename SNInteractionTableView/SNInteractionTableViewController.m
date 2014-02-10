@@ -32,26 +32,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-- (void)viewWillDisappear:(BOOL)animated {
-    SNInteractionTableView *tv = (SNInteractionTableView *)self.tableView;
-    [tv deselectSelectedRow];
-}
+
 - (void)viewDidDisappear:(BOOL)animated {
-    //[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    [super viewDidDisappear:animated];
+    
     for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
         SNInteractionCell *cell = (SNInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         [cell prepareForReuse];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    //[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
-    /*
-    SNInteractionTableView *tableView = (SNInteractionTableView *)self.tableView;
-    [tableView deselectSelectedRow];
-     */
+    SNInteractionTableView *tv = (SNInteractionTableView *)self.tableView;
+    [tv deselectSelectedRow];
 }
 
 - (void)didReceiveMemoryWarning {

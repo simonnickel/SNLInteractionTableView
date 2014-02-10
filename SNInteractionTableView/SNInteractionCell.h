@@ -40,6 +40,5 @@ extern const double seperatorHeight;
 
 - (void)setupActionPanelWithButtons:(NSArray *)buttons;
 - (void)toggleVisibility:(BOOL)visibility;
-- (void)reset;
 
 @end

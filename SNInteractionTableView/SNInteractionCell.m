@@ -40,6 +40,10 @@ const double seperatorHeight = 0.5;
     // wrap subviews of contentView in container
     [self setupContainer];
 }
+- (void)prepareForReuse {
+    self.container.hidden = NO;
+    [self toggleVisibility:YES];
+}
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -60,10 +64,6 @@ const double seperatorHeight = 0.5;
 }
 - (void)toggleVisibility:(BOOL)visible {
     self.hidden = !visible;
-}
-// reset animations for segues etc.
-- (void)reset {
-    self.container.hidden = NO;
 }
 
 /*

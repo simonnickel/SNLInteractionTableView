@@ -63,11 +63,8 @@
     static NSString *CellIdentifier = @"Cell";
     SNIETableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    [cell reset];
-
     if (cell == nil) {
         cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        NSLog(@"init s");
     }
     
     // change colors
@@ -84,15 +81,16 @@
     [cell setupActionPanelWithButtons:items];
     
     // setup pan gestures
-    [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
     [cell setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
-    [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
     [cell setPanSuccessActionLeft:^(SNIETableViewCell *cell){
         [self panSuccessActionLeftOnCell:cell];
     }];
+    
+    [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
     [cell setPanSuccessActionRight:^(SNIETableViewCell *cell){
         [self panSuccessActionRightOnCell:cell];
     }];
+    
     
     // configure content of your cell
     [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];

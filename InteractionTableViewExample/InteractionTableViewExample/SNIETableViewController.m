@@ -63,24 +63,37 @@
     static NSString *CellIdentifier = @"Cell";
     SNIETableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    [cell reset];
+
     if (cell == nil) {
         cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    // change colors
     [cell setColorBackground:[UIColor grayColor]];
     [cell setColorContainer:[UIColor whiteColor]];
     [cell setColorSelected:[UIColor greenColor]];
     [cell setColorActionPanel:[UIColor blueColor]];
     
+    // setup actionPanel
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     UIBarButtonItem *a = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonA:)];
     NSArray *items = [NSArray arrayWithObjects:flexibleItem, a, flexibleItem, nil];
     
     [cell setupActionPanelWithButtons:items];
-
     
+    // setup pan gestures
+    [cell setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
+    [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
+    [cell setPanSuccessActionLeft:^(SNIETableViewCell *cell){
+        [self panSuccessActionLeftOnCell:cell];
+    }];
+    [cell setPanSuccessActionRight:^(SNIETableViewCell *cell){
+        [self panSuccessActionRightOnCell:cell];
+    }];
+    
+    // configure content of your cell
     [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];
-
     
     return cell;
 }
@@ -120,6 +133,34 @@
 
 - (void)buttonA:(id)sender {
     NSLog(@"A");
+}
+
+- (void)panSuccessActionLeftOnCell:(SNIETableViewCell *)cell {
+    NSLog(@"left");
+}
+- (void)panSuccessActionRightOnCell:(SNIETableViewCell *)cell {
+    NSLog(@"right");
+    [self performSegueWithIdentifier:@"detail" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardPopoverSegue *)segue sender:(id)sender {
+    /*
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:self.activeCell];
+    
+    if ([[segue identifier] isEqualToString:@"detail"]) {
+        ItemDetailViewController *detailVC = [segue destinationViewController];
+        
+        id object = [self.itemList objectAtIndex:indexPath.row];
+        
+        [detailVC setObject:object];
+    }
+     */
+}
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"detail" ]) {
+        return YES;
+    }
+    return NO;
 }
 
 

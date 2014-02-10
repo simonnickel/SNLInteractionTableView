@@ -41,14 +41,13 @@ const double seperatorHeight = 0.5;
     }
     
     // set color
+    self.contentView.backgroundColor = self.colorBackground;
     if (self.isSelected) {
         self.container.backgroundColor = self.colorSelected;
         self.heightContainer.constant = self.contentView.frame.size.height - actionPanelHeight;
     }
     else
         self.container.backgroundColor = self.colorContainer;
-
-    self.contentView.backgroundColor = self.colorBackground;
 
     // set action panel
     if (self.actionPanel) {
@@ -58,6 +57,10 @@ const double seperatorHeight = 0.5;
 }
 - (void)toggleVisibility:(BOOL)visible {
     self.hidden = !visible;
+}
+// reset animations for segues etc.
+- (void)reset {
+    self.container.hidden = NO;
 }
 
 /*
@@ -178,11 +181,12 @@ const double seperatorHeight = 0.5;
 }
 // panGesture to swipe a cell to trigger actions
 - (void)handlePanGesture:(UIPanGestureRecognizer*)gestureRecognizer {
-    float distance =  (float) (gestureRecognizer.view.center.x - self.contentView.center.x);
+    float panDistance =  (float) (gestureRecognizer.view.center.x - self.contentView.center.x);
     
     if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
         [self.animator removeAllBehaviors];
-
+        [self setPanSuccesLeft:NO];
+        [self setPanSuccesRight:NO];
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
@@ -190,27 +194,71 @@ const double seperatorHeight = 0.5;
         CGPoint translatedPoint = [gestureRecognizer translationInView:gestureRecognizer.view];
         gestureRecognizer.view.center = CGPointMake(gestureRecognizer.view.center.x+translatedPoint.x, gestureRecognizer.view.center.y);
         [gestureRecognizer setTranslation:CGPointMake(0, 0) inView:gestureRecognizer.view.superview];
+        
+        if (panDistance > 50)
+            [self setPanSuccesLeft:YES];
+        else
+            [self setPanSuccesLeft:NO];
+        
+        if (panDistance < -50)
+            [self setPanSuccesRight:YES];
+        else
+            [self setPanSuccesRight:NO];
+        
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        // set UIDynamics to get the container back in position
-        UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self.container]];
-        UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.container]];
-        UIDynamicItemBehavior *item = [[UIDynamicItemBehavior alloc] initWithItems:@[self.container]];
-        item.elasticity = 0.3f;
-        [self.animator addBehavior:collision];
-        [self.animator addBehavior:gravity];
-        [self.animator addBehavior:item];
-        
-        // set gravity and collision boundary depending on pan direction
-        CGFloat space = - self.container.frame.size.width;
-        if (distance < 0) {
-            [gravity setGravityDirection:CGVectorMake(5, 0)];
-            [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(space, space, space, 0)];
+        // slide out
+        if ((self.panSuccesLeft &&
+            [self.panSuccesAnimationLeft intValue] == [SNICellPanSuccessAnimationOut intValue]) ||
+            (self.panSuccesRight &&
+             [self.panSuccesAnimationRight intValue] == [SNICellPanSuccessAnimationOut intValue])
+        ) {
+            CGPoint outside;
+            if (self.panSuccesLeft)
+                outside = CGPointMake(self.contentView.frame.size.width/2, self.contentView.center.y);
+            else
+                outside = CGPointMake(-self.contentView.frame.size.width/2, self.contentView.center.y);
+                
+            [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+                             animations:^{
+                                 [gestureRecognizer.view setCenter:outside];
+                             } completion:^(BOOL completed){
+                                 [self.container setHidden:YES];
+                                 //[gestureRecognizer.view setCenter:centerReset];
+                                 if (self.panSuccesLeft)
+                                     self.panSuccessActionLeft(self);
+                                 else if (self.panSuccesRight)
+                                     self.panSuccessActionRight(self);
+                             }];
         }
+        // view has to bounce back
         else {
-            [gravity setGravityDirection:CGVectorMake(-5, 0)];
-            [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(space, 0, space, space)];
+            // set UIDynamics to get the container back in position
+            UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self.container]];
+            UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.container]];
+            UIDynamicItemBehavior *item = [[UIDynamicItemBehavior alloc] initWithItems:@[self.container]];
+            item.elasticity = 0.3f;
+            [self.animator addBehavior:collision];
+            [self.animator addBehavior:gravity];
+            [self.animator addBehavior:item];
+            
+            // set gravity and collision boundary depending on pan direction
+            CGFloat space = - self.container.frame.size.width;
+            if (panDistance < 0) {
+                [gravity setGravityDirection:CGVectorMake(5, 0)];
+                [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(space, space, space, 0)];
+            }
+            else {
+                [gravity setGravityDirection:CGVectorMake(-5, 0)];
+                [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(space, 0, space, space)];
+            }
+            
+            if (self.panSuccesLeft)
+                self.panSuccessActionLeft(self);
+            else if (self.panSuccesRight)
+                self.panSuccessActionRight(self);
+   
         }
     }
 }
@@ -218,7 +266,7 @@ const double seperatorHeight = 0.5;
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {
     [self.animator removeAllBehaviors];
     
-    /* reset weird 1/2px bounce rotation if seperator exists
+    /*reset weird 1/2px bounce rotation if seperator exists
     [self.container setNeedsLayout];
     [self.container layoutIfNeeded];
     */

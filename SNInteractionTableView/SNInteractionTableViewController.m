@@ -33,9 +33,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
+    //[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
     /*
     SNInteractionTableView *tableView = (SNInteractionTableView *)self.tableView;
     [tableView deselectSelectedRow];
@@ -49,8 +53,9 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([tableView indexPathForSelectedRow] && indexPath.row == [tableView indexPathForSelectedRow].row)
+    if ([tableView indexPathForSelectedRow] && indexPath.row == [tableView indexPathForSelectedRow].row) {
         return self.tableView.rowHeight + actionPanelHeight;
+    }
     else
         return self.tableView.rowHeight;
 }
@@ -103,6 +108,17 @@
     SNInteractionCell *cell = (SNInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     [cell toggleVisibility:visibility];
 }
+- (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+
+}
+
+ - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
+
+ }
+
+ - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath; {
+
+ }
 
 
 @end

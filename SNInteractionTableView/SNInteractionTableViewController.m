@@ -40,15 +40,12 @@
         SNInteractionCell *cell = (SNInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         [cell prepareForReuse];
     }
-    SNInteractionTableView *tv = (SNInteractionTableView *)self.tableView;
-    [tv deselectSelectedRow];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([tableView indexPathForSelectedRow] && indexPath.row == [tableView indexPathForSelectedRow].row) {

@@ -321,7 +321,7 @@ const double seperatorHeight = 0.5;
             UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self.container]];
             UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.container]];
             UIDynamicItemBehavior *item = [[UIDynamicItemBehavior alloc] initWithItems:@[self.container]];
-            item.elasticity = 0.3f;
+            item.elasticity = 0.4f;
             [self.animator addBehavior:collision];
             [self.animator addBehavior:gravity];
             [self.animator addBehavior:item];
@@ -329,12 +329,12 @@ const double seperatorHeight = 0.5;
             // set gravity and collision boundary depending on pan direction
             CGFloat space = - self.container.frame.size.width;
             if (panDistance < 0) {
-                [gravity setGravityDirection:CGVectorMake(5, 0)];
-                [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(space, space, space, 0)];
+                [gravity setGravityDirection:CGVectorMake(3, 0)];
+                [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(0, space, 0, 0)];
             }
             else {
-                [gravity setGravityDirection:CGVectorMake(-5, 0)];
-                [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(space, 0, space, space)];
+                [gravity setGravityDirection:CGVectorMake(-3, 0)];
+                [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(0, 0, 0, space)];
             }
             
             // handle left action
@@ -361,7 +361,7 @@ const double seperatorHeight = 0.5;
 - (void)resetIndicatorLeftOrRight:(BOOL)isLeft withDelay:(BOOL)withDelay {
     float delay = 0.0;
     if (withDelay)
-        delay = 0.5;
+        delay = 0.7;
         
     [UIView animateWithDuration:0.3 delay:delay usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
     animations:^{
@@ -403,10 +403,9 @@ const double seperatorHeight = 0.5;
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {
     [self.animator removeAllBehaviors];
     
-    /*reset weird 1/2px bounce rotation if seperator exists
+    //reset weird 1/2px bounce rotation if seperator exists
     [self.container setNeedsLayout];
     [self.container layoutIfNeeded];
-    */
 }
 
 @end

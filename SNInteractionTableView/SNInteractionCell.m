@@ -281,31 +281,28 @@ const double seperatorHeight = 0.5;
     if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
         // translate pan movement
         CGPoint translatedPoint = [gestureRecognizer translationInView:gestureRecognizer.view];
-        self.container.center = CGPointMake(gestureRecognizer.view.center.x+translatedPoint.x, gestureRecognizer.view.center.y);
+        [gestureRecognizer setTranslation:CGPointMake(0, 0) inView:gestureRecognizer.view.superview];
 
-        
         float panFactor = 0.7;
         NSNumber *panSuccesDistanceLeft = [NSNumber numberWithInt:50 * (1/panFactor)];
         NSNumber *panSuccesDistanceRight = [NSNumber numberWithInt: - 50 * (1/panFactor)];
         
+        // pan container
+        self.container.center = CGPointMake(gestureRecognizer.view.center.x+translatedPoint.x, gestureRecognizer.view.center.y);
+        
         // pan left indicator
-        if (panDistance < [panSuccesDistanceLeft floatValue]) {
+        if (panDistance < [panSuccesDistanceLeft floatValue])
             self.indicatorLeft.center = CGPointMake(self.indicatorLeft.center.x+translatedPoint.x*panFactor, gestureRecognizer.view.center.y);
-        }
-        else {
+        else
             self.indicatorLeft.center = CGPointMake(self.indicatorLeft.frame.size.width/2, gestureRecognizer.view.center.y);
-        }
+        
         // pan right indicator
-        if (panDistance > [panSuccesDistanceRight floatValue]) {
+        if (panDistance > [panSuccesDistanceRight floatValue])
             self.indicatorRight.center = CGPointMake(self.indicatorRight.center.x+translatedPoint.x*panFactor, gestureRecognizer.view.center.y);
-        }
-        else {
+        else
             self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width - self.indicatorRight.frame.size.width/2, gestureRecognizer.view.center.y);
-        }
         
-        
-        [gestureRecognizer setTranslation:CGPointMake(0, 0) inView:gestureRecognizer.view.superview];
-        
+        // trigger actions
         if (panDistance > [panSuccesDistanceLeft floatValue])
             [self setPanSuccesLeft:YES];
         else

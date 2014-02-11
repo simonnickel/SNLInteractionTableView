@@ -70,13 +70,16 @@
         cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // change colors
+    // change colors, otherwise they are guessed by colors from storyboard
+    /*
     [cell setColorBackground:[UIColor grayColor]];
     [cell setColorContainer:[UIColor whiteColor]];
     [cell setColorSelected:[UIColor greenColor]];
-    [cell setColorToolbar:[UIColor blueColor]];
+    [cell setColorToolbarBarTint:[UIColor blueColor]];
+    [cell setColorToolbarTint:[UIColor greenColor]];
     [cell setColorIndicator:[UIColor redColor]];
     [cell setColorIndicatorSuccess:[UIColor greenColor]];
+    */
     
     // setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];

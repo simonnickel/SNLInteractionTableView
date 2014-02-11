@@ -46,7 +46,8 @@ extern const double seperatorHeight;
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;
 @property (nonatomic) UIColor *colorSelected;
-@property (nonatomic) UIColor *colorToolbar;
+@property (nonatomic) UIColor *colorToolbarBarTint;
+@property (nonatomic) UIColor *colorToolbarTint;
 @property (nonatomic) UIColor *colorIndicator;
 @property (nonatomic) UIColor *colorIndicatorSuccess;
 

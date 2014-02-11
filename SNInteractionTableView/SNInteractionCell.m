@@ -64,18 +64,10 @@ const double seperatorHeight = 0.5;
     else
         self.container.backgroundColor = self.colorContainer;
     
-    self.toolbar.backgroundColor = self.colorBackground;
-    if (self.colorToolbar)
-        self.toolbar.barTintColor = self.colorToolbar;
-    
-    if (self.colorIndicator) {
-        self.indicatorLeft.backgroundColor = self.colorIndicator;
-        self.indicatorRight.backgroundColor = self.colorIndicator;
-    }
-    else {
-        self.indicatorLeft.backgroundColor = self.container.backgroundColor;
-        self.indicatorRight.backgroundColor = self.container.backgroundColor;
-    }
+    self.toolbar.barTintColor = self.colorToolbarBarTint;
+    self.toolbar.tintColor = self.colorToolbarTint;
+    self.indicatorLeft.backgroundColor = self.colorIndicator;
+    self.indicatorRight.backgroundColor = self.colorIndicator;
 }
 
 - (void)toggleVisibility:(BOOL)visible {
@@ -133,18 +125,14 @@ const double seperatorHeight = 0.5;
     [self.contentView addConstraints:@[top, right, left, self.heightContainer]];
     
     // copy settings of contentView
-    if (! self.colorBackground) {
-        self.colorBackground = self.backgroundColor;
-    }
-    if (! self.colorContainer) {
-        self.colorContainer = self.contentView.backgroundColor;
-    }
-    if (! self.colorSelected) {
-        self.colorSelected = [UIColor whiteColor];
-    }
-    if (! self.colorToolbar) {
-        self.colorSelected = self.backgroundColor;
-    }
+    self.colorBackground = self.backgroundColor;
+    self.colorContainer = self.contentView.backgroundColor;
+    self.colorSelected = self.contentView.tintColor;
+    self.colorToolbarBarTint = self.colorContainer;
+    self.colorToolbarTint = self.tintColor;
+    self.colorIndicator = self.colorContainer;
+    self.colorIndicatorSuccess = self.tintColor;
+
     /* more settings to copy, if needed
      self.container.tintColor = self.contentView.tintColor;
      self.container.alpha = self.contentView.alpha;
@@ -387,7 +375,7 @@ const double seperatorHeight = 0.5;
     _panSuccesLeft = panSuccess;
     
     // re/set success color if existing
-    if (panSuccess && self.colorIndicatorSuccess)
+    if (panSuccess)
         self.indicatorLeft.backgroundColor = self.colorIndicatorSuccess;
     else
         self.indicatorLeft.backgroundColor = self.colorIndicator;
@@ -402,7 +390,7 @@ const double seperatorHeight = 0.5;
     _panSuccesRight = panSuccess;
     
     // re/set success color if existing
-    if (panSuccess && self.colorIndicatorSuccess)
+    if (panSuccess)
         self.indicatorRight.backgroundColor = self.colorIndicatorSuccess;
     else
         self.indicatorRight.backgroundColor = self.colorIndicator;

@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InteractionTableViewExample/SNIETableViewController.m"
-            timestampString = "413807013.213875"
+            timestampString = "413810143.404773"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "-moveRowFromIndexPath:toIndexPath:"
             landmarkType = "5">
          </BreakpointContent>

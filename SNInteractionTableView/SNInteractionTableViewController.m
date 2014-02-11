@@ -16,21 +16,14 @@
 
 @implementation SNInteractionTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // Uncomment the following line to disable toolbar.
+    [(SNInteractionTableView *)self.tableView setToolbarEnabled:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -47,9 +40,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([tableView indexPathForSelectedRow] && indexPath.row == [tableView indexPathForSelectedRow].row) {
-        return self.tableView.rowHeight + actionPanelHeight;
+- (CGFloat)tableView:(SNInteractionTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([tableView toolbarEnabled] &&
+        [tableView indexPathForSelectedRow] &&
+        indexPath.row == [tableView indexPathForSelectedRow].row
+    ) {
+        return self.tableView.rowHeight + toolbarHeight;
     }
     else
         return self.tableView.rowHeight;
@@ -63,9 +59,13 @@
 }
 - (NSIndexPath *)tableView:(SNInteractionTableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SNInteractionCell *cell = (SNInteractionCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
     if ([cell isSelected]) {
         [tableView deselectSelectedRow];
         return nil;
+    }
+    else if (tableView.toolbarEnabled) {
+        cell.hasToolbar = YES;
     }
     return indexPath;
 }

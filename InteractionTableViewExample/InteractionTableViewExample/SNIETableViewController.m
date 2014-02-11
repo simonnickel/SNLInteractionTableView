@@ -34,6 +34,9 @@
 
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to disable toolbar.
+    // [(SNInteractionTableView *)self.tableView setToolbarEnabled:NO];
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -71,16 +74,14 @@
     [cell setColorBackground:[UIColor grayColor]];
     [cell setColorContainer:[UIColor whiteColor]];
     [cell setColorSelected:[UIColor greenColor]];
-    [cell setColorActionPanel:[UIColor blueColor]];
+    [cell setColorToolbar:[UIColor blueColor]];
     [cell setColorIndicator:[UIColor redColor]];
     [cell setColorIndicatorSuccess:[UIColor greenColor]];
     
-    // setup actionPanel
+    // setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     UIBarButtonItem *a = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonA:)];
-    NSArray *items = [NSArray arrayWithObjects:flexibleItem, a, flexibleItem, nil];
-    
-    [cell setupActionPanelWithButtons:items];
+    [cell setToolbarButtons: [NSArray arrayWithObjects:flexibleItem, a, flexibleItem, nil]];
     
     // setup pan gestures
     [cell setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];

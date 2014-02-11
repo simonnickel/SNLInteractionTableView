@@ -20,11 +20,13 @@
 
 @interface SNInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
-extern const double actionPanelHeight;
+extern const double toolbarHeight;
 extern const double seperatorHeight;
 
 @property (nonatomic) UIView *container;
-@property (nonatomic) UIToolbar *actionPanel;
+@property (nonatomic) BOOL hasToolbar;
+@property (nonatomic) UIToolbar *toolbar;
+@property (nonatomic) NSArray *toolbarButtons;
 
 @property (nonatomic) UIView *indicatorLeft;
 @property (nonatomic) UIView *indicatorRight;
@@ -44,11 +46,10 @@ extern const double seperatorHeight;
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;
 @property (nonatomic) UIColor *colorSelected;
-@property (nonatomic) UIColor *colorActionPanel;
+@property (nonatomic) UIColor *colorToolbar;
 @property (nonatomic) UIColor *colorIndicator;
 @property (nonatomic) UIColor *colorIndicatorSuccess;
 
-- (void)setupActionPanelWithButtons:(NSArray *)buttons;
 - (void)toggleVisibility:(BOOL)visibility;
 
 @end

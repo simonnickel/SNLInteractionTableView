@@ -163,13 +163,35 @@ const double seperatorHeight = 0.5;
     [self.animator setDelegate:self];
 }
 
+/*
+ *  Setup additional view elements: toolbar, indicatorLeft/Right
+ */
+
+- (void)setupToolbar {
+    self.toolbar = [[UIToolbar alloc] init];
+    [self.contentView addSubview:self.toolbar];
+    [self.toolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: toolbarHeight];
+    
+    [self.contentView addConstraints:@[top, right, left, height]];
+}
+
+- (void)setToolbarButtons:(NSArray *)toolbarButtons {
+    _toolbarButtons = toolbarButtons;
+    [self.toolbar setItems:toolbarButtons];
+}
+
 - (void)setupIndicatorLeft {
-    [self setupIndicatorLeftOrRight:YES];
+    [self setupIndicatorLeft:YES];
 }
 - (void)setupIndicatorRight {
-    [self setupIndicatorLeftOrRight:NO];
+    [self setupIndicatorLeft:NO];
 }
-- (void)setupIndicatorLeftOrRight:(BOOL)isLeft {
+- (void)setupIndicatorLeft:(BOOL)isLeft {
     UIView *indicator = [[UIView alloc] init];
     [indicator setTranslatesAutoresizingMaskIntoConstraints:NO];
     
@@ -208,18 +230,29 @@ const double seperatorHeight = 0.5;
     [indicator addConstraints:@[centerX, centerY]];
 }
 
-- (void)setupToolbar {
-    self.toolbar = [[UIToolbar alloc] init];
-    [self.contentView addSubview:self.toolbar];
-    [self.toolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
-
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
-   NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: toolbarHeight];
+- (void)resetIndicatorLeft:(BOOL)isLeft withDelay:(BOOL)withDelay {
+    float delay = 0.0;
+    if (withDelay)
+        delay = 0.7;
     
-    [self.contentView addConstraints:@[top, right, left, height]];
+    [UIView animateWithDuration:0.3 delay:delay usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         if (isLeft)
+                             self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
+                         else
+                             self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width + self.indicatorRight.frame.size.width/2, self.container.center.y);
+                     } completion:^(BOOL completed){}];
 }
+
+- (void)setIndicatorImageLeft:(UIImage *)indicatorImageLeft {
+    _indicatorImageLeft = indicatorImageLeft;
+    [self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
+}
+- (void)setIndicatorImageRight:(UIImage *)indicatorImageRight {
+    _indicatorImageRight = indicatorImageRight;
+    [self.indicatorImageViewRight setImage:self.indicatorImageRight];
+}
+
 
 /*
  * Gesture functions
@@ -335,68 +368,53 @@ const double seperatorHeight = 0.5;
             // handle left action
             if (self.panSuccesLeft) {
                 self.panSuccessActionLeft(self);
-                [self resetIndicatorLeftOrRight:YES withDelay:YES];
+                [self resetIndicatorLeft:YES withDelay:YES];
             }
             else {
-                [self resetIndicatorLeftOrRight:YES withDelay:NO];
+                [self resetIndicatorLeft:YES withDelay:NO];
             }
             
             // handle right action
             if (self.panSuccesRight) {
                 self.panSuccessActionRight(self);
-                [self resetIndicatorLeftOrRight:NO withDelay:YES];
+                [self resetIndicatorLeft:NO withDelay:YES];
             }
             else {
-                [self resetIndicatorLeftOrRight:NO withDelay:NO];
+                [self resetIndicatorLeft:NO withDelay:NO];
             }
         }
     }
 }
 
-- (void)resetIndicatorLeftOrRight:(BOOL)isLeft withDelay:(BOOL)withDelay {
-    float delay = 0.0;
-    if (withDelay)
-        delay = 0.7;
-        
-    [UIView animateWithDuration:0.3 delay:delay usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
-    animations:^{
-        if (isLeft)
-            self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
-        else
-            self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width + self.indicatorRight.frame.size.width/2, self.container.center.y);
-    } completion:^(BOOL completed){}];
-}
-
-- (void)setToolbarButtons:(NSArray *)toolbarButtons {
-    _toolbarButtons = toolbarButtons;
-    [self.toolbar setItems:toolbarButtons];
-}
 - (void)setPanSuccesLeft:(BOOL)panSuccess {
     _panSuccesLeft = panSuccess;
-    if (panSuccess && self.colorIndicatorSuccess) {
-        
+    
+    // re/set success color if existing
+    if (panSuccess && self.colorIndicatorSuccess)
         self.indicatorLeft.backgroundColor = self.colorIndicatorSuccess;
-    }
-    else {
+    else
         self.indicatorLeft.backgroundColor = self.colorIndicator;
-    }
+    
+    // re/set success image if existing
+    if (panSuccess && self.indicatorImageSuccessLeft)
+        [self.indicatorImageViewLeft setImage:self.indicatorImageSuccessLeft];
+    else
+        [self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
 }
 - (void)setPanSuccesRight:(BOOL)panSuccess {
     _panSuccesRight = panSuccess;
-    if (panSuccess && self.colorIndicatorSuccess) {
+    
+    // re/set success color if existing
+    if (panSuccess && self.colorIndicatorSuccess)
         self.indicatorRight.backgroundColor = self.colorIndicatorSuccess;
-    }
-    else {
+    else
         self.indicatorRight.backgroundColor = self.colorIndicator;
-    }
-}
-- (void)setIndicatorImageLeft:(UIImage *)indicatorImageLeft {
-    _indicatorImageLeft = indicatorImageLeft;
-    [self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
-}
-- (void)setIndicatorImageRight:(UIImage *)indicatorImageRight {
-    _indicatorImageRight = indicatorImageRight;
-    [self.indicatorImageViewRight setImage:self.indicatorImageRight];
+    
+    // re/set success image if existing
+    if (panSuccess && self.indicatorImageSuccessRight)
+        [self.indicatorImageViewRight setImage:self.indicatorImageSuccessRight];
+    else
+        [self.indicatorImageViewRight setImage:self.indicatorImageRight];
 }
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {

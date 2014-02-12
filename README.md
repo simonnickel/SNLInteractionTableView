@@ -9,7 +9,7 @@ Takes your UITableViewCell layouted in Storyboard and extends it with:
 * Select - with toolbar
 * Reorder - by press and hold
 
-You can use this code completely free without any restrictions for whatever you want. Even to print it, if you really want. If you do so (using, not printing) it would be great to hear from you. Just tweet @simonnickel or send me an email.
+You can use this code completely free without any restrictions for whatever you want. Even to print it, if you really want. If you do so (using, not printing) it would be great to hear from you. Just tweet [@simonnickel](https://twitter.com/simonnickel) or send me an email (see profile).
 
 Reordering is inspired/rebuild/copied by [BVReorderTableView](https://github.com/bvogelzang/BVReorderTableView) by Ben Vogelzang. If you just want reordering: use his code!
 

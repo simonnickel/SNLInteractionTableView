@@ -9,6 +9,8 @@ Takes your UITableViewCell layouted in Storyboard and extends it with:
 * Select - with toolbar
 * Reorder - by press and hold
 
+You can use this code completely free without any restrictions for whatever you want. Even to print it, if you really want. If you do so (using, not printing) it would be great to hear from you. Just tweet @simonnickel or send me an email.
+
 Reordering is inspired/rebuild/copied by [BVReorderTableView](https://github.com/bvogelzang/BVReorderTableView) by Ben Vogelzang. If you just want reordering: use his code!
 
 
@@ -65,27 +67,5 @@ See example project in InteractionTableViewExample for more details.
 	    [self panSuccessActionRightOnCell:cell];
 	}];
 }
-
-
-// Update your data source when a cell is draged to a new position. This method is called every time 2 cells switch positions.
-- (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-    /*
-     * Reorder example:
-     */
-    id object = [self.itemList objectAtIndex:fromIndexPath.row];
-    [self.itemList removeObjectAtIndex:fromIndexPath.row];
-    [self.itemList insertObject:object atIndex:toIndexPath.row];
-}
-
-/*  Uncomment this function if you need additional setup when reordering starts.
-- (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Reordering started");
-}
-*/
-/*  Uncomment this function if you need additional cleanup when reordering ended.
- - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath; {
-    NSLog(@"Reordering ended");
- }
-*/
 
 ```

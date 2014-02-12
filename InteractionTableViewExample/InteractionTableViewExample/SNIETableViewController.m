@@ -112,9 +112,7 @@
  *  Reorder functions
  */
 
-// This method is called when the selected row is dragged to a new position. You simply update your
-// data source to reflect that the rows have switched places. This can be called multiple times
-// during the reordering process.
+// Update your data source when a cell is draged to a new position. This method is called every time 2 cells switch positions.
 - (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
     /*
      * Reorder example:

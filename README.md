@@ -32,11 +32,12 @@ See example project in InteractionTableViewExample for more details.
     static NSString *CellIdentifier = @"Cell";
     SNIETableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         
-	if (cell == nil) {
+    if (cell == nil) {
         cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // change colors, otherwise they are guessed by colors from storyboard
+    // can also be set in your custom tableViewCell, see SNIETableViewCell.m
     /*
     [cell setColorBackground:[UIColor grayColor]];
     [cell setColorContainer:[UIColor whiteColor]];
@@ -46,26 +47,37 @@ See example project in InteractionTableViewExample for more details.
     [cell setColorIndicator:[UIColor redColor]];
     [cell setColorIndicatorSuccess:[UIColor greenColor]];
     */
+    
+    // setup pan gestures
+    // can also be set in your custom tableViewCell, see SNIETableViewCell.m
+    [cell setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];
+    [cell setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
+    [cell setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
+    [cell setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
+    [cell setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
+    [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
+    
+    // setup pan gesture callback methods
+    // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
+    [cell setPanSuccessActionLeft:^(SNIETableViewCell *cell){
+        [self panSuccessActionLeftOnCell:cell];
+    }];
+    [cell setPanSuccessActionRight:^(SNIETableViewCell *cell){
+        [self panSuccessActionRightOnCell:cell];
+    }];
+    
+    // setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.
+    // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem *a = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonA:)];
+    [cell setToolbarButtons: [NSArray arrayWithObjects:flexibleItem, a, flexibleItem, nil]];
+    
 
-	// setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.
-	UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-	UIBarButtonItem *a = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonA:)];
-	[cell setToolbarButtons: [NSArray arrayWithObjects:flexibleItem, a, flexibleItem, nil]];
-	    
-	// setup pan gestures
-	[cell setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];
-	[cell setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
-	[cell setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
-	[cell setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
-	[cell setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
-	[cell setPanSuccessActionLeft:^(SNIETableViewCell *cell){
-		[self panSuccessActionLeftOnCell:cell];
-	}];
-	    
-	[cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
-	[cell setPanSuccessActionRight:^(SNIETableViewCell *cell){
-	    [self panSuccessActionRightOnCell:cell];
-	}];
+    
+    // configure content of your cell
+    [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];
+    
+    return cell;
 }
 
 ```

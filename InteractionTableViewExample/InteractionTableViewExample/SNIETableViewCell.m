@@ -41,6 +41,15 @@
     [self setColorToolbarTint:[UIColor greenColor]];
     [self setColorIndicator:[UIColor redColor]];
     [self setColorIndicatorSuccess:[UIColor greenColor]];
+     
+    
+    [self setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];
+    [self setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
+    [self setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
+    [self setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
+    [self setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
+    [self setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
+     
      */
 }
 /*

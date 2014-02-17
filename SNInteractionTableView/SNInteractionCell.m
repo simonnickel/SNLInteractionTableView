@@ -44,18 +44,25 @@ const double seperatorHeight = 0.5;
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self initialize];
+        [self SNInteractionCellInitialize];
+    }
+    return self;
+}
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self SNInteractionCellInitialize];
     }
     return self;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self initialize];
+        [self SNInteractionCellInitialize];
     }
     return self;
 }
-- (void)initialize {
+- (void)SNInteractionCellInitialize {
     // wrap subviews of contentView in container
     [self setupContainer];
     self.indicatorWidth = [NSNumber numberWithInt:50];

@@ -71,6 +71,7 @@
     }
     
     // change colors, otherwise they are guessed by colors from storyboard
+    // can also be set in your custom tableViewCell, see SNIETableViewCell.m
     /*
     [cell setColorBackground:[UIColor grayColor]];
     [cell setColorContainer:[UIColor whiteColor]];

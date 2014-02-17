@@ -1,17 +1,17 @@
 SNInteractionTableView
 ======================
 
-TableViewController, TableView and TableViewCell for more interaction: swipe, selection, reorder. Using AutoLayout and UIDynamics.
+SNInteractionTableView provides a complete tableView (controller, tableView and cell) to easily add more interaction  to your tableView. It uses AutoLayout and extends an existing tableViewCell layout from your Storyboard with the following functionality:
 
-Takes your UITableViewCell layouted in Storyboard and extends it with:
+* Swipe - with bounce or fade-out animation
+* Selection - with toolbar
+* Reordering - by long press
 
-* Swipe - with Bounce or Slide out animation
-* Select - with toolbar
-* Reorder - by press and hold
+This repo contains the SNInteractionTableView and an example project to see how you can use it. For a detailed description see this <a href="http://simonnickel.de/devlog/projects/sninteractiontableview/how-to-use" title="How to use">instruction</a> or the usage section below.
 
 You can use this code completely free without any restrictions for whatever you want. Even to print it, if you really want. If you do so (using, not printing) it would be great to hear from you. Just tweet [@simonnickel](https://twitter.com/simonnickel) or send me an email (see profile).
 
-Reordering is inspired/rebuild/copied by [BVReorderTableView](https://github.com/bvogelzang/BVReorderTableView) by Ben Vogelzang. If you just want reordering: use his code!
+The reordering functionality is inspired/rebuild/copied by [BVReorderTableView](https://github.com/bvogelzang/BVReorderTableView) by Ben Vogelzang. If you just want reordering: use his code!
 
 
 ![Example](https://github.com/simonnickel/SNInteractionTableView/blob/master/example.gif?raw=true)

@@ -37,7 +37,6 @@
 @interface SNInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
 extern const double toolbarHeight;
-extern const double seperatorHeight;
 
 @property (nonatomic) UIView *container;
 @property (nonatomic) BOOL hasToolbar;

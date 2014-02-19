@@ -39,7 +39,6 @@
 @implementation SNInteractionCell
 
 const double toolbarHeight = 44;
-const double seperatorHeight = 0.5;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -78,6 +77,7 @@ const double seperatorHeight = 0.5;
     [super layoutSubviews];
 
     // set color
+    self.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = self.colorBackground;
     if (self.isSelected) {
         self.container.backgroundColor = self.colorSelected;
@@ -138,7 +138,7 @@ const double seperatorHeight = 0.5;
     
     // layout container to fill contentView
     [self.container setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant: - seperatorHeight];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant: 0.f];
     //NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-1.f];
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
@@ -182,6 +182,7 @@ const double seperatorHeight = 0.5;
     self.toolbar = [[UIToolbar alloc] init];
     [self.contentView addSubview:self.toolbar];
     [self.toolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.toolbar.clipsToBounds = YES;
     
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];

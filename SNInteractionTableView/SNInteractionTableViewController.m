@@ -96,7 +96,6 @@
     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
-
 /*
  *  Editing functions
  */

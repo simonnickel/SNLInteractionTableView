@@ -28,12 +28,6 @@
 #define SNICellPanSuccessAnimationBounce [NSNumber numberWithInt:0]
 #define SNICellPanSuccessAnimationOut [NSNumber numberWithInt:1]
 
-#define panStateOff [NSNumber numberWithInt:0]
-#define panStateNone [NSNumber numberWithInt:1]
-#define panStateIncrease [NSNumber numberWithInt:2]
-#define panStateDecrease [NSNumber numberWithInt:3]
-#define panStateEdit [NSNumber numberWithInt:4]
-
 @interface SNInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
 extern const double toolbarHeight;

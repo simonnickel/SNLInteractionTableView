@@ -67,15 +67,15 @@ const double toolbarHeight = 44;
 - (void)SNInteractionCellInitialize {
     [self setupContainer];
     
+    self.customSeparatorTopHeight = 0;
+    self.customSeparatorBottomHeight = 0.5;
+    [self setupCustomSeparator];
+    
     self.indicatorWidth = [NSNumber numberWithInt:50];
     [self setupIndicatorLeft];
     [self setupIndicatorRight];
     
     [self setupToolbar];
-    
-    self.customSeparatorTopHeight = 0;
-    self.customSeparatorBottomHeight = 0.5;
-    [self setupCustomSeparator];
 }
 - (void)prepareForReuse {
     self.container.hidden = NO;

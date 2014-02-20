@@ -33,6 +33,7 @@
 extern const double toolbarHeight;
 
 @property (nonatomic) UIView *container;
+
 @property (nonatomic) BOOL hasToolbar;
 @property (nonatomic) UIToolbar *toolbar;
 @property (nonatomic) NSArray *toolbarButtons;
@@ -44,13 +45,18 @@ extern const double toolbarHeight;
 @property (nonatomic) UIImage *indicatorImageRight;
 @property (nonatomic) UIImage *indicatorImageSuccessLeft;
 @property (nonatomic) UIImage *indicatorImageSuccessRight;
+
+@property (nonatomic) BOOL panSuccesLeft;
+@property (nonatomic) BOOL panSuccesRight;
 @property (nonatomic) NSNumber *panSuccesAnimationLeft;
 @property (nonatomic) NSNumber *panSuccesAnimationRight;
 @property (strong, nonatomic) void(^panSuccessActionLeft)();
 @property (strong, nonatomic) void(^panSuccessActionRight)();
 
-@property (nonatomic) BOOL panSuccesLeft;
-@property (nonatomic) BOOL panSuccesRight;
+@property (nonatomic) UIView *customSeparatorTop;
+@property (nonatomic) UIView *customSeparatorBottom;
+@property (nonatomic) float customSeparatorTopHeight;
+@property (nonatomic) float customSeparatorBottomHeight;
 
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;
@@ -59,6 +65,10 @@ extern const double toolbarHeight;
 @property (nonatomic) UIColor *colorToolbarTint;
 @property (nonatomic) UIColor *colorIndicator;
 @property (nonatomic) UIColor *colorIndicatorSuccess;
+@property (nonatomic) UIColor *colorCustomSeparatorTop;
+@property (nonatomic) UIColor *colorCustomSeparatorBottom;
+
+
 
 - (void)toggleVisibility:(BOOL)visibility;
 

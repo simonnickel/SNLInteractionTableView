@@ -82,6 +82,16 @@
     [cell setColorIndicatorSuccess:[UIColor greenColor]];
     */
     
+    // setup custom separator on top and/or bottom of cell, default: top = 0, bottom = 0.5
+    /*
+    cell.colorCustomSeparatorTop = [UIColor whiteColor];
+    [cell setColorContainer:[UIColor lightTextColor]];
+    cell.colorCustomSeparatorBottom = [UIColor grayColor];
+    
+    cell.customSeparatorBottomHeight = 0.5;
+    cell.customSeparatorTopHeight = 0.5;
+    */
+    
     // setup pan gestures
     // can also be set in your custom tableViewCell, see SNIETableViewCell.m
     [cell setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];

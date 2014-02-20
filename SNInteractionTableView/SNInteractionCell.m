@@ -34,9 +34,6 @@
 @property (nonatomic, strong) UIImageView *indicatorImageViewLeft;
 @property (nonatomic, strong) UIImageView *indicatorImageViewRight;
 
-@property (nonatomic, strong) NSLayoutConstraint *customSeparatorConstraintTop;
-@property (nonatomic, strong) NSLayoutConstraint *customSeparatorConstraintBottom;
-
 @end
 
 @implementation SNInteractionCell
@@ -67,13 +64,11 @@ const double toolbarHeight = 44;
 - (void)SNInteractionCellInitialize {
     [self setupContainer];
     
-    self.customSeparatorTopHeight = 0;
-    self.customSeparatorBottomHeight = 0.5;
-    [self setupCustomSeparator];
-    
     self.indicatorWidth = [NSNumber numberWithInt:50];
     [self setupIndicatorLeft];
     [self setupIndicatorRight];
+    
+    [self setupCustomSeparator];
     
     [self setupToolbar];
 }
@@ -211,35 +206,28 @@ const double toolbarHeight = 44;
 }
 
 - (void)setupCustomSeparator {
-    self.customSeparatorTop = [[UIView alloc] init];
-    [self.contentView addSubview:self.customSeparatorTop];
-    [self.customSeparatorTop setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.customSeparatorTop attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *topLeft = [NSLayoutConstraint constraintWithItem:self.customSeparatorTop attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *topRight = [NSLayoutConstraint constraintWithItem:self.customSeparatorTop attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
-    self.customSeparatorConstraintTop = [NSLayoutConstraint constraintWithItem:self.customSeparatorTop attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: self.customSeparatorTopHeight];
-    
-    [self.contentView addConstraints:@[top, topRight, topLeft, self.customSeparatorConstraintTop]];
-    
-    self.customSeparatorBottom = [[UIView alloc] init];
-    [self.contentView addSubview:self.customSeparatorBottom];
-    [self.customSeparatorBottom setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.customSeparatorBottom attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *bottomLeft = [NSLayoutConstraint constraintWithItem:self.customSeparatorBottom attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *bottomRight = [NSLayoutConstraint constraintWithItem:self.customSeparatorBottom attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
-    self.customSeparatorConstraintBottom = [NSLayoutConstraint constraintWithItem:self.customSeparatorBottom attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: self.customSeparatorBottomHeight];
-    
-    [self.contentView addConstraints:@[bottom, bottomRight, bottomLeft, self.customSeparatorConstraintBottom]];
+    self.customSeparatorTop = [self customSeparator:YES forView:self.container];
+    self.customSeparatorBottom = [self customSeparator:NO forView:self.container];
 }
-- (void)setCustomSeparatorTopHeight:(float)customSeparatorTopHeight {
-    _customSeparatorTopHeight = customSeparatorTopHeight;
-    self.customSeparatorConstraintTop.constant = customSeparatorTopHeight;
-}
-- (void)setCustomSeparatorBottomHeight:(float)customSeparatorBottomHeight {
-    _customSeparatorBottomHeight = customSeparatorBottomHeight;
-    self.customSeparatorConstraintBottom.constant = customSeparatorBottomHeight;
+- (UIView *)customSeparator:(BOOL)isTop forView:(UIView *)targetView {
+    UIView *view = [[UIView alloc] init];
+    [targetView addSubview:view];
+    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: 0.5f];
+    
+    [targetView addConstraints:@[right, left, height]];
+    
+    if (isTop)
+        [targetView addConstraint:top];
+    else
+        [targetView addConstraint:bottom];
+    
+    return view;
 }
 
 - (void)setupIndicatorLeft {

@@ -55,8 +55,6 @@ extern const double toolbarHeight;
 
 @property (nonatomic) UIView *customSeparatorTop;
 @property (nonatomic) UIView *customSeparatorBottom;
-@property (nonatomic) float customSeparatorTopHeight;
-@property (nonatomic) float customSeparatorBottomHeight;
 
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;

@@ -63,6 +63,7 @@ const double seperatorHeight = 0.5;
     return self;
 }
 - (void)SNInteractionCellInitialize {
+	self.clipsToBounds = YES;
     // wrap subviews of contentView in container
     [self setupContainer];
     self.indicatorWidth = [NSNumber numberWithInt:50];

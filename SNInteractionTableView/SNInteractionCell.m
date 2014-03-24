@@ -62,6 +62,8 @@ const double toolbarHeight = 44;
     return self;
 }
 - (void)SNInteractionCellInitialize {
+	self.clipsToBounds = YES;
+    // wrap subviews of contentView in container
     [self setupContainer];
     
     self.indicatorWidth = [NSNumber numberWithInt:50];

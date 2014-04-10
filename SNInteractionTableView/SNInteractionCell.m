@@ -92,6 +92,7 @@ const double toolbarHeight = 44;
     else
         self.container.backgroundColor = self.colorContainer;
     
+	self.toolbar.backgroundColor = self.colorToolbarBarTint;
     self.toolbar.barTintColor = self.colorToolbarBarTint;
     self.toolbar.tintColor = self.colorToolbarTint;
     self.indicatorLeft.backgroundColor = self.colorIndicator;

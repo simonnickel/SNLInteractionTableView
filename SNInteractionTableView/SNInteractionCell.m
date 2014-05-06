@@ -294,11 +294,13 @@ const double toolbarHeight = 44;
 
 - (void)setIndicatorImageLeft:(UIImage *)indicatorImageLeft {
     _indicatorImageLeft = indicatorImageLeft;
-    [self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
+	// should be set on initialisation to work with dis-/enabling
+    //[self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
 }
 - (void)setIndicatorImageRight:(UIImage *)indicatorImageRight {
     _indicatorImageRight = indicatorImageRight;
-    [self.indicatorImageViewRight setImage:self.indicatorImageRight];
+	// should be set on initialisation to work with dis-/enabling
+    //[self.indicatorImageViewRight setImage:self.indicatorImageRight];
 }
 
 

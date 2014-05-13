@@ -45,6 +45,8 @@ extern const double toolbarHeight;
 @property (nonatomic) UIImage *indicatorImageRight;
 @property (nonatomic) UIImage *indicatorImageSuccessLeft;
 @property (nonatomic) UIImage *indicatorImageSuccessRight;
+@property (nonatomic, strong) UIImageView *indicatorImageViewLeft;
+@property (nonatomic, strong) UIImageView *indicatorImageViewRight;
 
 @property (nonatomic) BOOL panSuccesLeft;
 @property (nonatomic) BOOL panSuccesRight;

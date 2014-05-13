@@ -31,9 +31,6 @@
 @property (nonatomic, strong) UIGravityBehavior *gravity;
 @property (nonatomic, strong) NSLayoutConstraint *heightContainer;
 
-@property (nonatomic, strong) UIImageView *indicatorImageViewLeft;
-@property (nonatomic, strong) UIImageView *indicatorImageViewRight;
-
 @end
 
 @implementation SNInteractionCell

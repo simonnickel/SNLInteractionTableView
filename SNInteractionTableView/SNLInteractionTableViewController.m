@@ -103,6 +103,11 @@
 
 #pragma mark - SNLInteractionTableView delegate - Reorder
 
+- (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath {
+    SNLInteractionCell *cell = (SNLInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    [cell toggleVisibility:visibility];
+}
+
 - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
 	// implement additional setup when reordering starts in subclass
 }

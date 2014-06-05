@@ -26,13 +26,6 @@
 
 @implementation SNLInteractionTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to disable toolbar.
-    [(SNLInteractionTableView *)self.tableView setToolbarEnabled:YES];
-}
-
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
@@ -41,6 +34,9 @@
         [cell prepareForReuse];
     }
 }
+
+
+#pragma mark - Table view delegate
 
 - (CGFloat)tableView:(SNLInteractionTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([tableView toolbarEnabled] &&
@@ -53,17 +49,23 @@
         return self.tableView.rowHeight;
 }
 
-/*
- *  Toggle selection and resize cell.
- */
+
+#pragma mark - Table view delegate - Selection
+
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     return indexPath;
 }
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+}
+
 - (NSIndexPath *)tableView:(SNLInteractionTableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SNLInteractionCell *cell = (SNLInteractionCell *)[tableView cellForRowAtIndexPath:indexPath];
     
     if ([cell isSelected]) {
-        [tableView deselectSelectedRow];
+		[tableView deselectSelectedRow];
         return nil;
     }
     else if (tableView.toolbarEnabled) {
@@ -71,10 +73,7 @@
     }
     return indexPath;
 }
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
@@ -82,41 +81,44 @@
     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
-/*
- *  Editing functions
- */
+
+#pragma mark - Table view data source - Editing
+
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return  UITableViewCellEditingStyleNone;
 }
--(BOOL)tableView:(UITableView*)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath*)indexPath {
+
+- (BOOL)tableView:(UITableView*)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath*)indexPath {
     return NO;
 }
 
 
-/*
- * Reorder functions
- */
+#pragma mark - SNLInteractionTableView delegate - Reorder
+
 - (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath {
     SNLInteractionCell *cell = (SNLInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     [cell toggleVisibility:visibility];
 }
-- (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
 
+- (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
+	// implement additional setup when reordering starts in subclass
 }
 
- - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
-
- }
+- (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+	// update your DataSource when cells are switched in subclass
+}
 
  - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath; {
-
- }
+	// implement additional cleanup when reordering ended in subclass
+}
 
 
 @end

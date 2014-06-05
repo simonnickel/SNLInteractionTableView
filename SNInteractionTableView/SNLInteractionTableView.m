@@ -59,6 +59,7 @@
 - (void)initialize {
     [self setAllowsMultipleSelection:NO];
     [self setAllowsSelection:YES];
+	self.toolbarEnabled = YES;
     
     self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [self addGestureRecognizer:self.longPress];
@@ -234,9 +235,6 @@
         
         if ([self.delegate respondsToSelector:@selector(moveRowFromIndexPath:toIndexPath:)]) {
             [self.delegate moveRowFromIndexPath:self.currentIndexPath toIndexPath:indexPath];
-        }
-        else {
-            NSLog(@"moveRowFromIndexPath: is not implemented");
         }
         
         [self endUpdates];

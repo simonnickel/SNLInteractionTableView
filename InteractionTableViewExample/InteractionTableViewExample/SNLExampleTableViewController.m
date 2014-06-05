@@ -18,7 +18,7 @@
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to disable toolbar.
+    // Uncomment the following line to disable the toolbar.
     // [(SNLInteractionTableView *)self.tableView setToolbarEnabled:NO];
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -96,7 +96,7 @@
 
 
 
-#pragma mark - SNLInteractionTableView Reorder
+#pragma mark - SNLInteractionTableView delegate - Reorder
 
 - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
 	// additional setup when reordering starts
@@ -108,9 +108,7 @@
 	// update DataSource when cells are switched
     NSLog(@"Switched Cells");
 	
-    /*
-     * Reorder example:
-     */
+    // Reorder example:
     id object = [self.itemList objectAtIndex:fromIndexPath.row];
     [self.itemList removeObjectAtIndex:fromIndexPath.row];
     [self.itemList insertObject:object atIndex:toIndexPath.row];

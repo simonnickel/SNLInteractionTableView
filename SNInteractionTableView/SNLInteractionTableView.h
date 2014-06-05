@@ -18,12 +18,30 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  Delegate protocol to handle reordering of cells in SNLInteractionTableView.
+ */
 @protocol SNLInteractionTableViewDelegate <UITableViewDelegate>
 
+/**
+ *	Called when user long presses a cell.
+ */
 - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *	Called every time 2 cells switch positions.
+ *  To update the data source when a cell is dragged to a new position.
+ */
 - (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;
+
+/**
+ *	Called when user stops dragging.
+ */
 - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *	Hides selected cell.
+ */
 - (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath;
 
 @end
@@ -31,9 +49,22 @@
 
 @interface SNLInteractionTableView : UITableView
 
+/**
+ *  TableViews delegate ViewController to handle reordering.
+ */
 @property (nonatomic, weak) id <SNLInteractionTableViewDelegate> delegate;
+
+/**
+ *  Toolbar is shown when cell is tapped.
+ *
+ *  Default: YES.
+ */
 @property (nonatomic) BOOL toolbarEnabled;
 
+/**
+ *  Deselect selected cell and calls tableView:willDeselectRowAtIndexPath and
+ *	tableView:didDeselectRowAtIndexPath of delegate.
+ */
 - (void)deselectSelectedRow;
 
 @end

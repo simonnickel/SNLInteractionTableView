@@ -96,7 +96,7 @@
 
 
 
-#pragma mark - SNLInteractionTableView delegate - Reorder
+#pragma mark - SNLInteractionTableView delegate
 
 - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
 	// additional setup when reordering starts

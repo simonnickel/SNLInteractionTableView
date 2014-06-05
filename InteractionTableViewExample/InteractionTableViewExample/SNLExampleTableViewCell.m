@@ -25,7 +25,7 @@
 }
 - (void)initialize {
 	/*
-	// override default/storyboard colors
+	// to override default/storyboard colors use:
 	self.colorBackground = [UIColor grayColor];
 	self.colorContainer = [UIColor whiteColor];
 	self.colorSelected = [UIColor greenColor];

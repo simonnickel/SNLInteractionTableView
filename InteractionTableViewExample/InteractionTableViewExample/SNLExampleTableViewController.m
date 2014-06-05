@@ -16,13 +16,13 @@
     self.itemList = [[NSMutableArray alloc] initWithObjects:@"Test 1", @"Test 2", @"Test 3", @"Test 4", @"Test 5", @"Test 6", @"Test 7", @"Test 8", @"Test 9", @"Test 10", nil];
 
     // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
+    // self.clearsSelectionOnViewWillAppear = NO;
+	
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // Uncomment the following line to disable the toolbar.
     // [(SNLInteractionTableView *)self.tableView setToolbarEnabled:NO];
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
@@ -45,17 +45,9 @@
 	// set cells delegate to connect swipe action method
 	cell.delegate = self;
 	
-	// initialize colors and images in your SNLInteractionCell subclass
-    
-    // setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.
-    // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
-    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem *a = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonA:)];
-    [cell setToolbarButtons: [NSArray arrayWithObjects:flexibleItem, a, flexibleItem, nil]];
-    
+	// initialize colors, images and toolbar in your SNLInteractionCell subclass
 
-    
-    // configure content of your cell
+    // configure example content
     [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];
     
     return cell;
@@ -87,7 +79,8 @@
 }
 
 
-#pragma mark - SNLInteractionCell delegate - Swipe
+
+#pragma mark - SNLInteractionCell delegate
 
 - (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLExampleTableViewCell *)cell {
 	// implement actions on successfull swipe gesture
@@ -100,11 +93,13 @@
 	}
 }
 
-
-#pragma mark - Interaction
-
-- (void)buttonA:(id)sender {
-    NSLog(@"Button");
+- (void)buttonActionWithTag:(NSInteger)tag onCell:(SNLExampleTableViewCell *)cell {
+	if (tag == 1) {
+		NSLog(@"First Button on '%@'", cell.label.text);
+	}
+	else if (tag == 2) {
+		NSLog(@"Second Button on '%@'", cell.label.text);
+	}
 }
 
 

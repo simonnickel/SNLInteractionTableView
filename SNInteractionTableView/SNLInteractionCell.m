@@ -461,4 +461,13 @@ const double SNLToolbarHeight = 44;
     [self.container layoutIfNeeded];
 }
 
+
+
+
+
+
+- (void)buttonPressed:(UIButton *)sender {
+	[self.delegate buttonActionWithTag:sender.tag onCell:self];
+}
+
 @end

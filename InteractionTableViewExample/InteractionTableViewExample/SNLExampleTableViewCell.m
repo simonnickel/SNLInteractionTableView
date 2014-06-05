@@ -48,6 +48,16 @@
     self.colorCustomSeparatorTop = [UIColor whiteColor];
 	self.colorContainer = [UIColor lightTextColor];
     self.colorCustomSeparatorBottom = [UIColor grayColor];
+	
+	// setup toolbar, if toolbar is enabled (default)
+    UIBarButtonItem *buttonA = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonPressed:)];
+	buttonA.tag = 1;
+	
+    UIBarButtonItem *buttonB = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonPressed:)];
+	buttonB.tag = 2;
+	
+	UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [self setToolbarButtons: [NSArray arrayWithObjects:flexibleItem, buttonA, flexibleItem, buttonB, flexibleItem, nil]];
 }
 
 

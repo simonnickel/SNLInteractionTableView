@@ -33,9 +33,11 @@ typedef NS_ENUM(NSInteger, SNLSwipeAction){
 /**
  *  Delegate protocol to handle cell swipe actions.
  */
-@protocol SNLInteractionCellSwipeActionDelegate <NSObject>
+@protocol SNLInteractionCellActionDelegate <NSObject>
 
 - (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLInteractionCell *)cell;
+
+- (void)buttonActionWithTag:(NSInteger)tag onCell:(SNLInteractionCell *)cell;
 
 @end
 
@@ -48,7 +50,7 @@ extern const double SNLToolbarHeight;
 /**
  *  Cells delegate to handle swipe actions.
  */
-@property (nonatomic, weak) id <SNLInteractionCellSwipeActionDelegate> delegate;
+@property (nonatomic, weak) id <SNLInteractionCellActionDelegate> delegate;
 
 
 @property (nonatomic) UIView *container;
@@ -84,5 +86,8 @@ extern const double SNLToolbarHeight;
 @property (nonatomic) UIColor *colorIndicatorSuccess;
 @property (nonatomic) UIColor *colorCustomSeparatorTop;
 @property (nonatomic) UIColor *colorCustomSeparatorBottom;
+
+
+- (void)buttonPressed:(UIButton *)sender;
 
 @end

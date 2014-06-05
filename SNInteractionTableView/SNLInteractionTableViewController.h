@@ -20,6 +20,6 @@
 #import "SNLInteractionTableView.h"
 #import "SNLInteractionCell.h"
 
-@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDataSource, SNLInteractionCellSwipeActionDelegate>
+@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDataSource, SNLInteractionCellActionDelegate>
 
 @end

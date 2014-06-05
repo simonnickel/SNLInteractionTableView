@@ -113,7 +113,7 @@
 }
 
 
-#pragma mark - SNLInteractionCell delegate - Swipe
+#pragma mark - SNLInteractionCell delegate
 
 - (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLInteractionCell *)cell {
 	// implement action for swipeAction == SNLSwipeActionLeft/SNLSwipeActionLeft in subclass
@@ -125,6 +125,10 @@
 	
 	}
 	*/
+}
+
+- (void)buttonActionWithTag:(NSInteger)tag onCell:(SNLInteractionCell *)cell {
+	// implement action for buttonTap in subclass
 }
 
 

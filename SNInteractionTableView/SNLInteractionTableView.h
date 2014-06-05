@@ -21,14 +21,13 @@
 @protocol SNLInteractionTableViewDelegate <UITableViewDelegate>
 
 - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath;
-
 - (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;
-
 - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath;
 
 - (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath;
 
 @end
+
 
 @interface SNLInteractionTableView : UITableView
 

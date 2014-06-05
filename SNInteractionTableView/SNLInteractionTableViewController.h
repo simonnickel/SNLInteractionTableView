@@ -19,6 +19,6 @@
 #import <UIKit/UIKit.h>
 #import "SNLInteractionTableView.h"
 
-@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDataSource>
 
 @end

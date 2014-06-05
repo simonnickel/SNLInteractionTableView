@@ -18,6 +18,7 @@
 
 #import "SNLInteractionTableView.h"
 
+
 @interface SNLInteractionTableView ()
 
 @property (nonatomic) UILongPressGestureRecognizer *longPress;
@@ -30,16 +31,18 @@
 @end
 
 
+
 @implementation SNLInteractionTableView
 
-- (id)init {
-    return [self initWithFrame:CGRectZero];
-}
-- (id)initWithFrame:(CGRect)frame {
-    return [self initWithFrame:frame style:UITableViewStylePlain];
-}
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         [self initialize];
     }
@@ -52,10 +55,6 @@
     }
     return self;
 }
-
-/*
- *  initialization
- */
 - (void)initialize {
     [self setAllowsMultipleSelection:NO];
     [self setAllowsSelection:YES];
@@ -69,9 +68,9 @@
     self.separatorColor = [UIColor clearColor];
 }
 
-/*
- *  Selection functions
- */
+
+#pragma mark - Selection
+
 - (void)deselectSelectedRow {
     NSIndexPath *selected = [self indexPathForSelectedRow];
     if (selected) {
@@ -81,9 +80,9 @@
     }
 }
 
-/*
- *  Reorder functions
- */
+
+#pragma mark - Reorder
+
 - (void)longPress:(UILongPressGestureRecognizer *)gesture {
     CGPoint location = [gesture locationInView:self];
     NSIndexPath *indexPath = [self indexPathForRowAtPoint:location];
@@ -145,7 +144,7 @@
         if ([self.delegate respondsToSelector:@selector(startedReorderAtIndexPath:)]) {
             [self.delegate startedReorderAtIndexPath:indexPath];
         }
-        [self.delegate toggleCellVisibility:NO forIndexPath:indexPath];
+        [self toggleCellVisibility:NO forIndexPath:indexPath];
 
         
         self.initialIndexPath = indexPath;
@@ -207,12 +206,16 @@
              self.draggingView.frame = CGRectOffset(self.draggingView.bounds, rect.origin.x, rect.origin.y);
          } completion:^(BOOL finished) {
              [self.draggingView removeFromSuperview];
-             [self.delegate toggleCellVisibility:YES forIndexPath:indexPath];
+             [self toggleCellVisibility:YES forIndexPath:indexPath];
 
              self.currentIndexPath = nil;
              self.draggingView = nil;
          }];
     }
+}
+- (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+    cell.hidden = ! visibility;
 }
 
 - (void)updateCurrentLocation:(UILongPressGestureRecognizer *)gesture {
@@ -239,8 +242,8 @@
         
         [self endUpdates];
         
-        [self.delegate toggleCellVisibility:YES forIndexPath:self.currentIndexPath];
-        [self.delegate toggleCellVisibility:NO forIndexPath:indexPath];
+        [self toggleCellVisibility:YES forIndexPath:self.currentIndexPath];
+        [self toggleCellVisibility:NO forIndexPath:indexPath];
         
         self.currentIndexPath = indexPath;
     }

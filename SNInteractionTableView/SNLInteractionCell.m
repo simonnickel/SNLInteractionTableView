@@ -34,25 +34,25 @@ const double SNLToolbarHeight = 44;
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self SNLInteractionCellInitialize];
+        [self initialize];
     }
     return self;
 }
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self SNLInteractionCellInitialize];
+        [self initialize];
     }
     return self;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self SNLInteractionCellInitialize];
+        [self initialize];
     }
     return self;
 }
-- (void)SNLInteractionCellInitialize {
+- (void)initialize {
 	self.clipsToBounds = YES;
     // wrap subviews of contentView in container
     [self setupContainer];
@@ -67,7 +67,7 @@ const double SNLToolbarHeight = 44;
 }
 - (void)prepareForReuse {
     self.container.hidden = NO;
-    [self toggleVisibility:YES];
+	self.hidden = NO;
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -91,10 +91,6 @@ const double SNLToolbarHeight = 44;
     
     self.customSeparatorTop.backgroundColor = self.colorCustomSeparatorTop;
     self.customSeparatorBottom.backgroundColor = self.colorCustomSeparatorBottom;
-}
-
-- (void)toggleVisibility:(BOOL)visible {
-    self.hidden = !visible;
 }
 
 /*

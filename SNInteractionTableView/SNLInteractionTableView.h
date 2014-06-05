@@ -39,12 +39,9 @@
  */
 - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath;
 
-/**
- *	Hides selected cell.
- */
-- (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath;
-
 @end
+
+
 
 
 @interface SNLInteractionTableView : UITableView

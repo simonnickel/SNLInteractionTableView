@@ -27,7 +27,8 @@
 
 @interface SNInteractionTableView : UITableView
 
-@property (nonatomic, assign) id <SNInteractionTableViewDelegate> delegate;
+// TODO: weak delegate
+@property (nonatomic) id <SNInteractionTableViewDelegate> delegate;
 @property (nonatomic) BOOL toolbarEnabled;
 
 - (void)deselectSelectedRow;

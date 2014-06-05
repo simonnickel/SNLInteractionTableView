@@ -11,6 +11,6 @@
 
 @interface SNIETableViewController : SNInteractionTableViewController
 
-@property NSMutableArray *itemList;
+@property (nonatomic) NSMutableArray *itemList;
 
 @end

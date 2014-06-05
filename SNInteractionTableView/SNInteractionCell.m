@@ -26,10 +26,10 @@
 
 @interface SNInteractionCell ()
 
-@property (nonatomic, strong) UIDynamicAnimator *animator;
-@property (nonatomic, strong) UICollisionBehavior *collision;
-@property (nonatomic, strong) UIGravityBehavior *gravity;
-@property (nonatomic, strong) NSLayoutConstraint *heightContainer;
+@property (nonatomic) UIDynamicAnimator *animator;
+@property (nonatomic) UICollisionBehavior *collision;
+@property (nonatomic) UIGravityBehavior *gravity;
+@property (nonatomic) NSLayoutConstraint *heightContainer;
 
 @end
 

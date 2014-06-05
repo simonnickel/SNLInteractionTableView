@@ -26,12 +26,12 @@
 
 @interface SNInteractionTableView ()
 
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
-@property (nonatomic, strong) NSIndexPath *initialIndexPath;
-@property (nonatomic, strong) NSIndexPath *currentIndexPath;
-@property (nonatomic, strong) UIImageView *draggingView;
-@property (nonatomic, strong) CADisplayLink *scrollDisplayLink;
-@property (nonatomic, assign) CGFloat scrollRate;
+@property (nonatomic) UILongPressGestureRecognizer *longPress;
+@property (nonatomic) NSIndexPath *initialIndexPath;
+@property (nonatomic) NSIndexPath *currentIndexPath;
+@property (nonatomic) UIImageView *draggingView;
+@property (nonatomic) CADisplayLink *scrollDisplayLink;
+@property (nonatomic) CGFloat scrollRate;
 
 @end
 

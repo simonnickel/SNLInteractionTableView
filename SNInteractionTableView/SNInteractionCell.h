@@ -45,15 +45,15 @@ extern const double toolbarHeight;
 @property (nonatomic) UIImage *indicatorImageRight;
 @property (nonatomic) UIImage *indicatorImageSuccessLeft;
 @property (nonatomic) UIImage *indicatorImageSuccessRight;
-@property (nonatomic, strong) UIImageView *indicatorImageViewLeft;
-@property (nonatomic, strong) UIImageView *indicatorImageViewRight;
+@property (nonatomic) UIImageView *indicatorImageViewLeft;
+@property (nonatomic) UIImageView *indicatorImageViewRight;
 
 @property (nonatomic) BOOL panSuccesLeft;
 @property (nonatomic) BOOL panSuccesRight;
 @property (nonatomic) NSNumber *panSuccesAnimationLeft;
 @property (nonatomic) NSNumber *panSuccesAnimationRight;
-@property (strong, nonatomic) void(^panSuccessActionLeft)();
-@property (strong, nonatomic) void(^panSuccessActionRight)();
+@property (nonatomic, strong) void(^panSuccessActionLeft)();
+@property (nonatomic, strong) void(^panSuccessActionRight)();
 
 @property (nonatomic) UIView *customSeparatorTop;
 @property (nonatomic) UIView *customSeparatorBottom;

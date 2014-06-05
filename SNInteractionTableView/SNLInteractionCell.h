@@ -18,9 +18,9 @@
 
 #import <UIKit/UIKit.h>
 
-#define SNICellPanSuccessAnimationDefault [NSNumber numberWithInt:0]
-#define SNICellPanSuccessAnimationBounce [NSNumber numberWithInt:0]
-#define SNICellPanSuccessAnimationOut [NSNumber numberWithInt:1]
+#define SNLCellPanSuccessAnimationDefault [NSNumber numberWithInt:0]
+#define SNLCellPanSuccessAnimationBounce [NSNumber numberWithInt:0]
+#define SNLCellPanSuccessAnimationOut [NSNumber numberWithInt:1]
 
 @interface SNLInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 

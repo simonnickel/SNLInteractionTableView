@@ -39,8 +39,8 @@
     [self setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
     [self setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
     [self setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
-    [self setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
-    [self setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
+    [self setPanSuccesAnimationLeft:SNLCellPanSuccessAnimationBounce];
+    [self setPanSuccesAnimationRight:SNLCellPanSuccessAnimationOut];
      
      */
 }

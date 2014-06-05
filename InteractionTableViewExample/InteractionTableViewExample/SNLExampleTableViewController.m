@@ -19,7 +19,7 @@
     self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to disable toolbar.
-    // [(SNInteractionTableView *)self.tableView setToolbarEnabled:NO];
+    // [(SNLInteractionTableView *)self.tableView setToolbarEnabled:NO];
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -43,7 +43,7 @@
     SNLExampleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // change colors, otherwise they are guessed by colors from storyboard
-    // can also be set in your custom tableViewCell, see SNIETableViewCell.m
+    // can also be set in your custom tableViewCell, see SNLExampleTableViewCell.m
     /*
     [cell setColorBackground:[UIColor grayColor]];
     [cell setColorContainer:[UIColor whiteColor]];
@@ -61,13 +61,13 @@
     
     
     // setup pan gestures
-    // can also be set in your custom tableViewCell, see SNIETableViewCell.m
+    // can also be set in your custom tableViewCell, see SNLExampleTableViewCell.m
     [cell setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];
     [cell setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
     [cell setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
     [cell setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
-    [cell setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
-    [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
+    [cell setPanSuccesAnimationLeft:SNLCellPanSuccessAnimationBounce];
+    [cell setPanSuccesAnimationRight:SNLCellPanSuccessAnimationOut];
     
     // setup pan gesture callback methods
     // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well

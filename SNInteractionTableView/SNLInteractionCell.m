@@ -34,25 +34,25 @@ const double toolbarHeight = 44;
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self SNInteractionCellInitialize];
+        [self SNLInteractionCellInitialize];
     }
     return self;
 }
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self SNInteractionCellInitialize];
+        [self SNLInteractionCellInitialize];
     }
     return self;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self SNInteractionCellInitialize];
+        [self SNLInteractionCellInitialize];
     }
     return self;
 }
-- (void)SNInteractionCellInitialize {
+- (void)SNLInteractionCellInitialize {
 	self.clipsToBounds = YES;
     // wrap subviews of contentView in container
     [self setupContainer];
@@ -359,9 +359,9 @@ const double toolbarHeight = 44;
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         // slide out
         if ((self.panSuccesLeft &&
-            [self.panSuccesAnimationLeft intValue] == [SNICellPanSuccessAnimationOut intValue]) ||
+            [self.panSuccesAnimationLeft intValue] == [SNLCellPanSuccessAnimationOut intValue]) ||
             (self.panSuccesRight &&
-             [self.panSuccesAnimationRight intValue] == [SNICellPanSuccessAnimationOut intValue])
+             [self.panSuccesAnimationRight intValue] == [SNLCellPanSuccessAnimationOut intValue])
         ) {
             CGPoint outside;
             if (self.panSuccesLeft)

@@ -24,7 +24,7 @@
 
 @interface SNLInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
-extern const double toolbarHeight;
+extern const double SNLToolbarHeight;
 
 @property (nonatomic) UIView *container;
 

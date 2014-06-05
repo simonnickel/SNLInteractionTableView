@@ -29,7 +29,7 @@
 
 @implementation SNLInteractionCell
 
-const double toolbarHeight = 44;
+const double SNLToolbarHeight = 44;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -78,7 +78,7 @@ const double toolbarHeight = 44;
     if (self.isSelected) {
         self.container.backgroundColor = self.colorSelected;
         if (self.hasToolbar)
-            self.heightContainer.constant = self.contentView.frame.size.height - toolbarHeight;
+            self.heightContainer.constant = self.contentView.frame.size.height - SNLToolbarHeight;
     }
     else
         self.container.backgroundColor = self.colorContainer;
@@ -189,7 +189,7 @@ const double toolbarHeight = 44;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: toolbarHeight];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: SNLToolbarHeight];
     
     [self.contentView addConstraints:@[top, right, left, height]];
 }

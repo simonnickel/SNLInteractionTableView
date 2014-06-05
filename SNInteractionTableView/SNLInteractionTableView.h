@@ -31,7 +31,6 @@
 
 @interface SNLInteractionTableView : UITableView
 
-// TODO: weak delegate
 @property (nonatomic, weak) id <SNLInteractionTableViewDelegate> delegate;
 @property (nonatomic) BOOL toolbarEnabled;
 

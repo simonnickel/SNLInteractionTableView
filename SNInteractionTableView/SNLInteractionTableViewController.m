@@ -28,9 +28,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    //self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to disable toolbar.
     [(SNLInteractionTableView *)self.tableView setToolbarEnabled:YES];
@@ -45,17 +42,12 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (CGFloat)tableView:(SNLInteractionTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([tableView toolbarEnabled] &&
         [tableView indexPathForSelectedRow] &&
         indexPath.row == [tableView indexPathForSelectedRow].row
     ) {
-        return self.tableView.rowHeight + toolbarHeight;
+        return self.tableView.rowHeight + SNLToolbarHeight;
     }
     else
         return self.tableView.rowHeight;

@@ -71,11 +71,6 @@ extern const double SNLToolbarHeight;
 @property (nonatomic) UIImageView *indicatorImageViewLeft;
 @property (nonatomic) UIImageView *indicatorImageViewRight;
 
-@property (nonatomic) BOOL panSuccesLeft;
-@property (nonatomic) BOOL panSuccesRight;
-@property (nonatomic) SNLSwipeAnimation swipeAnimationLeft;
-@property (nonatomic) SNLSwipeAnimation swipeAnimationRight;
-
 @property (nonatomic) UIView *customSeparatorTop;
 @property (nonatomic) UIView *customSeparatorBottom;
 

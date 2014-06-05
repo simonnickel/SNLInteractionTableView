@@ -25,6 +25,11 @@
 @property (nonatomic) UIGravityBehavior *gravity;
 @property (nonatomic) NSLayoutConstraint *heightContainer;
 
+@property (nonatomic) BOOL swipeSuccessLeft;
+@property (nonatomic) BOOL swipeSuccessRight;
+@property (nonatomic) SNLSwipeAnimation swipeAnimationLeft;
+@property (nonatomic) SNLSwipeAnimation swipeAnimationRight;
+
 @end
 
 @implementation SNLInteractionCell
@@ -331,8 +336,8 @@ const double SNLToolbarHeight = 44;
     
     if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
         [self.animator removeAllBehaviors];
-        [self setPanSuccesLeft:NO];
-        [self setPanSuccesRight:NO];
+        [self setSwipeSuccessLeft:NO];
+        [self setSwipeSuccessRight:NO];
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
@@ -361,26 +366,26 @@ const double SNLToolbarHeight = 44;
         
         // trigger actions
         if (panDistance > [panSuccesDistanceLeft floatValue])
-            [self setPanSuccesLeft:YES];
+            [self setSwipeSuccessLeft:YES];
         else
-            [self setPanSuccesLeft:NO];
+            [self setSwipeSuccessLeft:NO];
         
         if (panDistance < [panSuccesDistanceRight floatValue])
-            [self setPanSuccesRight:YES];
+            [self setSwipeSuccessRight:YES];
         else
-            [self setPanSuccesRight:NO];
+            [self setSwipeSuccessRight:NO];
         
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         // slide out
-        if ((self.panSuccesLeft &&
+        if ((self.swipeSuccessLeft &&
 			 self.swipeAnimationLeft == SNLSwipeAnimationSlide) ||
-            (self.panSuccesRight &&
+            (self.swipeSuccessRight &&
              self.swipeAnimationRight == SNLSwipeAnimationSlide)
 			) {
             CGPoint outside;
-            if (self.panSuccesLeft)
+            if (self.swipeSuccessLeft)
                 outside = CGPointMake(self.contentView.frame.size.width/2, self.container.center.y);
             else
                 outside = CGPointMake(-self.contentView.frame.size.width/2, self.container.center.y);
@@ -391,10 +396,10 @@ const double SNLToolbarHeight = 44;
 							 } completion:^(BOOL completed){
 								 [self.container setHidden:YES];
 								 //[gestureRecognizer.view setCenter:centerReset];
-								 if (self.panSuccesLeft) {
+								 if (self.swipeSuccessLeft) {
 									 [self.delegate swipeAction:SNLSwipeActionLeft onCell:self];
 								 }
-								 else if (self.panSuccesRight) {
+								 else if (self.swipeSuccessRight) {
 									 [self.delegate swipeAction:SNLSwipeActionRight onCell:self];
 								 }
 							 }];
@@ -422,7 +427,7 @@ const double SNLToolbarHeight = 44;
             }
             
             // handle left action
-            if (self.panSuccesLeft) {
+            if (self.swipeSuccessLeft) {
 				[self.delegate swipeAction:SNLSwipeActionLeft onCell:self];
                 [self resetIndicatorLeft:YES withDelay:YES];
             }
@@ -431,7 +436,7 @@ const double SNLToolbarHeight = 44;
             }
             
             // handle right action
-            if (self.panSuccesRight) {
+            if (self.swipeSuccessRight) {
 				[self.delegate swipeAction:SNLSwipeActionRight onCell:self];
                 [self resetIndicatorLeft:NO withDelay:YES];
             }
@@ -442,8 +447,8 @@ const double SNLToolbarHeight = 44;
     }
 }
 
-- (void)setPanSuccesLeft:(BOOL)panSuccess {
-    _panSuccesLeft = panSuccess;
+- (void)setSwipeSuccessLeft:(BOOL)panSuccess {
+    _swipeSuccessLeft = panSuccess;
     
     // re/set success color if existing
     if (panSuccess)
@@ -457,8 +462,8 @@ const double SNLToolbarHeight = 44;
     else
         [self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
 }
-- (void)setPanSuccesRight:(BOOL)panSuccess {
-    _panSuccesRight = panSuccess;
+- (void)setSwipeSuccessRight:(BOOL)panSuccess {
+    _swipeSuccessRight = panSuccess;
     
     // re/set success color if existing
     if (panSuccess)

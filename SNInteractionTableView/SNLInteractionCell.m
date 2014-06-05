@@ -34,25 +34,25 @@ const double SNLToolbarHeight = 44;
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self initialize];
+        [self SNLInteractionCellInitialize];
     }
     return self;
 }
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self initialize];
+        [self SNLInteractionCellInitialize];
     }
     return self;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self initialize];
+        [self SNLInteractionCellInitialize];
     }
     return self;
 }
-- (void)initialize {
+- (void)SNLInteractionCellInitialize {
 	self.clipsToBounds = YES;
     // wrap subviews of contentView in container
     [self setupContainer];
@@ -67,11 +67,11 @@ const double SNLToolbarHeight = 44;
 }
 - (void)prepareForReuse {
     self.container.hidden = NO;
-	self.hidden = NO;
+    [self toggleVisibility:YES];
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+	
     // set color
     self.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = self.colorBackground;
@@ -91,6 +91,10 @@ const double SNLToolbarHeight = 44;
     
     self.customSeparatorTop.backgroundColor = self.colorCustomSeparatorTop;
     self.customSeparatorBottom.backgroundColor = self.colorCustomSeparatorBottom;
+}
+
+- (void)toggleVisibility:(BOOL)visible {
+    self.hidden = !visible;
 }
 
 /*
@@ -235,7 +239,7 @@ const double SNLToolbarHeight = 44;
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:[self.indicatorWidth floatValue]];
     NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.container attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.f];
     NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:[self.indicatorWidth floatValue]];
-
+	
     UIImageView *image;
     
     if (isLeft) {
@@ -258,9 +262,9 @@ const double SNLToolbarHeight = 44;
     
     NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:indicator attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.f];
     NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:indicator attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.f];
-
+	
     [image setTranslatesAutoresizingMaskIntoConstraints:NO];
-
+	
     [indicator addSubview:image];
     [indicator addConstraints:@[centerX, centerY]];
 }
@@ -319,7 +323,7 @@ const double SNLToolbarHeight = 44;
         // translate pan movement
         CGPoint translatedPoint = [gestureRecognizer translationInView:gestureRecognizer.view];
         [gestureRecognizer setTranslation:CGPointMake(0, 0) inView:gestureRecognizer.view.superview];
-
+		
         float panFactor = 0.7;
         NSNumber *panSuccesDistanceLeft = [NSNumber numberWithInt:50 * (1/panFactor)];
         NSNumber *panSuccesDistanceRight = [NSNumber numberWithInt: - 50 * (1/panFactor)];
@@ -355,27 +359,27 @@ const double SNLToolbarHeight = 44;
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         // slide out
         if ((self.panSuccesLeft &&
-            [self.panSuccesAnimationLeft intValue] == [SNLCellPanSuccessAnimationOut intValue]) ||
+			 [self.panSuccesAnimationLeft intValue] == [SNLCellPanSuccessAnimationOut intValue]) ||
             (self.panSuccesRight &&
              [self.panSuccesAnimationRight intValue] == [SNLCellPanSuccessAnimationOut intValue])
-        ) {
+			) {
             CGPoint outside;
             if (self.panSuccesLeft)
                 outside = CGPointMake(self.contentView.frame.size.width/2, self.container.center.y);
             else
                 outside = CGPointMake(-self.contentView.frame.size.width/2, self.container.center.y);
-                
+			
             [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
-            animations:^{
-                [gestureRecognizer.view setCenter:outside];
-            } completion:^(BOOL completed){
-                [self.container setHidden:YES];
-                //[gestureRecognizer.view setCenter:centerReset];
-                if (self.panSuccesLeft)
-                    self.panSuccessActionLeft(self);
-                else if (self.panSuccesRight)
-                    self.panSuccessActionRight(self);
-            }];
+							 animations:^{
+								 [gestureRecognizer.view setCenter:outside];
+							 } completion:^(BOOL completed){
+								 [self.container setHidden:YES];
+								 //[gestureRecognizer.view setCenter:centerReset];
+								 if (self.panSuccesLeft)
+									 self.panSuccessActionLeft(self);
+								 else if (self.panSuccesRight)
+									 self.panSuccessActionRight(self);
+							 }];
         }
         // view has to bounce back
         else {

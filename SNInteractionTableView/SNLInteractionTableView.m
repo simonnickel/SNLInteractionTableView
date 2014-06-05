@@ -99,10 +99,10 @@
     
     // cancel gesture if tableView is empty, location is invalid row, dataSource does not allow moving the row or a cell is selected
     if  (rows == 0 ||
-        (! [self.delegate respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)]) ||
-        (gesture.state == UIGestureRecognizerStateBegan && indexPath == nil) ||
-        (gesture.state == UIGestureRecognizerStateBegan && indexPath && ![self.dataSource tableView:self canMoveRowAtIndexPath:indexPath])
-    ) {
+		 (! [self.delegate respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)]) ||
+		 (gesture.state == UIGestureRecognizerStateBegan && indexPath == nil) ||
+		 (gesture.state == UIGestureRecognizerStateBegan && indexPath && ![self.dataSource tableView:self canMoveRowAtIndexPath:indexPath])
+		 ) {
         [self longPressCancel];
         return;
     }
@@ -138,14 +138,14 @@
             self.draggingView.center = CGPointMake(self.center.x, location.y);
             [UIView commitAnimations];
         }
-
+		
         [self beginUpdates];
         
         if ([self.delegate respondsToSelector:@selector(startedReorderAtIndexPath:)]) {
             [self.delegate startedReorderAtIndexPath:indexPath];
         }
-        [self toggleCellVisibility:NO forIndexPath:indexPath];
-
+        [self.delegate toggleCellVisibility:NO forIndexPath:indexPath];
+		
         
         self.initialIndexPath = indexPath;
         self.currentIndexPath = indexPath;
@@ -170,7 +170,7 @@
         CGFloat scrollZoneHeight = rect.size.height / 6;
         CGFloat bottomScrollBeginning = self.contentOffset.y + self.contentInset.top + rect.size.height - scrollZoneHeight;
         CGFloat topScrollBeginning = self.contentOffset.y + self.contentInset.top  + scrollZoneHeight;
-
+		
         if (location.y >= bottomScrollBeginning) // scroll down
             self.scrollRate = (location.y - bottomScrollBeginning) / scrollZoneHeight;
         else if (location.y <= topScrollBeginning) // scroll up
@@ -181,18 +181,18 @@
     else if (gesture.state == UIGestureRecognizerStateEnded) {
         // gesture ended on last legal indexPath
         NSIndexPath *indexPath = self.currentIndexPath;
-
+		
         [self beginUpdates];
         if ([self.delegate respondsToSelector:@selector(finishedReorderAtIndexPath:)]) {
             [self.delegate finishedReorderAtIndexPath:indexPath];
         }
         [self endUpdates];
-
+		
         /*
-        NSMutableArray *visibleRows = [[self indexPathsForVisibleRows] mutableCopy];
-        [visibleRows removeObject:indexPath];
-        [self reloadRowsAtIndexPaths:visibleRows withRowAnimation:UITableViewRowAnimationNone];
-        */
+		 NSMutableArray *visibleRows = [[self indexPathsForVisibleRows] mutableCopy];
+		 [visibleRows removeObject:indexPath];
+		 [self reloadRowsAtIndexPaths:visibleRows withRowAnimation:UITableViewRowAnimationNone];
+		 */
         
         // remove scrolling CADisplayLink
         [self.scrollDisplayLink invalidate];
@@ -201,21 +201,17 @@
         
         // animate the drag view to the newly hovered cell
         [UIView animateWithDuration:0.3 animations: ^{
-             CGRect rect = [self rectForRowAtIndexPath:indexPath];
-             self.draggingView.transform = CGAffineTransformIdentity;
-             self.draggingView.frame = CGRectOffset(self.draggingView.bounds, rect.origin.x, rect.origin.y);
-         } completion:^(BOOL finished) {
-             [self.draggingView removeFromSuperview];
-             [self toggleCellVisibility:YES forIndexPath:indexPath];
-
-             self.currentIndexPath = nil;
-             self.draggingView = nil;
-         }];
+			CGRect rect = [self rectForRowAtIndexPath:indexPath];
+			self.draggingView.transform = CGAffineTransformIdentity;
+			self.draggingView.frame = CGRectOffset(self.draggingView.bounds, rect.origin.x, rect.origin.y);
+		} completion:^(BOOL finished) {
+			[self.draggingView removeFromSuperview];
+			[self.delegate toggleCellVisibility:YES forIndexPath:indexPath];
+			
+			self.currentIndexPath = nil;
+			self.draggingView = nil;
+		}];
     }
-}
-- (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-    cell.hidden = ! visibility;
 }
 
 - (void)updateCurrentLocation:(UILongPressGestureRecognizer *)gesture {
@@ -231,7 +227,7 @@
     
     if (indexPath && ![indexPath isEqual:self.currentIndexPath] && [gesture locationInView:[self cellForRowAtIndexPath:indexPath]].y > newHeight - oldHeight)
     {
-
+		
         [self beginUpdates];
         [self deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.currentIndexPath] withRowAnimation:UITableViewRowAnimationTop];
         [self insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
@@ -242,8 +238,8 @@
         
         [self endUpdates];
         
-        [self toggleCellVisibility:YES forIndexPath:self.currentIndexPath];
-        [self toggleCellVisibility:NO forIndexPath:indexPath];
+        [self.delegate toggleCellVisibility:YES forIndexPath:self.currentIndexPath];
+        [self.delegate toggleCellVisibility:NO forIndexPath:indexPath];
         
         self.currentIndexPath = indexPath;
     }

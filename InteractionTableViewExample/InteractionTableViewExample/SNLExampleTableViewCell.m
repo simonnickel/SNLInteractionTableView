@@ -43,6 +43,11 @@
     [self setPanSuccesAnimationRight:SNLCellPanSuccessAnimationOut];
      
      */
+	
+	// setup custom separator on top and/or bottom of cell
+    self.colorCustomSeparatorTop = [UIColor whiteColor];
+	self.colorContainer = [UIColor lightTextColor];
+    self.colorCustomSeparatorBottom = [UIColor grayColor];
 }
 
 

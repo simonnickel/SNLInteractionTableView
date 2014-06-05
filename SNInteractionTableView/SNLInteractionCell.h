@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, SNLSwipeAction){
 extern const double SNLToolbarHeight;
 
 /**
- *  Cells delegate ViewController to handle swipe actions.
+ *  Cells delegate to handle swipe actions.
  */
 @property (nonatomic, weak) id <SNLInteractionCellSwipeActionDelegate> delegate;
 

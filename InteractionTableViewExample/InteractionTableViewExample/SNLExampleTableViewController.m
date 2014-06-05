@@ -41,37 +41,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SNLExampleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    // change colors, otherwise they are guessed by colors from storyboard
-    // can also be set in your custom tableViewCell, see SNLExampleTableViewCell.m
-    /*
-    [cell setColorBackground:[UIColor grayColor]];
-    [cell setColorContainer:[UIColor whiteColor]];
-    [cell setColorSelected:[UIColor greenColor]];
-    [cell setColorToolbarBarTint:[UIColor blueColor]];
-    [cell setColorToolbarTint:[UIColor greenColor]];
-    [cell setColorIndicator:[UIColor redColor]];
-    [cell setColorIndicatorSuccess:[UIColor greenColor]];
-    */
-    
-    // setup custom separator on top and/or bottom of cell
-    cell.colorCustomSeparatorTop = [UIColor whiteColor];
-    [cell setColorContainer:[UIColor lightTextColor]];
-    cell.colorCustomSeparatorBottom = [UIColor grayColor];
-    
-    
-    // setup pan gestures
-    // can also be set in your custom tableViewCell, see SNLExampleTableViewCell.m
-    [cell setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];
-    [cell setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
-    [cell setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
-    [cell setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
-    [cell setPanSuccesAnimationLeft:SNLCellPanSuccessAnimationBounce];
-    [cell setPanSuccesAnimationRight:SNLCellPanSuccessAnimationOut];
-    
-    // setup pan gesture callback methods
-    // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
+	
+	// set cells delegate to connect swipe action method
 	cell.delegate = self;
+	
+	// initialize colors and images in your SNLInteractionCell subclass
     
     // setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.
     // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well

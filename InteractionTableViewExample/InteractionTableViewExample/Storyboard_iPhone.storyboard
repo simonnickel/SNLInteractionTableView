@@ -22,7 +22,7 @@
         <!--Example Table View Controller-->
         <scene sceneID="9xr-0f-4rJ">
             <objects>
-                <tableViewController id="gGL-Q9-eRK" customClass="SNLExampleTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="InteractionViewController" id="gGL-Q9-eRK" customClass="SNLExampleTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="68" sectionHeaderHeight="22" sectionFooterHeight="22" id="LDW-8k-KGP" customClass="SNInteractionTableView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

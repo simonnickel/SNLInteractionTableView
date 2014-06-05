@@ -25,16 +25,16 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return [self.itemList count];
 }
@@ -98,12 +98,19 @@
 }
 
 
-/*
- *  Reorder functions
- */
+
+#pragma mark - SNLInteractionTableView Reorder
+
+- (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
+	// additional setup when reordering starts
+	NSLog(@"Reordering started");
+}
 
 // Update your data source when a cell is draged to a new position. This method is called every time 2 cells switch positions.
 - (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+	// update DataSource when cells are switched
+    NSLog(@"Switched Cells");
+	
     /*
      * Reorder example:
      */
@@ -112,30 +119,25 @@
     [self.itemList insertObject:object atIndex:toIndexPath.row];
 }
 
-/*  Uncomment this function if you need additional setup when reordering starts.
-- (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Reordering started");
-}
-*/
-/*  Uncomment this function if you need additional cleanup when reordering ended.
- - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath; {
+- (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath; {
+	// additional cleanup when reordering ended
     NSLog(@"Reordering ended");
- }
-*/
+}
 
 
 
 #pragma mark - Interaction
 
 - (void)buttonA:(id)sender {
-    NSLog(@"A");
+    NSLog(@"Button");
 }
 
 - (void)panSuccessActionLeftOnCell:(SNLExampleTableViewCell *)cell {
-    NSLog(@"left");
+    NSLog(@"Left");
 }
+
 - (void)panSuccessActionRightOnCell:(SNLExampleTableViewCell *)cell {
-    NSLog(@"right");
+    NSLog(@"Right");
     [self performSegueWithIdentifier:@"detail" sender:self];
 }
 

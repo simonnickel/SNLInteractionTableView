@@ -13,7 +13,7 @@
 		5A87C84918A3E75800928A4A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C84818A3E75800928A4A /* UIKit.framework */; };
 		5A87C84F18A3E75800928A4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A87C84D18A3E75800928A4A /* InfoPlist.strings */; };
 		5A87C85118A3E75800928A4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C85018A3E75800928A4A /* main.m */; };
-		5A87C85518A3E75800928A4A /* SNIEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C85418A3E75800928A4A /* SNIEAppDelegate.m */; };
+		5A87C85518A3E75800928A4A /* SNLExampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A87C85418A3E75800928A4A /* SNLExampleAppDelegate.m */; };
 		5A87C85718A3E75800928A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A87C85618A3E75800928A4A /* Images.xcassets */; };
 		5A87C85E18A3E75800928A4A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C85D18A3E75800928A4A /* XCTest.framework */; };
 		5A87C85F18A3E75800928A4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A87C84418A3E75800928A4A /* Foundation.framework */; };
@@ -49,8 +49,8 @@
 		5A87C84E18A3E75800928A4A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A87C85018A3E75800928A4A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A87C85218A3E75800928A4A /* InteractionTableViewExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InteractionTableViewExample-Prefix.pch"; sourceTree = "<group>"; };
-		5A87C85318A3E75800928A4A /* SNIEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SNIEAppDelegate.h; sourceTree = "<group>"; };
-		5A87C85418A3E75800928A4A /* SNIEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SNIEAppDelegate.m; sourceTree = "<group>"; };
+		5A87C85318A3E75800928A4A /* SNLExampleAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SNLExampleAppDelegate.h; sourceTree = "<group>"; };
+		5A87C85418A3E75800928A4A /* SNLExampleAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SNLExampleAppDelegate.m; sourceTree = "<group>"; };
 		5A87C85618A3E75800928A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5A87C85C18A3E75800928A4A /* InteractionTableViewExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InteractionTableViewExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A87C85D18A3E75800928A4A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -127,8 +127,8 @@
 		5A87C84A18A3E75800928A4A /* InteractionTableViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				5A87C85318A3E75800928A4A /* SNIEAppDelegate.h */,
-				5A87C85418A3E75800928A4A /* SNIEAppDelegate.m */,
+				5A87C85318A3E75800928A4A /* SNLExampleAppDelegate.h */,
+				5A87C85418A3E75800928A4A /* SNLExampleAppDelegate.m */,
 				5A87C87918A3E91A00928A4A /* SNIETableViewController.h */,
 				5A87C87A18A3E91A00928A4A /* SNIETableViewController.m */,
 				5A87C96318A4020500928A4A /* SNIETableViewCell.h */,
@@ -286,7 +286,7 @@
 				5A867CB718A6CC9E002F43B8 /* SNInteractionTableViewController.m in Sources */,
 				5A87C87B18A3E91A00928A4A /* SNIETableViewController.m in Sources */,
 				5A87C85118A3E75800928A4A /* main.m in Sources */,
-				5A87C85518A3E75800928A4A /* SNIEAppDelegate.m in Sources */,
+				5A87C85518A3E75800928A4A /* SNLExampleAppDelegate.m in Sources */,
 				5A87C88118A3E9F300928A4A /* SNInteractionTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

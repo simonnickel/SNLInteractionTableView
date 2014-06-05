@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SNIEAppDelegate.h"
+#import "SNLExampleAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SNIEAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SNLExampleAppDelegate class]));
     }
 }
 

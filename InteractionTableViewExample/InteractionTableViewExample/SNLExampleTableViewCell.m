@@ -24,26 +24,28 @@
     return self;
 }
 - (void)initialize {
-    // change colors, otherwise they are guessed by colors from storyboard
-    /*
-    [self setColorBackground:[UIColor grayColor]];
-    [self setColorContainer:[UIColor whiteColor]];
-    [self setColorSelected:[UIColor greenColor]];
-    [self setColorToolbarBarTint:[UIColor blueColor]];
-    [self setColorToolbarTint:[UIColor greenColor]];
-    [self setColorIndicator:[UIColor redColor]];
-    [self setColorIndicatorSuccess:[UIColor greenColor]];
-     */
+	/*
+	// override default/storyboard colors
+	self.colorBackground = [UIColor grayColor];
+	self.colorContainer = [UIColor whiteColor];
+	self.colorSelected = [UIColor greenColor];
+	self.colorToolbarBarTint = [UIColor blueColor];
+	self.colorToolbarTint = [UIColor greenColor];
+	self.colorIndicator = [UIColor redColor];
+	self.colorIndicatorSuccess = [UIColor greenColor];
+	*/
+	self.colorContainer = [UIColor lightTextColor];
+	
+	// setup custom separator on top and/or bottom of cell
+    self.colorCustomSeparatorTop = [UIColor whiteColor];
+    self.colorCustomSeparatorBottom = [UIColor grayColor];
+	
 	
 	// configure left and right swipe indicator
 	[self configureSwipeOn:SNLSwipeActionLeft withAnimation:SNLSwipeAnimationBounce andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
 	
 	[self configureSwipeOn:SNLSwipeActionRight withAnimation:SNLSwipeAnimationSlide andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
-	
-	// setup custom separator on top and/or bottom of cell
-    self.colorCustomSeparatorTop = [UIColor whiteColor];
-	self.colorContainer = [UIColor lightTextColor];
-    self.colorCustomSeparatorBottom = [UIColor grayColor];
+
 	
 	// setup toolbar, if toolbar is enabled (default)
     UIBarButtonItem *buttonA = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonPressed:)];

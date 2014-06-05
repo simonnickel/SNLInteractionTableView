@@ -54,25 +54,9 @@ extern const double SNLToolbarHeight;
  */
 @property (nonatomic, weak) id <SNLInteractionCellActionDelegate> delegate;
 
-
-@property (nonatomic) UIView *container;
-
 @property (nonatomic) BOOL hasToolbar;
 @property (nonatomic) UIToolbar *toolbar;
 @property (nonatomic) NSArray *toolbarButtons;
-
-@property (nonatomic) UIView *indicatorLeft;
-@property (nonatomic) UIView *indicatorRight;
-@property (nonatomic) NSNumber *indicatorWidth;
-@property (nonatomic) UIImage *indicatorImageLeft;
-@property (nonatomic) UIImage *indicatorImageRight;
-@property (nonatomic) UIImage *indicatorImageSuccessLeft;
-@property (nonatomic) UIImage *indicatorImageSuccessRight;
-@property (nonatomic) UIImageView *indicatorImageViewLeft;
-@property (nonatomic) UIImageView *indicatorImageViewRight;
-
-@property (nonatomic) UIView *customSeparatorTop;
-@property (nonatomic) UIView *customSeparatorBottom;
 
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;
@@ -83,7 +67,6 @@ extern const double SNLToolbarHeight;
 @property (nonatomic) UIColor *colorIndicatorSuccess;
 @property (nonatomic) UIColor *colorCustomSeparatorTop;
 @property (nonatomic) UIColor *colorCustomSeparatorBottom;
-
 
 - (void)configureSwipeOn:(SNLSwipeAction)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess;
 - (void)buttonPressed:(UIButton *)sender;

@@ -20,15 +20,31 @@
 
 @interface SNLInteractionCell ()
 
-@property (nonatomic) UIDynamicAnimator *animator;
-@property (nonatomic) UICollisionBehavior *collision;
-@property (nonatomic) UIGravityBehavior *gravity;
+@property (nonatomic) UIView *container;
 @property (nonatomic) NSLayoutConstraint *heightContainer;
+
+@property (nonatomic) UIView *customSeparatorTop;
+@property (nonatomic) UIView *customSeparatorBottom;
+
+@property (nonatomic) NSNumber *indicatorWidth;
+@property (nonatomic) UIView *indicatorLeft;
+@property (nonatomic) UIView *indicatorRight;
+
+@property (nonatomic) UIImageView *indicatorImageViewLeft;
+@property (nonatomic) UIImageView *indicatorImageViewRight;
+@property (nonatomic) UIImage *indicatorImageLeft;
+@property (nonatomic) UIImage *indicatorImageRight;
+@property (nonatomic) UIImage *indicatorImageSuccessLeft;
+@property (nonatomic) UIImage *indicatorImageSuccessRight;
 
 @property (nonatomic) BOOL swipeSuccessLeft;
 @property (nonatomic) BOOL swipeSuccessRight;
 @property (nonatomic) SNLSwipeAnimation swipeAnimationLeft;
 @property (nonatomic) SNLSwipeAnimation swipeAnimationRight;
+
+@property (nonatomic) UIDynamicAnimator *animator;
+@property (nonatomic) UICollisionBehavior *collision;
+@property (nonatomic) UIGravityBehavior *gravity;
 
 @end
 
@@ -346,31 +362,31 @@ const double SNLToolbarHeight = 44;
         [gestureRecognizer setTranslation:CGPointMake(0, 0) inView:gestureRecognizer.view.superview];
 		
         float panFactor = 0.7;
-        NSNumber *panSuccesDistanceLeft = [NSNumber numberWithInt:50 * (1/panFactor)];
-        NSNumber *panSuccesDistanceRight = [NSNumber numberWithInt: - 50 * (1/panFactor)];
+        NSNumber *swipeSuccessDistanceLeft = [NSNumber numberWithInt:50 * (1/panFactor)];
+        NSNumber *swipeSuccessDistanceRight = [NSNumber numberWithInt: - 50 * (1/panFactor)];
         
         // pan container
         self.container.center = CGPointMake(gestureRecognizer.view.center.x+translatedPoint.x, gestureRecognizer.view.center.y);
         
         // pan left indicator
-        if (panDistance < [panSuccesDistanceLeft floatValue])
+        if (panDistance < [swipeSuccessDistanceLeft floatValue])
             self.indicatorLeft.center = CGPointMake(self.indicatorLeft.center.x+translatedPoint.x*panFactor, gestureRecognizer.view.center.y);
         else
             self.indicatorLeft.center = CGPointMake(self.indicatorLeft.frame.size.width/2, gestureRecognizer.view.center.y);
         
         // pan right indicator
-        if (panDistance > [panSuccesDistanceRight floatValue])
+        if (panDistance > [swipeSuccessDistanceRight floatValue])
             self.indicatorRight.center = CGPointMake(self.indicatorRight.center.x+translatedPoint.x*panFactor, gestureRecognizer.view.center.y);
         else
             self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width - self.indicatorRight.frame.size.width/2, gestureRecognizer.view.center.y);
         
         // trigger actions
-        if (panDistance > [panSuccesDistanceLeft floatValue])
+        if (panDistance > [swipeSuccessDistanceLeft floatValue])
             [self setSwipeSuccessLeft:YES];
         else
             [self setSwipeSuccessLeft:NO];
         
-        if (panDistance < [panSuccesDistanceRight floatValue])
+        if (panDistance < [swipeSuccessDistanceRight floatValue])
             [self setSwipeSuccessRight:YES];
         else
             [self setSwipeSuccessRight:NO];
@@ -447,32 +463,32 @@ const double SNLToolbarHeight = 44;
     }
 }
 
-- (void)setSwipeSuccessLeft:(BOOL)panSuccess {
-    _swipeSuccessLeft = panSuccess;
+- (void)setSwipeSuccessLeft:(BOOL)success {
+    _swipeSuccessLeft = success;
     
     // re/set success color if existing
-    if (panSuccess)
+    if (success)
         self.indicatorLeft.backgroundColor = self.colorIndicatorSuccess;
     else
         self.indicatorLeft.backgroundColor = self.colorIndicator;
     
     // re/set success image if existing
-    if (panSuccess && self.indicatorImageSuccessLeft)
+    if (success && self.indicatorImageSuccessLeft)
         [self.indicatorImageViewLeft setImage:self.indicatorImageSuccessLeft];
     else
         [self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
 }
-- (void)setSwipeSuccessRight:(BOOL)panSuccess {
-    _swipeSuccessRight = panSuccess;
+- (void)setSwipeSuccessRight:(BOOL)success {
+    _swipeSuccessRight = success;
     
     // re/set success color if existing
-    if (panSuccess)
+    if (success)
         self.indicatorRight.backgroundColor = self.colorIndicatorSuccess;
     else
         self.indicatorRight.backgroundColor = self.colorIndicator;
     
     // re/set success image if existing
-    if (panSuccess && self.indicatorImageSuccessRight)
+    if (success && self.indicatorImageSuccessRight)
         [self.indicatorImageViewRight setImage:self.indicatorImageSuccessRight];
     else
         [self.indicatorImageViewRight setImage:self.indicatorImageRight];

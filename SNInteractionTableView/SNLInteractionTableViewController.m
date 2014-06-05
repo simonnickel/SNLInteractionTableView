@@ -49,9 +49,6 @@
         return self.tableView.rowHeight;
 }
 
-
-#pragma mark - Table view delegate - Selection
-
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     return indexPath;
 }

@@ -17,19 +17,7 @@
 //  THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-
-@protocol SNLInteractionTableViewDelegate <UITableViewDelegate>
-
-- (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath;
-
-- (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;
-
-- (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath;
-
-- (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath;
-
-@end
-
+#import "SNLInteractionTableView.h"
 
 @interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDelegate, UITableViewDataSource>
 

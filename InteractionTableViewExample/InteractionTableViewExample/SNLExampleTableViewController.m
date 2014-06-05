@@ -71,11 +71,13 @@
     
     // setup pan gesture callback methods
     // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
+	
+	SNLExampleTableViewController * __weak weakSelf = self;
     [cell setPanSuccessActionLeft:^(SNLExampleTableViewCell *cell){
-        [self panSuccessActionLeftOnCell:cell];
+        [weakSelf panSuccessActionLeftOnCell:cell];
     }];
     [cell setPanSuccessActionRight:^(SNLExampleTableViewCell *cell){
-        [self panSuccessActionRightOnCell:cell];
+        [weakSelf panSuccessActionRightOnCell:cell];
     }];
     
     // setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.

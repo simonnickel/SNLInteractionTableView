@@ -1,9 +1,3 @@
-//
-//  SNInteractionTableView.m
-//  InteractionTableViewExample
-//
-//  Created by Simon Nickel on 06.02.14.
-//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -22,9 +16,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "SNInteractionTableView.h"
+#import "SNLInteractionTableView.h"
 
-@interface SNInteractionTableView ()
+@interface SNLInteractionTableView ()
 
 @property (nonatomic) UILongPressGestureRecognizer *longPress;
 @property (nonatomic) NSIndexPath *initialIndexPath;
@@ -36,7 +30,7 @@
 @end
 
 
-@implementation SNInteractionTableView
+@implementation SNLInteractionTableView
 
 - (id)init {
     return [self initWithFrame:CGRectZero];
@@ -150,7 +144,7 @@
         if ([self.delegate respondsToSelector:@selector(startedReorderAtIndexPath:)]) {
             [self.delegate startedReorderAtIndexPath:indexPath];
         }
-        [self.delegate toggleCellVisibility:NO AtIndexPath:indexPath];
+        [self.delegate toggleCellVisibility:NO forIndexPath:indexPath];
 
         
         self.initialIndexPath = indexPath;
@@ -212,7 +206,7 @@
              self.draggingView.frame = CGRectOffset(self.draggingView.bounds, rect.origin.x, rect.origin.y);
          } completion:^(BOOL finished) {
              [self.draggingView removeFromSuperview];
-             [self.delegate toggleCellVisibility:YES AtIndexPath:indexPath];
+             [self.delegate toggleCellVisibility:YES forIndexPath:indexPath];
 
              self.currentIndexPath = nil;
              self.draggingView = nil;
@@ -247,8 +241,8 @@
         
         [self endUpdates];
         
-        [self.delegate toggleCellVisibility:YES AtIndexPath:self.currentIndexPath];
-        [self.delegate toggleCellVisibility:NO AtIndexPath:indexPath];
+        [self.delegate toggleCellVisibility:YES forIndexPath:self.currentIndexPath];
+        [self.delegate toggleCellVisibility:NO forIndexPath:indexPath];
         
         self.currentIndexPath = indexPath;
     }

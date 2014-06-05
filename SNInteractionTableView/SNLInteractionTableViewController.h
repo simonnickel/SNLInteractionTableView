@@ -1,9 +1,3 @@
-//
-//  SNInteractionTableViewController.h
-//  InteractionTableViewExample
-//
-//  Created by Simon Nickel on 08.02.14.
-//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -24,7 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SNInteractionTableViewDelegate <UITableViewDelegate>
+@protocol SNLInteractionTableViewDelegate <UITableViewDelegate>
 
 - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -32,11 +26,11 @@
 
 - (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath;
 
-- (void)toggleCellVisibility:(BOOL)visibility AtIndexPath:(NSIndexPath *)indexPath;
+- (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
 
-@interface SNInteractionTableViewController : UITableViewController <SNInteractionTableViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end

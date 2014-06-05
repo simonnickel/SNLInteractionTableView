@@ -1,9 +1,3 @@
-//
-//  SNInteractionTableViewController.m
-//  InteractionTableViewExample
-//
-//  Created by Simon Nickel on 08.02.14.
-//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -22,15 +16,15 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "SNInteractionTableViewController.h"
-#import "SNInteractionTableView.h"
-#import "SNInteractionCell.h"
+#import "SNLInteractionTableViewController.h"
+#import "SNLInteractionTableView.h"
+#import "SNLInteractionCell.h"
 
-@interface SNInteractionTableViewController ()
+@interface SNLInteractionTableViewController ()
 
 @end
 
-@implementation SNInteractionTableViewController
+@implementation SNLInteractionTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,14 +33,14 @@
     //self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to disable toolbar.
-    [(SNInteractionTableView *)self.tableView setToolbarEnabled:YES];
+    [(SNLInteractionTableView *)self.tableView setToolbarEnabled:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
     for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
-        SNInteractionCell *cell = (SNInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        SNLInteractionCell *cell = (SNLInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         [cell prepareForReuse];
     }
 }
@@ -56,7 +50,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (CGFloat)tableView:(SNInteractionTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(SNLInteractionTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([tableView toolbarEnabled] &&
         [tableView indexPathForSelectedRow] &&
         indexPath.row == [tableView indexPathForSelectedRow].row
@@ -73,8 +67,8 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     return indexPath;
 }
-- (NSIndexPath *)tableView:(SNInteractionTableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SNInteractionCell *cell = (SNInteractionCell *)[tableView cellForRowAtIndexPath:indexPath];
+- (NSIndexPath *)tableView:(SNLInteractionTableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SNLInteractionCell *cell = (SNLInteractionCell *)[tableView cellForRowAtIndexPath:indexPath];
     
     if ([cell isSelected]) {
         [tableView deselectSelectedRow];
@@ -116,8 +110,8 @@
 /*
  * Reorder functions
  */
-- (void)toggleCellVisibility:(BOOL)visibility AtIndexPath:(NSIndexPath *)indexPath {
-    SNInteractionCell *cell = (SNInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+- (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath {
+    SNLInteractionCell *cell = (SNLInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     [cell toggleVisibility:visibility];
 }
 - (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {

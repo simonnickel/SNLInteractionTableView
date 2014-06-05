@@ -1,9 +1,3 @@
-//
-//  SNInteractionTableView.h
-//  InteractionTableViewExample
-//
-//  Created by Simon Nickel on 06.02.14.
-//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -23,12 +17,12 @@
 //  THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "SNInteractionTableViewController.h"
+#import "SNLInteractionTableViewController.h"
 
-@interface SNInteractionTableView : UITableView
+@interface SNLInteractionTableView : UITableView
 
 // TODO: weak delegate
-@property (nonatomic) id <SNInteractionTableViewDelegate> delegate;
+@property (nonatomic, weak) id <SNLInteractionTableViewDelegate> delegate;
 @property (nonatomic) BOOL toolbarEnabled;
 
 - (void)deselectSelectedRow;

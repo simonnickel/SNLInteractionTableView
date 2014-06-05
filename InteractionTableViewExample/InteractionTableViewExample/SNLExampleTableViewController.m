@@ -1,5 +1,5 @@
 #import "SNLExampleTableViewController.h"
-#import "SNInteractionTableView.h"
+#import "SNLInteractionTableView.h"
 #import "SNLExampleTableViewCell.h"
 
 @interface SNLExampleTableViewController ()

@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
-#import "SNInteractionTableViewController.h"
+#import "SNLInteractionTableViewController.h"
 
-@interface SNLExampleTableViewController : SNInteractionTableViewController
+@interface SNLExampleTableViewController : SNLInteractionTableViewController
 
 @property (nonatomic) NSMutableArray *itemList;
 

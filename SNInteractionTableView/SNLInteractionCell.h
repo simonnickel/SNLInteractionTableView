@@ -1,9 +1,3 @@
-//
-//  SNInteractionCell.h
-//  InteractionTableViewExample
-//
-//  Created by Simon Nickel on 06.02.14.
-//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -28,7 +22,7 @@
 #define SNICellPanSuccessAnimationBounce [NSNumber numberWithInt:0]
 #define SNICellPanSuccessAnimationOut [NSNumber numberWithInt:1]
 
-@interface SNInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
+@interface SNLInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
 extern const double toolbarHeight;
 

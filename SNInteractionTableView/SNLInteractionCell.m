@@ -1,9 +1,3 @@
-//
-//  SNInteractionCell.m
-//  InteractionTableViewExample
-//
-//  Created by Simon Nickel on 06.02.14.
-//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -22,9 +16,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "SNInteractionCell.h"
+#import "SNLInteractionCell.h"
 
-@interface SNInteractionCell ()
+@interface SNLInteractionCell ()
 
 @property (nonatomic) UIDynamicAnimator *animator;
 @property (nonatomic) UICollisionBehavior *collision;
@@ -33,7 +27,7 @@
 
 @end
 
-@implementation SNInteractionCell
+@implementation SNLInteractionCell
 
 const double toolbarHeight = 44;
 

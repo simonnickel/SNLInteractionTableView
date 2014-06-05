@@ -144,7 +144,7 @@
         if ([self.delegate respondsToSelector:@selector(startedReorderAtIndexPath:)]) {
             [self.delegate startedReorderAtIndexPath:indexPath];
         }
-        [self.delegate toggleCellVisibility:NO forIndexPath:indexPath];
+        [self toggleCellVisibility:NO forIndexPath:indexPath];
 		
         
         self.initialIndexPath = indexPath;
@@ -206,7 +206,7 @@
 			self.draggingView.frame = CGRectOffset(self.draggingView.bounds, rect.origin.x, rect.origin.y);
 		} completion:^(BOOL finished) {
 			[self.draggingView removeFromSuperview];
-			[self.delegate toggleCellVisibility:YES forIndexPath:indexPath];
+			[self toggleCellVisibility:YES forIndexPath:indexPath];
 			
 			self.currentIndexPath = nil;
 			self.draggingView = nil;
@@ -238,11 +238,15 @@
         
         [self endUpdates];
         
-        [self.delegate toggleCellVisibility:YES forIndexPath:self.currentIndexPath];
-        [self.delegate toggleCellVisibility:NO forIndexPath:indexPath];
+        [self toggleCellVisibility:YES forIndexPath:self.currentIndexPath];
+        [self toggleCellVisibility:NO forIndexPath:indexPath];
         
         self.currentIndexPath = indexPath;
     }
+}
+- (void)toggleCellVisibility:(BOOL)visibility forIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+	cell.hidden = ! visibility;
 }
 
 - (void)scrollTableWithCell:(NSTimer *)timer {

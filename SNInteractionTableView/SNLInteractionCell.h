@@ -62,7 +62,4 @@ extern const double SNLToolbarHeight;
 @property (nonatomic) UIColor *colorCustomSeparatorTop;
 @property (nonatomic) UIColor *colorCustomSeparatorBottom;
 
-
-- (void)toggleVisibility:(BOOL)visibility;
-
 @end

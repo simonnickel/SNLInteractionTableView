@@ -67,7 +67,7 @@ const double SNLToolbarHeight = 44;
 }
 - (void)prepareForReuse {
     self.container.hidden = NO;
-    [self toggleVisibility:YES];
+	self.hidden = NO;
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -91,10 +91,6 @@ const double SNLToolbarHeight = 44;
     
     self.customSeparatorTop.backgroundColor = self.colorCustomSeparatorTop;
     self.customSeparatorBottom.backgroundColor = self.colorCustomSeparatorBottom;
-}
-
-- (void)toggleVisibility:(BOOL)visible {
-    self.hidden = !visible;
 }
 
 /*

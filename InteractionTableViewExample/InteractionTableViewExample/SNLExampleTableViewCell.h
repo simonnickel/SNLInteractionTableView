@@ -1,6 +1,6 @@
 #import "SNInteractionCell.h"
 
-@interface SNIETableViewCell : SNInteractionCell
+@interface SNLExampleTableViewCell : SNInteractionCell
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
 

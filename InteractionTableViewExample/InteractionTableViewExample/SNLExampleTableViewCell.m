@@ -1,6 +1,6 @@
-#import "SNIETableViewCell.h"
+#import "SNLExampleTableViewCell.h"
 
-@implementation SNIETableViewCell
+@implementation SNLExampleTableViewCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];

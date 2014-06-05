@@ -1,6 +1,6 @@
-#import "SNLExampleAppDelegate.h"
+#import "AppDelegate.h"
 
-@implementation SNLExampleAppDelegate
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

@@ -1,13 +1,13 @@
-#import "SNIETableViewController.h"
+#import "SNLExampleTableViewController.h"
 #import "SNInteractionTableView.h"
-#import "SNIETableViewCell.h"
+#import "SNLExampleTableViewCell.h"
 
-@interface SNIETableViewController ()
+@interface SNLExampleTableViewController ()
 
 @end
 
 
-@implementation SNIETableViewController
+@implementation SNLExampleTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -56,10 +56,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-    SNIETableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    SNLExampleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         
     if (cell == nil) {
-        cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[SNLExampleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // change colors, otherwise they are guessed by colors from storyboard
@@ -91,10 +91,10 @@
     
     // setup pan gesture callback methods
     // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
-    [cell setPanSuccessActionLeft:^(SNIETableViewCell *cell){
+    [cell setPanSuccessActionLeft:^(SNLExampleTableViewCell *cell){
         [self panSuccessActionLeftOnCell:cell];
     }];
-    [cell setPanSuccessActionRight:^(SNIETableViewCell *cell){
+    [cell setPanSuccessActionRight:^(SNLExampleTableViewCell *cell){
         [self panSuccessActionRightOnCell:cell];
     }];
     
@@ -145,10 +145,10 @@
     NSLog(@"A");
 }
 
-- (void)panSuccessActionLeftOnCell:(SNIETableViewCell *)cell {
+- (void)panSuccessActionLeftOnCell:(SNLExampleTableViewCell *)cell {
     NSLog(@"left");
 }
-- (void)panSuccessActionRightOnCell:(SNIETableViewCell *)cell {
+- (void)panSuccessActionRightOnCell:(SNLExampleTableViewCell *)cell {
     NSLog(@"right");
     [self performSegueWithIdentifier:@"detail" sender:self];
 }

@@ -132,7 +132,7 @@ const double SNLToolbarHeight = 44;
 }
 
 
-#pragma mark - Setup
+#pragma mark - Setup Helper
 
 /*
  *  Wrap subviews of contentView in container.
@@ -320,21 +320,9 @@ const double SNLToolbarHeight = 44;
                      } completion:^(BOOL completed){}];
 }
 
-- (void)setIndicatorImageLeft:(UIImage *)indicatorImageLeft {
-    _indicatorImageLeft = indicatorImageLeft;
-	// should be set on initialisation to work with dis-/enabling
-    //[self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
-}
-- (void)setIndicatorImageRight:(UIImage *)indicatorImageRight {
-    _indicatorImageRight = indicatorImageRight;
-	// should be set on initialisation to work with dis-/enabling
-    //[self.indicatorImageViewRight setImage:self.indicatorImageRight];
-}
 
+#pragma mark - Interaction
 
-/*
- * Gesture functions
- */
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     if ([gestureRecognizer isMemberOfClass:[UIPanGestureRecognizer class]]) {
         CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:self.contentView];
@@ -501,11 +489,6 @@ const double SNLToolbarHeight = 44;
     [self.container setNeedsLayout];
     [self.container layoutIfNeeded];
 }
-
-
-
-
-
 
 - (void)buttonPressed:(UIButton *)sender {
 	[self.delegate buttonActionWithTag:sender.tag onCell:self];

@@ -54,10 +54,17 @@ extern const double SNLToolbarHeight;
  */
 @property (nonatomic, weak) id <SNLInteractionCellActionDelegate> delegate;
 
+/**
+ *  Toolbar.
+ */
 @property (nonatomic) BOOL hasToolbar;
 @property (nonatomic) UIToolbar *toolbar;
 @property (nonatomic) NSArray *toolbarButtons;
 
+
+/**
+ *  Colors for all elements of the cell.
+ */
 @property (nonatomic) UIColor *colorBackground;
 @property (nonatomic) UIColor *colorContainer;
 @property (nonatomic) UIColor *colorSelected;
@@ -68,7 +75,14 @@ extern const double SNLToolbarHeight;
 @property (nonatomic) UIColor *colorCustomSeparatorTop;
 @property (nonatomic) UIColor *colorCustomSeparatorBottom;
 
+/**
+ *	Helper function to configure left and right swipe behaviour.
+ */
 - (void)configureSwipeOn:(SNLSwipeAction)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess;
+
+/**
+ *	Called when a toolbar button is pressed.
+ */
 - (void)buttonPressed:(UIButton *)sender;
 
 @end

@@ -65,6 +65,23 @@ const double SNLToolbarHeight = 44;
     
     [self setupToolbar];
 }
+
+- (void)configureSwipeOn:(SNLSwipeAction)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess {
+	if (side == SNLSwipeActionLeft || side == SNLSwipeActionBoth) {
+		self.swipeAnimationLeft = animation;
+		self.indicatorImageLeft = image;
+		self.indicatorImageSuccessLeft = imageSuccess;
+	}
+	if (side == SNLSwipeActionRight || side == SNLSwipeActionBoth) {
+		self.swipeAnimationRight = animation;
+		self.indicatorImageRight = image;
+		self.indicatorImageSuccessRight = imageSuccess;
+	}
+}
+
+
+#pragma mark - Lifecycle
+
 - (void)prepareForReuse {
     self.container.hidden = NO;
 	self.hidden = NO;
@@ -92,6 +109,9 @@ const double SNLToolbarHeight = 44;
     self.customSeparatorTop.backgroundColor = self.colorCustomSeparatorTop;
     self.customSeparatorBottom.backgroundColor = self.colorCustomSeparatorBottom;
 }
+
+
+#pragma mark - Setup
 
 /*
  *  Wrap subviews of contentView in container.
@@ -355,9 +375,9 @@ const double SNLToolbarHeight = 44;
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         // slide out
         if ((self.panSuccesLeft &&
-			 [self.panSuccesAnimationLeft intValue] == [SNLCellPanSuccessAnimationOut intValue]) ||
+			 self.swipeAnimationLeft == SNLSwipeAnimationSlide) ||
             (self.panSuccesRight &&
-             [self.panSuccesAnimationRight intValue] == [SNLCellPanSuccessAnimationOut intValue])
+             self.swipeAnimationRight == SNLSwipeAnimationSlide)
 			) {
             CGPoint outside;
             if (self.panSuccesLeft)

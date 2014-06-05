@@ -33,16 +33,12 @@
     [self setColorToolbarTint:[UIColor greenColor]];
     [self setColorIndicator:[UIColor redColor]];
     [self setColorIndicatorSuccess:[UIColor greenColor]];
-     
-    
-    [self setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];
-    [self setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
-    [self setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
-    [self setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
-    [self setPanSuccesAnimationLeft:SNLCellPanSuccessAnimationBounce];
-    [self setPanSuccesAnimationRight:SNLCellPanSuccessAnimationOut];
-     
      */
+	
+	// configure left and right swipe indicator
+	[self configureSwipeOn:SNLSwipeActionLeft withAnimation:SNLSwipeAnimationBounce andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+	
+	[self configureSwipeOn:SNLSwipeActionRight withAnimation:SNLSwipeAnimationSlide andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
 	
 	// setup custom separator on top and/or bottom of cell
     self.colorCustomSeparatorTop = [UIColor whiteColor];

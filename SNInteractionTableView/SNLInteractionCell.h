@@ -20,14 +20,16 @@
 
 @class SNLInteractionCell;
 
-#define SNLCellPanSuccessAnimationDefault [NSNumber numberWithInt:0]
-#define SNLCellPanSuccessAnimationBounce [NSNumber numberWithInt:0]
-#define SNLCellPanSuccessAnimationOut [NSNumber numberWithInt:1]
-
 typedef NS_ENUM(NSInteger, SNLSwipeAction){
 	SNLSwipeActionBoth,
     SNLSwipeActionLeft,
 	SNLSwipeActionRight
+};
+
+typedef NS_ENUM(NSInteger, SNLSwipeAnimation){
+	SNLSwipeAnimationDefault,
+    SNLSwipeAnimationBounce,
+	SNLSwipeAnimationSlide
 };
 
 /**
@@ -71,8 +73,8 @@ extern const double SNLToolbarHeight;
 
 @property (nonatomic) BOOL panSuccesLeft;
 @property (nonatomic) BOOL panSuccesRight;
-@property (nonatomic) NSNumber *panSuccesAnimationLeft;
-@property (nonatomic) NSNumber *panSuccesAnimationRight;
+@property (nonatomic) SNLSwipeAnimation swipeAnimationLeft;
+@property (nonatomic) SNLSwipeAnimation swipeAnimationRight;
 
 @property (nonatomic) UIView *customSeparatorTop;
 @property (nonatomic) UIView *customSeparatorBottom;
@@ -88,6 +90,7 @@ extern const double SNLToolbarHeight;
 @property (nonatomic) UIColor *colorCustomSeparatorBottom;
 
 
+- (void)configureSwipeOn:(SNLSwipeAction)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess;
 - (void)buttonPressed:(UIButton *)sender;
 
 @end

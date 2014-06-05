@@ -18,16 +18,11 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-	
-	//[((UINavigationController *)self.window.rootViewController) popToRootViewControllerAnimated:NO];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Storyboard_iPhone" bundle: nil];
-	UIViewController *controller = (UIViewController *)[mainStoryboard instantiateViewControllerWithIdentifier: @"InteractionViewController"];
-    [((UINavigationController *)self.window.rootViewController) pushViewController: controller animated:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

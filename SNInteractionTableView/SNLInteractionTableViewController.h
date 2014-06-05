@@ -18,7 +18,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SNLInteractionTableView.h"
+#import "SNLInteractionCell.h"
 
-@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDataSource>
+@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDataSource, SNLInteractionCellSwipeActionDelegate>
 
 @end

@@ -71,14 +71,7 @@
     
     // setup pan gesture callback methods
     // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
-	
-	SNLExampleTableViewController * __weak weakSelf = self;
-    [cell setPanSuccessActionLeft:^(SNLExampleTableViewCell *cell){
-        [weakSelf panSuccessActionLeftOnCell:cell];
-    }];
-    [cell setPanSuccessActionRight:^(SNLExampleTableViewCell *cell){
-        [weakSelf panSuccessActionRightOnCell:cell];
-    }];
+	cell.delegate = self;
     
     // setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.
     // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
@@ -96,7 +89,7 @@
 
 
 
-#pragma mark - SNLInteractionTableView delegate
+#pragma mark - SNLInteractionTableView delegate - Reorder
 
 - (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
 	// additional setup when reordering starts
@@ -120,20 +113,24 @@
 }
 
 
+#pragma mark - SNLInteractionCell delegate - Swipe
+
+- (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLExampleTableViewCell *)cell {
+	// implement actions on successfull swipe gesture
+	if (swipeAction == SNLSwipeActionLeft) {
+		NSLog(@"Left on '%@'", cell.label.text);
+	}
+	else if (swipeAction == SNLSwipeActionRight) {
+		NSLog(@"Right on '%@'", cell.label.text);
+		[self performSegueWithIdentifier:@"detail" sender:self];
+	}
+}
+
 
 #pragma mark - Interaction
 
 - (void)buttonA:(id)sender {
     NSLog(@"Button");
-}
-
-- (void)panSuccessActionLeftOnCell:(SNLExampleTableViewCell *)cell {
-    NSLog(@"Left");
-}
-
-- (void)panSuccessActionRightOnCell:(SNLExampleTableViewCell *)cell {
-    NSLog(@"Right");
-    [self performSegueWithIdentifier:@"detail" sender:self];
 }
 
 

@@ -18,13 +18,38 @@
 
 #import <UIKit/UIKit.h>
 
+@class SNLInteractionCell;
+
 #define SNLCellPanSuccessAnimationDefault [NSNumber numberWithInt:0]
 #define SNLCellPanSuccessAnimationBounce [NSNumber numberWithInt:0]
 #define SNLCellPanSuccessAnimationOut [NSNumber numberWithInt:1]
 
+typedef NS_ENUM(NSInteger, SNLSwipeAction){
+	SNLSwipeActionBoth,
+    SNLSwipeActionLeft,
+	SNLSwipeActionRight
+};
+
+/**
+ *  Delegate protocol to handle cell swipe actions.
+ */
+@protocol SNLInteractionCellSwipeActionDelegate <NSObject>
+
+- (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLInteractionCell *)cell;
+
+@end
+
+
+
 @interface SNLInteractionCell : UITableViewCell <UIDynamicAnimatorDelegate>
 
 extern const double SNLToolbarHeight;
+
+/**
+ *  Cells delegate ViewController to handle swipe actions.
+ */
+@property (nonatomic, weak) id <SNLInteractionCellSwipeActionDelegate> delegate;
+
 
 @property (nonatomic) UIView *container;
 
@@ -46,8 +71,6 @@ extern const double SNLToolbarHeight;
 @property (nonatomic) BOOL panSuccesRight;
 @property (nonatomic) NSNumber *panSuccesAnimationLeft;
 @property (nonatomic) NSNumber *panSuccesAnimationRight;
-@property (nonatomic, strong) void(^panSuccessActionLeft)();
-@property (nonatomic, strong) void(^panSuccessActionRight)();
 
 @property (nonatomic) UIView *customSeparatorTop;
 @property (nonatomic) UIView *customSeparatorBottom;

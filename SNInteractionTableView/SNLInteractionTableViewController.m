@@ -113,4 +113,19 @@
 }
 
 
+#pragma mark - SNLInteractionCell delegate - Swipe
+
+- (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLInteractionCell *)cell {
+	// implement action for swipeAction == SNLSwipeActionLeft/SNLSwipeActionLeft in subclass
+	/*
+	if (swipeAction == SNLSwipeActionLeft) {
+	
+	}
+	else if (swipeAction == SNLSwipeActionRight) {
+	
+	}
+	*/
+}
+
+
 @end

@@ -371,10 +371,12 @@ const double SNLToolbarHeight = 44;
 							 } completion:^(BOOL completed){
 								 [self.container setHidden:YES];
 								 //[gestureRecognizer.view setCenter:centerReset];
-								 if (self.panSuccesLeft)
-									 self.panSuccessActionLeft(self);
-								 else if (self.panSuccesRight)
-									 self.panSuccessActionRight(self);
+								 if (self.panSuccesLeft) {
+									 [self.delegate swipeAction:SNLSwipeActionLeft onCell:self];
+								 }
+								 else if (self.panSuccesRight) {
+									 [self.delegate swipeAction:SNLSwipeActionRight onCell:self];
+								 }
 							 }];
         }
         // view has to bounce back
@@ -401,7 +403,7 @@ const double SNLToolbarHeight = 44;
             
             // handle left action
             if (self.panSuccesLeft) {
-                self.panSuccessActionLeft(self);
+				[self.delegate swipeAction:SNLSwipeActionLeft onCell:self];
                 [self resetIndicatorLeft:YES withDelay:YES];
             }
             else {
@@ -410,7 +412,7 @@ const double SNLToolbarHeight = 44;
             
             // handle right action
             if (self.panSuccesRight) {
-                self.panSuccessActionRight(self);
+				[self.delegate swipeAction:SNLSwipeActionRight onCell:self];
                 [self resetIndicatorLeft:NO withDelay:YES];
             }
             else {

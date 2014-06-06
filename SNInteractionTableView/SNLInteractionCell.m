@@ -395,6 +395,7 @@ const double SNLToolbarHeight = 44;
 			animation = self.swipeSuccessRight ? self.swipeAnimationSuccessRight : self.swipeAnimationCancelRight;
 		}
 		
+		// slide out
         if (animation == SNLSwipeAnimationSlideOut) {
             CGPoint outside;
             if (self.swipeSuccessLeft)
@@ -410,6 +411,7 @@ const double SNLToolbarHeight = 44;
 								 [self performSwipeSuccessDelayAnimation:NO];
 							 }];
         }
+		// slide back
 		else if (animation == SNLSwipeAnimationSlideBack) {
 			[UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
 							 animations:^{
@@ -419,9 +421,8 @@ const double SNLToolbarHeight = 44;
 								 [self performSwipeSuccessDelayAnimation:NO];
 							 }];
 		}
-        // view has to bounce back
-        else {
-            // set UIDynamics to get the container back in position
+		// bounce back
+        else { // if (animation == SNLSwipeAnimationBounce || animation == SNLSwipeAnimationDefault)
             UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self.container]];
             UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.container]];
             UIDynamicItemBehavior *item = [[UIDynamicItemBehavior alloc] initWithItems:@[self.container]];

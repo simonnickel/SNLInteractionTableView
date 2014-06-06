@@ -124,11 +124,11 @@ const double SNLToolbarHeight = 44;
 	self.toolbar.backgroundColor = self.colorToolbarBarTint;
     self.toolbar.barTintColor = self.colorToolbarBarTint;
     self.toolbar.tintColor = self.colorToolbarTint;
-    self.indicatorLeft.backgroundColor = self.colorIndicator;
-    self.indicatorRight.backgroundColor = self.colorIndicator;
     
     self.customSeparatorTop.backgroundColor = self.colorCustomSeparatorTop;
     self.customSeparatorBottom.backgroundColor = self.colorCustomSeparatorBottom;
+	
+	[self updateIndicatorStyle:SNLSwipeSideBoth forSuccess:NO];
 }
 
 
@@ -306,16 +306,27 @@ const double SNLToolbarHeight = 44;
     [indicator addConstraints:@[centerX, centerY]];
 }
 
+- (void)updateIndicatorStyle:(SNLSwipeSide)side forSuccess:(BOOL)success {
+	if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
+		self.indicatorLeft.backgroundColor = success ? self.colorIndicatorSuccess : self.colorIndicator;
+		self.indicatorImageViewLeft.image = (success && self.indicatorImageSuccessLeft) ? self.indicatorImageSuccessLeft : self.indicatorImageLeft;
+	}
+	if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
+		self.indicatorRight.backgroundColor = success ? self.colorIndicatorSuccess : self.colorIndicator;
+		self.indicatorImageViewRight.image = (success && self.indicatorImageSuccessRight) ? self.indicatorImageSuccessRight : self.indicatorImageRight;
+	}
+}
+
 - (void)resetIndicator:(SNLSwipeSide)side delayed:(BOOL)delayed {
     [UIView animateWithDuration:0.3 delay:(delayed ? 0.7 : 0.0) usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
-                             self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
-						 }
-                         if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
-                             self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width + self.indicatorRight.frame.size.width/2, self.container.center.y);
-						 }
-                     } completion:^(BOOL completed){}];
+			animations:^{
+				if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
+					self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
+				}
+				if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
+					self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width + self.indicatorRight.frame.size.width/2, self.container.center.y);
+				}
+			} completion:^(BOOL completed){}];
 }
 
 
@@ -443,32 +454,12 @@ const double SNLToolbarHeight = 44;
 - (void)setSwipeSuccessLeft:(BOOL)success {
     _swipeSuccessLeft = success;
     
-    // re/set success color if existing
-    if (success)
-        self.indicatorLeft.backgroundColor = self.colorIndicatorSuccess;
-    else
-        self.indicatorLeft.backgroundColor = self.colorIndicator;
-    
-    // re/set success image if existing
-    if (success && self.indicatorImageSuccessLeft)
-        [self.indicatorImageViewLeft setImage:self.indicatorImageSuccessLeft];
-    else
-        [self.indicatorImageViewLeft setImage:self.indicatorImageLeft];
+	[self updateIndicatorStyle:SNLSwipeSideLeft forSuccess:success];
 }
 - (void)setSwipeSuccessRight:(BOOL)success {
     _swipeSuccessRight = success;
-    
-    // re/set success color if existing
-    if (success)
-        self.indicatorRight.backgroundColor = self.colorIndicatorSuccess;
-    else
-        self.indicatorRight.backgroundColor = self.colorIndicator;
-    
-    // re/set success image if existing
-    if (success && self.indicatorImageSuccessRight)
-        [self.indicatorImageViewRight setImage:self.indicatorImageSuccessRight];
-    else
-        [self.indicatorImageViewRight setImage:self.indicatorImageRight];
+	
+	[self updateIndicatorStyle:SNLSwipeSideRight forSuccess:success];
 }
 
 - (void)performSwipeSuccessDelayAnimation:(BOOL)animationDelayed {

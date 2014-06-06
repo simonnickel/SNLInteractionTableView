@@ -56,8 +56,8 @@
 			 imageInactive:[UIImage imageNamed:@"indicator_disabled"]];
 	
 	/* to set swipe action inactive
-	 self.swipeEnabledLeft = NO;
-	 self.swipeEnabledRight = NO;
+	 self.swipeActiveLeft = NO;
+	 self.swipeActiveRight = NO;
 	*/
 
 	

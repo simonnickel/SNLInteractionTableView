@@ -399,7 +399,7 @@ const double SNLToolbarHeight = 44;
 								 [gestureRecognizer.view setCenter:outside];
 							 } completion:^(BOOL completed){
 								 [self.container setHidden:YES];
-								 [self performSwipeSuccess];
+								 [self performSwipeSuccessWithAnimationDelay:NO];
 							 }];
         }
 		else if ((self.swipeSuccessLeft &&
@@ -412,9 +412,7 @@ const double SNLToolbarHeight = 44;
 								 CGPoint center = CGPointMake(self.center.x, self.container.center.y);
 								 [gestureRecognizer.view setCenter:center];
 							 } completion:^(BOOL completed){
-								 [self performSwipeSuccess];
-								 [self resetIndicatorLeft:YES withDelay:NO];
-								 [self resetIndicatorLeft:NO withDelay:NO];
+								 [self performSwipeSuccessWithAnimationDelay:NO];
 							 }];
 		}
         // view has to bounce back
@@ -439,23 +437,7 @@ const double SNLToolbarHeight = 44;
                 [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(0, 0, 0, space)];
             }
             
-            // handle left action
-            if (self.swipeSuccessLeft) {
-				[self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
-                [self resetIndicatorLeft:YES withDelay:YES];
-            }
-            else {
-                [self resetIndicatorLeft:YES withDelay:NO];
-            }
-            
-            // handle right action
-            if (self.swipeSuccessRight) {
-				[self.delegate swipeAction:SNLSwipeSideRight onCell:self];
-                [self resetIndicatorLeft:NO withDelay:YES];
-            }
-            else {
-                [self resetIndicatorLeft:NO withDelay:NO];
-            }
+			[self performSwipeSuccessWithAnimationDelay:(self.swipeSuccessLeft || self.swipeSuccessRight)];
         }
     }
 }
@@ -491,12 +473,14 @@ const double SNLToolbarHeight = 44;
         [self.indicatorImageViewRight setImage:self.indicatorImageRight];
 }
 
-- (void)performSwipeSuccess {
+- (void)performSwipeSuccessWithAnimationDelay:(BOOL)animationDelay {
 	if (self.swipeSuccessLeft) {
 		[self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
+		[self resetIndicatorLeft:YES withDelay:animationDelay];
 	}
 	else if (self.swipeSuccessRight) {
 		[self.delegate swipeAction:SNLSwipeSideRight onCell:self];
+		[self resetIndicatorLeft:NO withDelay:animationDelay];
 	}
 }
 

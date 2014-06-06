@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, SNLSwipeSide){
 typedef NS_ENUM(NSInteger, SNLSwipeAnimation){
 	SNLSwipeAnimationDefault,
     SNLSwipeAnimationBounce,
-	SNLSwipeAnimationSlide
+	SNLSwipeAnimationSlideOut,
+	SNLSwipeAnimationSlideBack
 };
 
 /**

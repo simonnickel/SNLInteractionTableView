@@ -37,15 +37,11 @@
 	self.colorCustomSeparatorBottom = [UIColor grayColor];
 	*/
 	
-	// setup custom separator on top and/or bottom of cell
-    
-	
-	
 	
 	// configure left and right swipe indicator
-	[self configureSwipeOn:SNLSwipeSideLeft withAnimation:SNLSwipeAnimationBounce andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+	[self configureSwipeOn:SNLSwipeSideLeft withAnimation:SNLSwipeAnimationSlideBack andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
 	
-	[self configureSwipeOn:SNLSwipeSideRight withAnimation:SNLSwipeAnimationSlide andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+	[self configureSwipeOn:SNLSwipeSideRight withAnimation:SNLSwipeAnimationSlideOut andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
 
 	
 	// setup toolbar, if toolbar is enabled (default)

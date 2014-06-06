@@ -384,10 +384,10 @@ const double SNLToolbarHeight = 44;
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         // slide out
         if ((self.swipeSuccessLeft &&
-			 self.swipeAnimationLeft == SNLSwipeAnimationSlide) ||
+			 self.swipeAnimationLeft == SNLSwipeAnimationSlideOut) ||
             (self.swipeSuccessRight &&
-             self.swipeAnimationRight == SNLSwipeAnimationSlide)
-			) {
+             self.swipeAnimationRight == SNLSwipeAnimationSlideOut)
+		) {
             CGPoint outside;
             if (self.swipeSuccessLeft)
                 outside = CGPointMake(self.contentView.frame.size.width/2, self.container.center.y);
@@ -399,15 +399,24 @@ const double SNLToolbarHeight = 44;
 								 [gestureRecognizer.view setCenter:outside];
 							 } completion:^(BOOL completed){
 								 [self.container setHidden:YES];
-								 //[gestureRecognizer.view setCenter:centerReset];
-								 if (self.swipeSuccessLeft) {
-									 [self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
-								 }
-								 else if (self.swipeSuccessRight) {
-									 [self.delegate swipeAction:SNLSwipeSideRight onCell:self];
-								 }
+								 [self performSwipeSuccess];
 							 }];
         }
+		else if ((self.swipeSuccessLeft &&
+				  self.swipeAnimationLeft == SNLSwipeAnimationSlideBack) ||
+				 (self.swipeSuccessRight &&
+				  self.swipeAnimationRight == SNLSwipeAnimationSlideBack)
+		) {
+			[UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+							 animations:^{
+								 CGPoint center = CGPointMake(self.center.x, self.container.center.y);
+								 [gestureRecognizer.view setCenter:center];
+							 } completion:^(BOOL completed){
+								 [self performSwipeSuccess];
+								 [self resetIndicatorLeft:YES withDelay:NO];
+								 [self resetIndicatorLeft:NO withDelay:NO];
+							 }];
+		}
         // view has to bounce back
         else {
             // set UIDynamics to get the container back in position
@@ -480,6 +489,15 @@ const double SNLToolbarHeight = 44;
         [self.indicatorImageViewRight setImage:self.indicatorImageSuccessRight];
     else
         [self.indicatorImageViewRight setImage:self.indicatorImageRight];
+}
+
+- (void)performSwipeSuccess {
+	if (self.swipeSuccessLeft) {
+		[self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
+	}
+	else if (self.swipeSuccessRight) {
+		[self.delegate swipeAction:SNLSwipeSideRight onCell:self];
+	}
 }
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {

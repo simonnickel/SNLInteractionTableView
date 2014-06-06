@@ -80,11 +80,11 @@ const double SNLToolbarHeight = 44;
     
     self.indicatorWidth = [NSNumber numberWithInt:50];
     [self setupIndicator:SNLSwipeSideBoth];
+	
+	[self setupToolbar];
     
 	[self setupCustomSeparator:SNLCustomSeparatorPositionTop forView:self.container];
     [self setupCustomSeparator:SNLCustomSeparatorPositionBottom forView:self.container];
-	
-    [self setupToolbar];
 }
 
 - (void)configureSwipeOn:(SNLSwipeSide)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess {
@@ -244,47 +244,6 @@ const double SNLToolbarHeight = 44;
     [self.animator setDelegate:self];
 }
 
-/*
- *  Setup additional view elements: toolbar, indicatorLeft/Right
- */
-
-- (void)setupToolbar {
-    self.toolbar = [[UIToolbar alloc] init];
-    [self.contentView addSubview:self.toolbar];
-    [self.toolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
-    self.toolbar.clipsToBounds = YES;
-    
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: SNLToolbarHeight];
-    
-    [self.contentView addConstraints:@[top, right, left, height]];
-}
-
-- (void)setupCustomSeparator:(SNLCustomSeparatorPosition)position forView:(UIView *)targetView {
-    UIView *view = [[UIView alloc] init];
-    [targetView addSubview:view];
-    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: 0.5f];
-    
-    [targetView addConstraints:@[right, left, height]];
-    
-    if (position == SNLCustomSeparatorPositionTop) {
-		[targetView addConstraint:top];
-		self.customSeparatorTop = view;
-	}
-    else if (position == SNLCustomSeparatorPositionBottom) {
-		[targetView addConstraint:bottom];
-		self.customSeparatorBottom = view;
-	}
-}
-
 - (void)setupIndicator:(SNLSwipeSide)side {
 	if (side == SNLSwipeSideBoth) {
 		[self setupIndicator:SNLSwipeSideLeft];
@@ -330,6 +289,43 @@ const double SNLToolbarHeight = 44;
 	}
 }
 
+- (void)setupToolbar {
+    self.toolbar = [[UIToolbar alloc] init];
+    [self.contentView addSubview:self.toolbar];
+    [self.toolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    self.toolbar.clipsToBounds = YES;
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:self.heightContainer.constant];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: SNLToolbarHeight];
+    
+    [self.contentView addConstraints:@[top, right, left, height]];
+}
+
+- (void)setupCustomSeparator:(SNLCustomSeparatorPosition)position forView:(UIView *)targetView {
+    UIView *view = [[UIView alloc] init];
+    [targetView addSubview:view];
+    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: 0.5f];
+    
+    [targetView addConstraints:@[right, left, height]];
+    
+    if (position == SNLCustomSeparatorPositionTop) {
+		[targetView addConstraint:top];
+		self.customSeparatorTop = view;
+	}
+    else if (position == SNLCustomSeparatorPositionBottom) {
+		[targetView addConstraint:bottom];
+		self.customSeparatorBottom = view;
+	}
+}
+
 
 #pragma mark - Interaction
 
@@ -344,9 +340,11 @@ const double SNLToolbarHeight = 44;
         return YES;
     }
 }
+
 // panGesture to swipe a cell to trigger actions
 - (void)handlePanGesture:(UIPanGestureRecognizer*)gestureRecognizer {
     float panDistance =  (float) (gestureRecognizer.view.center.x - self.contentView.center.x);
+	SNLSwipeAnimation animation = SNLSwipeAnimationDefault;
     
     if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
         [self.animator removeAllBehaviors];
@@ -379,25 +377,30 @@ const double SNLToolbarHeight = 44;
             self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width - self.indicatorRight.frame.size.width/2, gestureRecognizer.view.center.y);
         
         // trigger actions
-        if (panDistance > [swipeSuccessDistanceLeft floatValue])
-            [self setSwipeSuccessLeft:YES];
-        else
-            [self setSwipeSuccessLeft:NO];
-        
-        if (panDistance < [swipeSuccessDistanceRight floatValue])
-            [self setSwipeSuccessRight:YES];
-        else
-            [self setSwipeSuccessRight:NO];
-        
+		if (panDistance > 0) { // swipe to right
+			if (panDistance > [swipeSuccessDistanceLeft floatValue]) {
+				[self setSwipeSuccessLeft:YES];
+				animation = self.swipeAnimationLeft;
+			}
+			else {
+				[self setSwipeSuccessLeft:NO];
+				animation = SNLSwipeAnimationDefault;
+			}
+		}
+		else { // swipe to left
+			if (panDistance < [swipeSuccessDistanceRight floatValue]) {
+				[self setSwipeSuccessRight:YES];
+				animation = self.swipeAnimationRight;
+			}
+			else {
+				[self setSwipeSuccessRight:NO];
+				animation = SNLSwipeAnimationDefault;
+			}
+		}
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        // slide out
-        if ((self.swipeSuccessLeft &&
-			 self.swipeAnimationLeft == SNLSwipeAnimationSlideOut) ||
-            (self.swipeSuccessRight &&
-             self.swipeAnimationRight == SNLSwipeAnimationSlideOut)
-		) {
+        if (animation == SNLSwipeAnimationSlideOut) {
             CGPoint outside;
             if (self.swipeSuccessLeft)
                 outside = CGPointMake(self.contentView.frame.size.width/2, self.container.center.y);
@@ -412,11 +415,7 @@ const double SNLToolbarHeight = 44;
 								 [self performSwipeSuccessDelayAnimation:NO];
 							 }];
         }
-		else if ((self.swipeSuccessLeft &&
-				  self.swipeAnimationLeft == SNLSwipeAnimationSlideBack) ||
-				 (self.swipeSuccessRight &&
-				  self.swipeAnimationRight == SNLSwipeAnimationSlideBack)
-		) {
+		else if (animation == SNLSwipeAnimationSlideBack) {
 			[UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
 							 animations:^{
 								 CGPoint center = CGPointMake(self.center.x, self.container.center.y);

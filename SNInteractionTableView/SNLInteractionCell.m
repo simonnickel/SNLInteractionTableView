@@ -102,10 +102,6 @@ const double SNLToolbarHeight = 44;
 
 #pragma mark - Lifecycle
 
-- (void)prepareForReuse {
-    self.container.hidden = NO;
-	self.hidden = NO;
-}
 - (void)layoutSubviews {
     [super layoutSubviews];
 	
@@ -128,6 +124,41 @@ const double SNLToolbarHeight = 44;
     self.customSeparatorBottom.backgroundColor = self.colorCustomSeparatorBottom;
 	
 	[self updateIndicatorStyle:SNLSwipeSideBoth forSuccess:NO];
+}
+
+- (void)prepareForReuse {
+    self.container.hidden = NO;
+	self.hidden = NO;
+}
+
+- (void)updateIndicatorStyle:(SNLSwipeSide)side forSuccess:(BOOL)success {
+	if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
+		self.indicatorLeft.backgroundColor = success ? self.colorIndicatorSuccess : self.colorIndicator;
+		self.indicatorImageViewLeft.image = (success && self.indicatorImageSuccessLeft) ? self.indicatorImageSuccessLeft : self.indicatorImageLeft;
+	}
+	if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
+		self.indicatorRight.backgroundColor = success ? self.colorIndicatorSuccess : self.colorIndicator;
+		self.indicatorImageViewRight.image = (success && self.indicatorImageSuccessRight) ? self.indicatorImageSuccessRight : self.indicatorImageRight;
+	}
+}
+
+
+#pragma mark - Setter and Getter
+
+- (void)setToolbarButtons:(NSArray *)toolbarButtons {
+    _toolbarButtons = toolbarButtons;
+    [self.toolbar setItems:toolbarButtons];
+}
+
+- (void)setSwipeSuccessLeft:(BOOL)success {
+    _swipeSuccessLeft = success;
+    
+	[self updateIndicatorStyle:SNLSwipeSideLeft forSuccess:success];
+}
+- (void)setSwipeSuccessRight:(BOOL)success {
+    _swipeSuccessRight = success;
+	
+	[self updateIndicatorStyle:SNLSwipeSideRight forSuccess:success];
 }
 
 
@@ -230,11 +261,6 @@ const double SNLToolbarHeight = 44;
     [self.contentView addConstraints:@[top, right, left, height]];
 }
 
-- (void)setToolbarButtons:(NSArray *)toolbarButtons {
-    _toolbarButtons = toolbarButtons;
-    [self.toolbar setItems:toolbarButtons];
-}
-
 - (void)setupCustomSeparator {
     self.customSeparatorTop = [self customSeparator:YES forView:self.container];
     self.customSeparatorBottom = [self customSeparator:NO forView:self.container];
@@ -303,29 +329,6 @@ const double SNLToolbarHeight = 44;
 		[indicator addSubview:image];
 		[indicator addConstraints:@[centerX, centerY]];
 	}
-}
-
-- (void)updateIndicatorStyle:(SNLSwipeSide)side forSuccess:(BOOL)success {
-	if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
-		self.indicatorLeft.backgroundColor = success ? self.colorIndicatorSuccess : self.colorIndicator;
-		self.indicatorImageViewLeft.image = (success && self.indicatorImageSuccessLeft) ? self.indicatorImageSuccessLeft : self.indicatorImageLeft;
-	}
-	if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
-		self.indicatorRight.backgroundColor = success ? self.colorIndicatorSuccess : self.colorIndicator;
-		self.indicatorImageViewRight.image = (success && self.indicatorImageSuccessRight) ? self.indicatorImageSuccessRight : self.indicatorImageRight;
-	}
-}
-
-- (void)resetIndicator:(SNLSwipeSide)side delayed:(BOOL)delayed {
-    [UIView animateWithDuration:0.3 delay:(delayed ? 0.7 : 0.0) usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
-			animations:^{
-				if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
-					self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
-				}
-				if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
-					self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width + self.indicatorRight.frame.size.width/2, self.container.center.y);
-				}
-			} completion:^(BOOL completed){}];
 }
 
 
@@ -450,17 +453,6 @@ const double SNLToolbarHeight = 44;
     }
 }
 
-- (void)setSwipeSuccessLeft:(BOOL)success {
-    _swipeSuccessLeft = success;
-    
-	[self updateIndicatorStyle:SNLSwipeSideLeft forSuccess:success];
-}
-- (void)setSwipeSuccessRight:(BOOL)success {
-    _swipeSuccessRight = success;
-	
-	[self updateIndicatorStyle:SNLSwipeSideRight forSuccess:success];
-}
-
 - (void)performSwipeSuccessDelayAnimation:(BOOL)animationDelayed {
 	if (self.swipeSuccessLeft) {
 		[self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
@@ -469,6 +461,23 @@ const double SNLToolbarHeight = 44;
 		[self.delegate swipeAction:SNLSwipeSideRight onCell:self];
 	}
 	[self resetIndicator:SNLSwipeSideBoth delayed:animationDelayed];
+}
+
+- (void)resetIndicator:(SNLSwipeSide)side delayed:(BOOL)delayed {
+    [UIView animateWithDuration:0.3
+						  delay:(delayed ? 0.7 : 0.0)
+		 usingSpringWithDamping:1.0f
+		  initialSpringVelocity:1.0f
+						options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+					 animations:^{
+						 if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
+							 self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
+						 }
+						 if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
+							 self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width + self.indicatorRight.frame.size.width/2, self.container.center.y);
+						 }
+					 }
+					 completion:^(BOOL completed){}];
 }
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {

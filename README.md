@@ -1,27 +1,27 @@
-SNInteractionTableView
+SNLInteractionTableView
 ======================
 
-SNInteractionTableView provides a complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView. It uses AutoLayout and extends an existing tableViewCell layout from your Storyboard with the following functionality:
+SNLInteractionTableView provides a complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView. It uses AutoLayout and extends an existing tableViewCell layout from your Storyboard with the following functionality:
 
 * Swipe Action - left and right, with bounce, slide-back or slide-out animation
 * Selection - with toolbar
 * Reordering - by long press
 
-This repo contains the SNInteractionTableView and an example project to see how you can use it. For a detailed description see this <a href="http://simonnickel.de/devlog/projects/sninteractiontableview/how-to-use" title="How to use">instruction</a> or the usage section below.
+This repo contains the SNLInteractionTableView and an example project to see how you can use it. For a detailed description see this <a href="http://simonnickel.de/devlog/projects/sninteractiontableview/how-to-use" title="How to use">instruction</a> or the usage section below.
 
 You can use this code completely free without any restrictions for whatever you want. Even to print it, if you really want. If you do so (using, not printing) it would be great to hear from you. Just tweet [@simonnickel](https://twitter.com/simonnickel) or send me an email (see profile).
 
 The reordering functionality is inspired/rebuild/copied by [BVReorderTableView](https://github.com/bvogelzang/BVReorderTableView) by Ben Vogelzang. If you just want reordering: use his code!
 
 
-![Example](https://github.com/simonnickel/SNInteractionTableView/blob/master/example.gif?raw=true)
+![Example](https://github.com/simonnickel/SNLInteractionTableView/blob/master/example.gif?raw=true)
 
 
 ## Usage
 
 See example project in InteractionTableViewExample for more details.
 
-1. Copy SNInteractionTableView directory into your project (Controller, TableView and TableViewCell).
+1. Copy SNLInteractionTableView directory into your project (Controller, TableView and TableViewCell).
 2. Change classes of Controller, TableView and TableViewCell in your Storyboard to related SNInteraction-class or make your existing custom classes subclasses of related SNInteraction-class.
 3. Set cell delegate in tableView:cellForRowAtIndexPath: of your TableViewController.
 4. Configure your TableViewController to support reordering and cell actions.

@@ -81,7 +81,8 @@ const double SNLToolbarHeight = 44;
     self.indicatorWidth = [NSNumber numberWithInt:50];
     [self setupIndicator:SNLSwipeSideBoth];
     
-    [self setupCustomSeparator];
+	[self setupCustomSeparator:SNLCustomSeparatorPositionTop forView:self.container];
+    [self setupCustomSeparator:SNLCustomSeparatorPositionBottom forView:self.container];
 	
     [self setupToolbar];
 }
@@ -261,11 +262,7 @@ const double SNLToolbarHeight = 44;
     [self.contentView addConstraints:@[top, right, left, height]];
 }
 
-- (void)setupCustomSeparator {
-    self.customSeparatorTop = [self customSeparator:SNLCustomSeparatorPositionTop forView:self.container];
-    self.customSeparatorBottom = [self customSeparator:SNLCustomSeparatorPositionBottom forView:self.container];
-}
-- (UIView *)customSeparator:(SNLCustomSeparatorPosition)position forView:(UIView *)targetView {
+- (void)setupCustomSeparator:(SNLCustomSeparatorPosition)position forView:(UIView *)targetView {
     UIView *view = [[UIView alloc] init];
     [targetView addSubview:view];
     [view setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -278,12 +275,14 @@ const double SNLToolbarHeight = 44;
     
     [targetView addConstraints:@[right, left, height]];
     
-    if (position == SNLCustomSeparatorPositionTop)
-        [targetView addConstraint:top];
-    else if (position == SNLCustomSeparatorPositionBottom)
-        [targetView addConstraint:bottom];
-    
-    return view;
+    if (position == SNLCustomSeparatorPositionTop) {
+		[targetView addConstraint:top];
+		self.customSeparatorTop = view;
+	}
+    else if (position == SNLCustomSeparatorPositionBottom) {
+		[targetView addConstraint:bottom];
+		self.customSeparatorBottom = view;
+	}
 }
 
 - (void)setupIndicator:(SNLSwipeSide)side {

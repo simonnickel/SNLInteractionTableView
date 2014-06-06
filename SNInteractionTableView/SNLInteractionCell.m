@@ -478,8 +478,8 @@ const double SNLToolbarHeight = 44;
     [self.animator removeAllBehaviors];
     
     //reset weird 1/2px bounce rotation if seperator exists
-    [self.container setNeedsLayout];
-    [self.container layoutIfNeeded];
+    //[self.container setNeedsLayout];
+    //[self.container layoutIfNeeded];
 }
 
 - (void)buttonPressed:(UIButton *)sender {

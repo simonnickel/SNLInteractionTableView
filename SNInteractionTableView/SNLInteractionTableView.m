@@ -63,7 +63,7 @@
     self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [self addGestureRecognizer:self.longPress];
     
-    // cell separator causes a rotation bug with UIDynamics animation
+    // disable separator to prevent rotation bug on bounce animation
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.separatorColor = [UIColor clearColor];
 }

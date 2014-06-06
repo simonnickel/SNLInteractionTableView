@@ -59,7 +59,6 @@
 	 self.swipeActiveLeft = NO;
 	 self.swipeActiveRight = NO;
 	*/
-
 	
 	// setup toolbar, if toolbar is enabled (default)
     UIBarButtonItem *buttonA = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonPressed:)];

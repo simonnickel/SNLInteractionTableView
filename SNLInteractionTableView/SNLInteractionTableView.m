@@ -28,6 +28,8 @@
 @property (nonatomic) CADisplayLink *scrollDisplayLink;
 @property (nonatomic) CGFloat scrollRate;
 
+@property (nonatomic) BOOL orientationDidChange;
+
 @end
 
 
@@ -108,6 +110,9 @@
     }
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
+		// add observer to cancel gesture on orientation change
+		[[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+		
         UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
         [cell setHighlighted:NO animated:NO];
         
@@ -178,7 +183,9 @@
         else
             self.scrollRate = 0;
     }
-    else if (gesture.state == UIGestureRecognizerStateEnded) {
+    else if (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
+		[[NSNotificationCenter defaultCenter]removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+		
         // gesture ended on last legal indexPath
         NSIndexPath *indexPath = self.currentIndexPath;
 		
@@ -212,6 +219,11 @@
 			self.draggingView = nil;
 		}];
     }
+}
+
+- (void)orientationChanged:(NSNotification *)notification{
+	self.longPress.enabled = NO;
+	self.longPress.enabled = YES;
 }
 
 - (void)updateCurrentLocation:(UILongPressGestureRecognizer *)gesture {

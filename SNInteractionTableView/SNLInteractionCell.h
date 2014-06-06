@@ -65,15 +65,15 @@ extern const double SNLToolbarHeight;
 /**
  *  Colors for all elements of the cell.
  */
-@property (nonatomic) UIColor *colorBackground;
-@property (nonatomic) UIColor *colorContainer;
-@property (nonatomic) UIColor *colorSelected;
-@property (nonatomic) UIColor *colorToolbarBarTint;
-@property (nonatomic) UIColor *colorToolbarTint;
-@property (nonatomic) UIColor *colorIndicator;
-@property (nonatomic) UIColor *colorIndicatorSuccess;
-@property (nonatomic) UIColor *colorCustomSeparatorTop;
-@property (nonatomic) UIColor *colorCustomSeparatorBottom;
+@property (nonatomic) UIColor *colorContainer;				// default: contentView.backgroundColor
+@property (nonatomic) UIColor *colorBackground;				// default: cell.backgroundColor
+@property (nonatomic) UIColor *colorSelected;				// default: contentView.tintColor
+@property (nonatomic) UIColor *colorToolbarBarTint;			// default: cell.backgroundColor
+@property (nonatomic) UIColor *colorToolbarTint;			// default: cell.tintColor
+@property (nonatomic) UIColor *colorIndicator;				// default: contentView.backgroundColor
+@property (nonatomic) UIColor *colorIndicatorSuccess;		// default: cell.tintColor
+@property (nonatomic) UIColor *colorCustomSeparatorTop;		// default: contentView.backgroundColor
+@property (nonatomic) UIColor *colorCustomSeparatorBottom;	// default: cell.backgroundColor
 
 /**
  *	Helper function to configure left and right swipe behaviour.

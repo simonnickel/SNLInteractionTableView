@@ -83,7 +83,7 @@ const double SNLToolbarHeight = 44;
     [self setupIndicatorRight];
     
     [self setupCustomSeparator];
-    
+	
     [self setupToolbar];
 }
 
@@ -192,7 +192,7 @@ const double SNLToolbarHeight = 44;
     self.colorToolbarTint = self.tintColor;
     self.colorIndicator = self.colorContainer;
     self.colorIndicatorSuccess = self.tintColor;
-    self.colorCustomSeparatorTop = self.backgroundColor;
+    self.colorCustomSeparatorTop = self.contentView.backgroundColor;
     self.colorCustomSeparatorBottom = self.backgroundColor;
     
     /* more settings to copy, if needed

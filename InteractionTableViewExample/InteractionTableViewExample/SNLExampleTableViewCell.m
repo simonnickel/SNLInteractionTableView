@@ -33,12 +33,12 @@
 	self.colorToolbarTint = [UIColor greenColor];
 	self.colorIndicator = [UIColor redColor];
 	self.colorIndicatorSuccess = [UIColor greenColor];
+	self.colorCustomSeparatorTop = [UIColor whiteColor];
+	self.colorCustomSeparatorBottom = [UIColor grayColor];
 	*/
-	self.colorContainer = [UIColor lightTextColor];
 	
 	// setup custom separator on top and/or bottom of cell
-    self.colorCustomSeparatorTop = [UIColor whiteColor];
-    self.colorCustomSeparatorBottom = [UIColor grayColor];
+    
 	
 	
 	

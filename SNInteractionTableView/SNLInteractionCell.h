@@ -33,6 +33,11 @@ typedef NS_ENUM(NSInteger, SNLSwipeAnimation){
 	SNLSwipeAnimationSlideBack
 };
 
+typedef NS_ENUM(NSInteger, SNLCustomSeparatorPosition){
+	SNLCustomSeparatorPositionTop,
+    SNLCustomSeparatorPositionBottom
+};
+
 /**
  *  Delegate protocol to handle cell swipe actions.
  */

@@ -262,10 +262,10 @@ const double SNLToolbarHeight = 44;
 }
 
 - (void)setupCustomSeparator {
-    self.customSeparatorTop = [self customSeparator:YES forView:self.container];
-    self.customSeparatorBottom = [self customSeparator:NO forView:self.container];
+    self.customSeparatorTop = [self customSeparator:SNLCustomSeparatorPositionTop forView:self.container];
+    self.customSeparatorBottom = [self customSeparator:SNLCustomSeparatorPositionBottom forView:self.container];
 }
-- (UIView *)customSeparator:(BOOL)isTop forView:(UIView *)targetView {
+- (UIView *)customSeparator:(SNLCustomSeparatorPosition)position forView:(UIView *)targetView {
     UIView *view = [[UIView alloc] init];
     [targetView addSubview:view];
     [view setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -278,9 +278,9 @@ const double SNLToolbarHeight = 44;
     
     [targetView addConstraints:@[right, left, height]];
     
-    if (isTop)
+    if (position == SNLCustomSeparatorPositionTop)
         [targetView addConstraint:top];
-    else
+    else if (position == SNLCustomSeparatorPositionBottom)
         [targetView addConstraint:bottom];
     
     return view;

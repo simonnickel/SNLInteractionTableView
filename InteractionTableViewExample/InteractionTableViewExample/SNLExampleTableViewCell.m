@@ -39,7 +39,7 @@
 	
 	
 	// configure left and right swipe indicator
-	[self configureSwipeOn:SNLSwipeSideLeft withAnimation:SNLSwipeAnimationSlideBack andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+	[self configureSwipeOn:SNLSwipeSideLeft withAnimation:SNLSwipeAnimationBounce andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
 	
 	[self configureSwipeOn:SNLSwipeSideRight withAnimation:SNLSwipeAnimationSlideOut andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
 

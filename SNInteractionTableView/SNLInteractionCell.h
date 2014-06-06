@@ -84,7 +84,7 @@ extern const double SNLToolbarHeight;
 /**
  *	Helper function to configure left and right swipe behaviour.
  */
-- (void)configureSwipeOn:(SNLSwipeSide)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess;
+- (void)configureSwipeOn:(SNLSwipeSide)side withCancelAnimation:(SNLSwipeAnimation)animationCancel andSuccessAnimation:(SNLSwipeAnimation)animationSuccess andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess;
 
 /**
  *	Called when a toolbar button is pressed.

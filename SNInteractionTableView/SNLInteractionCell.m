@@ -39,8 +39,10 @@
 
 @property (nonatomic) BOOL swipeSuccessLeft;
 @property (nonatomic) BOOL swipeSuccessRight;
-@property (nonatomic) SNLSwipeAnimation swipeAnimationLeft;
-@property (nonatomic) SNLSwipeAnimation swipeAnimationRight;
+@property (nonatomic) SNLSwipeAnimation swipeAnimationCancelLeft;
+@property (nonatomic) SNLSwipeAnimation swipeAnimationCancelRight;
+@property (nonatomic) SNLSwipeAnimation swipeAnimationSuccessLeft;
+@property (nonatomic) SNLSwipeAnimation swipeAnimationSuccessRight;
 
 @property (nonatomic) UIDynamicAnimator *animator;
 @property (nonatomic) UICollisionBehavior *collision;
@@ -87,14 +89,16 @@ const double SNLToolbarHeight = 44;
     [self setupCustomSeparator:SNLCustomSeparatorPositionBottom forView:self.container];
 }
 
-- (void)configureSwipeOn:(SNLSwipeSide)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess {
+- (void)configureSwipeOn:(SNLSwipeSide)side withCancelAnimation:(SNLSwipeAnimation)animationCancel andSuccessAnimation:(SNLSwipeAnimation)animationSuccess andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess {
 	if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
-		self.swipeAnimationLeft = animation;
+		self.swipeAnimationCancelLeft = animationCancel;
+		self.swipeAnimationSuccessLeft = animationSuccess;
 		self.indicatorImageLeft = image;
 		self.indicatorImageSuccessLeft = imageSuccess;
 	}
 	if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
-		self.swipeAnimationRight = animation;
+		self.swipeAnimationCancelRight = animationCancel;
+		self.swipeAnimationSuccessRight = animationSuccess;
 		self.indicatorImageRight = image;
 		self.indicatorImageSuccessRight = imageSuccess;
 	}
@@ -152,14 +156,16 @@ const double SNLToolbarHeight = 44;
 }
 
 - (void)setSwipeSuccessLeft:(BOOL)success {
+	if (success != _swipeSuccessLeft) {
+		[self updateIndicatorStyle:SNLSwipeSideLeft forSuccess:success];
+	}
     _swipeSuccessLeft = success;
-    
-	[self updateIndicatorStyle:SNLSwipeSideLeft forSuccess:success];
 }
 - (void)setSwipeSuccessRight:(BOOL)success {
+	if (success != _swipeSuccessRight) {
+		[self updateIndicatorStyle:SNLSwipeSideRight forSuccess:success];
+	}
     _swipeSuccessRight = success;
-	
-	[self updateIndicatorStyle:SNLSwipeSideRight forSuccess:success];
 }
 
 
@@ -343,8 +349,7 @@ const double SNLToolbarHeight = 44;
 
 // panGesture to swipe a cell to trigger actions
 - (void)handlePanGesture:(UIPanGestureRecognizer*)gestureRecognizer {
-    float panDistance =  (float) (gestureRecognizer.view.center.x - self.contentView.center.x);
-	SNLSwipeAnimation animation = SNLSwipeAnimationDefault;
+    float panDistance = (float) (gestureRecognizer.view.center.x - self.contentView.center.x);
     
     if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
         [self.animator removeAllBehaviors];
@@ -377,29 +382,19 @@ const double SNLToolbarHeight = 44;
             self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width - self.indicatorRight.frame.size.width/2, gestureRecognizer.view.center.y);
         
         // trigger actions
-		if (panDistance > 0) { // swipe to right
-			if (panDistance > [swipeSuccessDistanceLeft floatValue]) {
-				[self setSwipeSuccessLeft:YES];
-				animation = self.swipeAnimationLeft;
-			}
-			else {
-				[self setSwipeSuccessLeft:NO];
-				animation = SNLSwipeAnimationDefault;
-			}
-		}
-		else { // swipe to left
-			if (panDistance < [swipeSuccessDistanceRight floatValue]) {
-				[self setSwipeSuccessRight:YES];
-				animation = self.swipeAnimationRight;
-			}
-			else {
-				[self setSwipeSuccessRight:NO];
-				animation = SNLSwipeAnimationDefault;
-			}
-		}
+		[self setSwipeSuccessLeft:panDistance > [swipeSuccessDistanceLeft floatValue]];
+		[self setSwipeSuccessRight:panDistance < [swipeSuccessDistanceRight floatValue]];
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+		SNLSwipeAnimation animation = SNLSwipeAnimationDefault;
+		if (panDistance > 0) { // swipe to right
+			animation = self.swipeSuccessLeft ? self.swipeAnimationSuccessLeft : self.swipeAnimationCancelLeft;
+		}
+		else { // swipe to left
+			animation = self.swipeSuccessRight ? self.swipeAnimationSuccessRight : self.swipeAnimationCancelRight;
+		}
+		
         if (animation == SNLSwipeAnimationSlideOut) {
             CGPoint outside;
             if (self.swipeSuccessLeft)

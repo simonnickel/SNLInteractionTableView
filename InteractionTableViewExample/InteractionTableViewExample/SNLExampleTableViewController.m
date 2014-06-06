@@ -46,6 +46,7 @@
 	cell.delegate = self;
 	
 	// initialize colors, images and toolbar in your SNLInteractionCell subclass
+	// see SNLExampleTableViewCell.m
 
     // configure example content
     [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];

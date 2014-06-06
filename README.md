@@ -1,9 +1,9 @@
 SNInteractionTableView
 ======================
 
-SNInteractionTableView provides a complete tableView (controller, tableView and cell) to easily add more interaction  to your tableView. It uses AutoLayout and extends an existing tableViewCell layout from your Storyboard with the following functionality:
+SNInteractionTableView provides a complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView. It uses AutoLayout and extends an existing tableViewCell layout from your Storyboard with the following functionality:
 
-* Swipe - with bounce or fade-out animation
+* Swipe Action - left and right, with bounce, slide-back or slide-out animation
 * Selection - with toolbar
 * Reordering - by long press
 
@@ -21,63 +21,68 @@ The reordering functionality is inspired/rebuild/copied by [BVReorderTableView](
 
 See example project in InteractionTableViewExample for more details.
 
-1. Copy SNInteractionTableView folder into your project (Controller, TableView and TableViewCell).
+1. Copy SNInteractionTableView directory into your project (Controller, TableView and TableViewCell).
 2. Change classes of Controller, TableView and TableViewCell in your Storyboard to related SNInteraction-class or make your existing custom classes subclasses of related SNInteraction-class.
-3. Configure cell in tableView:cellForRowAtIndexPath: of your TableViewController.
-4. Add moveRowFromIndexPath:toIndexPath: to your TableViewController to update your data store when reordering.
+3. Set cell delegate in tableView:cellForRowAtIndexPath: of your TableViewController.
+4. Configure cell in your SNLInteractionCell subclass.
+5. Add moveRowFromIndexPath:toIndexPath: to your TableViewController to update your data store when reordering.
 
 
 ```objective-c
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    SNIETableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        
-    if (cell == nil) {
-        cell = [[SNIETableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    SNLExampleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    // change colors, otherwise they are guessed by colors from storyboard
-    // can also be set in your custom tableViewCell, see SNIETableViewCell.m
-    /*
-    [cell setColorBackground:[UIColor grayColor]];
-    [cell setColorContainer:[UIColor whiteColor]];
-    [cell setColorSelected:[UIColor greenColor]];
-    [cell setColorToolbarBarTint:[UIColor blueColor]];
-    [cell setColorToolbarTint:[UIColor greenColor]];
-    [cell setColorIndicator:[UIColor redColor]];
-    [cell setColorIndicatorSuccess:[UIColor greenColor]];
-    */
+    // set cells delegate to connect swipe action method
+    cell.delegate = self;
     
-    // setup pan gestures
-    // can also be set in your custom tableViewCell, see SNIETableViewCell.m
-    [cell setIndicatorImageLeft:[UIImage imageNamed:@"indicator"]];
-    [cell setIndicatorImageRight:[UIImage imageNamed:@"indicator"]];
-    [cell setIndicatorImageSuccessLeft:[UIImage imageNamed:@"indicator_success"]];
-    [cell setIndicatorImageSuccessRight:[UIImage imageNamed:@"indicator_success"]];
-    [cell setPanSuccesAnimationLeft:SNICellPanSuccessAnimationBounce];
-    [cell setPanSuccesAnimationRight:SNICellPanSuccessAnimationOut];
-    
-    // setup pan gesture callback methods
-    // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
-    [cell setPanSuccessActionLeft:^(SNIETableViewCell *cell){
-        [self panSuccessActionLeftOnCell:cell];
-    }];
-    [cell setPanSuccessActionRight:^(SNIETableViewCell *cell){
-        [self panSuccessActionRightOnCell:cell];
-    }];
-    
-    // setup toolbar, if toolbar is enabled (default), to disable see viewDidLoad.
-    // has to be set here if it needs to call a controller method, otherwise it can be set in the cell initialization as well
-    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem *a = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonA:)];
-    [cell setToolbarButtons: [NSArray arrayWithObjects:flexibleItem, a, flexibleItem, nil]];
-    
+    // initialize colors, images and toolbar in your SNLInteractionCell subclass
+    // see SNLExampleTableViewCell.m
 
-    
-    // configure content of your cell
+    // configure example content
     [cell.label setText:[self.itemList objectAtIndex:indexPath.row]];
     
     return cell;
 }
 
+```
+
+Example cell initialization:
+```objective-c
+    /*
+    // to override default/storyboard colors use:
+    self.colorBackground = [UIColor grayColor];
+    self.colorContainer = [UIColor whiteColor];
+    self.colorSelected = [UIColor greenColor];
+    self.colorToolbarBarTint = [UIColor blueColor];
+    self.colorToolbarTint = [UIColor greenColor];
+    self.colorIndicator = [UIColor redColor];
+    self.colorIndicatorSuccess = [UIColor greenColor];
+    self.colorCustomSeparatorTop = [UIColor whiteColor];
+    self.colorCustomSeparatorBottom = [UIColor grayColor];
+    */
+    
+    
+    // configure left and right swipe indicator
+    [self configureSwipeOn:SNLSwipeSideLeft
+       withCancelAnimation:SNLSwipeAnimationDefault
+       andSuccessAnimation:SNLSwipeAnimationSlideBack
+                  andImage:[UIImage imageNamed:@"indicator"]
+         andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+    
+    [self configureSwipeOn:SNLSwipeSideRight
+       withCancelAnimation:SNLSwipeAnimationDefault
+       andSuccessAnimation:SNLSwipeAnimationSlideOut
+                  andImage:[UIImage imageNamed:@"indicator"]
+         andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+
+    
+    // setup toolbar, if toolbar is enabled (default)
+    UIBarButtonItem *buttonA = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonPressed:)];
+    buttonA.tag = 1;
+    
+    UIBarButtonItem *buttonB = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(buttonPressed:)];
+    buttonB.tag = 2;
+    
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [self setToolbarButtons: [NSArray arrayWithObjects:flexibleItem, buttonA, flexibleItem, buttonB, flexibleItem, nil]];
 ```

@@ -20,6 +20,12 @@
 #import "SNLInteractionTableView.h"
 #import "SNLInteractionCell.h"
 
+typedef NS_ENUM(NSInteger, SNLCustomSeparatorPosition){
+	SNLCustomSeparatorPositionTop,
+    SNLCustomSeparatorPositionBottom
+};
+
+
 @interface SNLInteractionTableViewController ()
 
 @end
@@ -53,6 +59,38 @@
     }
     else
         return self.tableView.rowHeight;
+}
+
+- (void)tableView:(SNLInteractionTableView *)tableView willDisplayCell:(SNLInteractionCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+		
+	// custom separator
+	if (tableView.customSeparatorEnabled) {
+		[self setupCustomSeparator:SNLCustomSeparatorPositionTop forView:cell];
+		[self setupCustomSeparator:SNLCustomSeparatorPositionBottom forView:cell];
+	}
+}
+
+- (void)setupCustomSeparator:(SNLCustomSeparatorPosition)position forView:(SNLInteractionCell *)cell {
+    UIView *view = [[UIView alloc] init];
+    [cell addSubview:view];
+    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeLeft multiplier:1.0f constant:self.tableView.separatorInset.left];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeRight multiplier:1.0f constant: - self.tableView.separatorInset.right];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: 0.5f];
+    
+    [cell addConstraints:@[right, left, height]];
+    
+    if (position == SNLCustomSeparatorPositionTop) {
+		[cell addConstraint:top];
+		cell.customSeparatorTop = view;
+	}
+    else if (position == SNLCustomSeparatorPositionBottom) {
+		[cell addConstraint:bottom];
+		cell.customSeparatorBottom = view;
+	}
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {

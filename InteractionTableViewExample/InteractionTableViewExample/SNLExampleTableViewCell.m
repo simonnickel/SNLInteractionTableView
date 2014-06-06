@@ -36,6 +36,7 @@
 	self.colorCustomSeparatorTop = [UIColor whiteColor];
 	self.colorCustomSeparatorBottom = [UIColor grayColor];
 	*/
+	self.colorCustomSeparatorTop = [UIColor whiteColor];
 	
 	
 	// configure left and right swipe indicator

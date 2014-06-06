@@ -23,9 +23,6 @@
 @property (nonatomic) UIView *container;
 @property (nonatomic) NSLayoutConstraint *heightContainer;
 
-@property (nonatomic) UIView *customSeparatorTop;
-@property (nonatomic) UIView *customSeparatorBottom;
-
 @property (nonatomic) NSNumber *indicatorWidth;
 @property (nonatomic) UIView *indicatorLeft;
 @property (nonatomic) UIView *indicatorRight;
@@ -84,9 +81,6 @@ const double SNLToolbarHeight = 44;
     [self setupIndicator:SNLSwipeSideBoth];
 	
 	[self setupToolbar];
-    
-	[self setupCustomSeparator:SNLCustomSeparatorPositionTop forView:self.container];
-    [self setupCustomSeparator:SNLCustomSeparatorPositionBottom forView:self.container];
 }
 
 - (void)configureSwipeOn:(SNLSwipeSide)side withCancelAnimation:(SNLSwipeAnimation)animationCancel andSuccessAnimation:(SNLSwipeAnimation)animationSuccess andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess {
@@ -307,29 +301,6 @@ const double SNLToolbarHeight = 44;
     NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: SNLToolbarHeight];
     
     [self.contentView addConstraints:@[top, right, left, height]];
-}
-
-- (void)setupCustomSeparator:(SNLCustomSeparatorPosition)position forView:(UIView *)targetView {
-    UIView *view = [[UIView alloc] init];
-    [targetView addSubview:view];
-    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:targetView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: 0.5f];
-    
-    [targetView addConstraints:@[right, left, height]];
-    
-    if (position == SNLCustomSeparatorPositionTop) {
-		[targetView addConstraint:top];
-		self.customSeparatorTop = view;
-	}
-    else if (position == SNLCustomSeparatorPositionBottom) {
-		[targetView addConstraint:bottom];
-		self.customSeparatorBottom = view;
-	}
 }
 
 

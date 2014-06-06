@@ -66,6 +66,7 @@
     [self addGestureRecognizer:self.longPress];
     
     // disable separator to prevent rotation bug on bounce animation
+	self.customSeparatorEnabled = (self.separatorStyle != UITableViewCellSeparatorStyleNone);
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.separatorColor = [UIColor clearColor];
 }

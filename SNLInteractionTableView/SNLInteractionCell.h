@@ -33,10 +33,12 @@ typedef NS_ENUM(NSInteger, SNLSwipeAnimation){
 	SNLSwipeAnimationSlideBack
 };
 
+/*
 typedef NS_ENUM(NSInteger, SNLCustomSeparatorPosition){
 	SNLCustomSeparatorPositionTop,
     SNLCustomSeparatorPositionBottom
 };
+*/
 
 /**
  *  Delegate protocol to handle cell swipe actions.
@@ -66,6 +68,12 @@ extern const double SNLToolbarHeight;
 @property (nonatomic) BOOL hasToolbar;
 @property (nonatomic) UIToolbar *toolbar;
 @property (nonatomic) NSArray *toolbarButtons;
+
+/**
+ *  Custom separator.
+ */
+@property (nonatomic) UIView *customSeparatorTop;
+@property (nonatomic) UIView *customSeparatorBottom;
 
 
 /**

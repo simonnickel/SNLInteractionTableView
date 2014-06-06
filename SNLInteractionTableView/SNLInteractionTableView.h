@@ -59,6 +59,13 @@
 @property (nonatomic) BOOL toolbarEnabled;
 
 /**
+ *  Custom separator is enabled. Inherited from Storyboard.
+ *
+ *  Default: NO
+ */
+@property (nonatomic) BOOL customSeparatorEnabled;
+
+/**
  *  Deselect selected cell and calls tableView:willDeselectRowAtIndexPath and
  *	tableView:didDeselectRowAtIndexPath of delegate.
  */

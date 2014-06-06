@@ -40,19 +40,19 @@
                                             <rect key="frame" x="139" y="23" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="tintColor" red="0.46083652767349137" green="0.66733932312291289" blue="0.67807614803314209" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.94328181407942235" green="0.94328181407942235" blue="0.94328181407942235" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" red="0.88640674062515434" green="0.96703893310531175" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="centerX" secondItem="rJH-QH-HBu" secondAttribute="centerX" id="AUC-pY-dDM"/>
                                         <constraint firstAttribute="centerY" secondItem="rJH-QH-HBu" secondAttribute="centerY" id="fEk-fB-ic7"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="1" green="0.81943601359999996" blue="0.42032472729999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.87378035840742663" green="1" blue="0.96034820228743345" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="label" destination="rJH-QH-HBu" id="QzO-yn-BBd"/>
                                 </connections>

@@ -96,12 +96,12 @@
 		5A6300B11941EF2E0010849F /* SNLInteractionTableView */ = {
 			isa = PBXGroup;
 			children = (
-				5A6300B21941EF2E0010849F /* SNLInteractionCell.h */,
-				5A6300B31941EF2E0010849F /* SNLInteractionCell.m */,
-				5A6300B41941EF2E0010849F /* SNLInteractionTableView.h */,
-				5A6300B51941EF2E0010849F /* SNLInteractionTableView.m */,
 				5A6300B61941EF2E0010849F /* SNLInteractionTableViewController.h */,
 				5A6300B71941EF2E0010849F /* SNLInteractionTableViewController.m */,
+				5A6300B41941EF2E0010849F /* SNLInteractionTableView.h */,
+				5A6300B51941EF2E0010849F /* SNLInteractionTableView.m */,
+				5A6300B21941EF2E0010849F /* SNLInteractionCell.h */,
+				5A6300B31941EF2E0010849F /* SNLInteractionCell.m */,
 			);
 			name = SNLInteractionTableView;
 			path = ../SNLInteractionTableView;

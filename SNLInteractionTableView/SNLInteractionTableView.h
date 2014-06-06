@@ -21,7 +21,7 @@
 /**
  *  Delegate protocol to handle reordering of cells in SNLInteractionTableView.
  */
-@protocol SNLInteractionTableViewDelegate <UITableViewDelegate>
+@protocol SNLInteractionTableViewReorderDelegate <UITableViewDelegate>
 
 /**
  *	Called when user long presses a cell.
@@ -49,7 +49,7 @@
 /**
  *  TableViews delegate ViewController to handle reordering.
  */
-@property (nonatomic, weak) id <SNLInteractionTableViewDelegate> delegate;
+@property (nonatomic, weak) id <SNLInteractionTableViewReorderDelegate> delegate;
 
 /**
  *  Toolbar is shown when cell is tapped.

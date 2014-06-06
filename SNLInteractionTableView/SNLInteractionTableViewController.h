@@ -20,6 +20,6 @@
 #import "SNLInteractionTableView.h"
 #import "SNLInteractionCell.h"
 
-@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewDelegate, UITableViewDataSource, SNLInteractionCellActionDelegate>
+@interface SNLInteractionTableViewController : UITableViewController <SNLInteractionTableViewReorderDelegate, UITableViewDataSource, SNLInteractionCellActionDelegate>
 
 @end

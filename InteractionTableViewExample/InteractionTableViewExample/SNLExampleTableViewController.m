@@ -54,6 +54,12 @@
     return cell;
 }
 
+/* Uncomment to disable reordering
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+*/
+
 
 
 #pragma mark - SNLInteractionTableView delegate - Reorder

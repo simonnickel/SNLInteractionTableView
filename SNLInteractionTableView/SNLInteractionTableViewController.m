@@ -35,6 +35,12 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+	if (self.clearsSelectionOnViewWillAppear) {
+		[((SNLInteractionTableView *)self.tableView) deselectSelectedRow];
+	}
+}
+
 
 #pragma mark - Table view delegate
 

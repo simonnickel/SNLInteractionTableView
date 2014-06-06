@@ -79,8 +79,7 @@ const double SNLToolbarHeight = 44;
     [self setupContainer];
     
     self.indicatorWidth = [NSNumber numberWithInt:50];
-    [self setupIndicatorLeft];
-    [self setupIndicatorRight];
+    [self setupIndicator:SNLSwipeSideBoth];
     
     [self setupCustomSeparator];
 	
@@ -261,49 +260,49 @@ const double SNLToolbarHeight = 44;
     return view;
 }
 
-- (void)setupIndicatorLeft {
-    [self setupIndicatorLeft:YES];
-}
-- (void)setupIndicatorRight {
-    [self setupIndicatorLeft:NO];
-}
-- (void)setupIndicatorLeft:(BOOL)isLeft {
-    UIView *indicator = [[UIView alloc] init];
-    [indicator setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant: - [self.indicatorWidth floatValue]];
-    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:[self.indicatorWidth floatValue]];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.container attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:[self.indicatorWidth floatValue]];
-	
-    UIImageView *image;
-    
-    if (isLeft) {
-        self.indicatorImageViewLeft = [[UIImageView alloc] init];
-        image = self.indicatorImageViewLeft;
-        
-        self.indicatorLeft = indicator;
-        [self.contentView addSubview:self.indicatorLeft];
-        
-        [self.contentView addConstraints:@[top, left, height, width]];
-    }
-    else {
-        self.indicatorImageViewRight = [[UIImageView alloc] init];
-        image = self.indicatorImageViewRight;
-        
-        self.indicatorRight = indicator;
-        [self.contentView addSubview:self.indicatorRight];
-        [self.contentView addConstraints:@[top, right, height, width]];
-    }
-    
-    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:indicator attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:indicator attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.f];
-	
-    [image setTranslatesAutoresizingMaskIntoConstraints:NO];
-	
-    [indicator addSubview:image];
-    [indicator addConstraints:@[centerX, centerY]];
+- (void)setupIndicator:(SNLSwipeSide)side {
+	if (side == SNLSwipeSideBoth) {
+		[self setupIndicator:SNLSwipeSideLeft];
+		[self setupIndicator:SNLSwipeSideRight];
+	}
+	else {
+		UIView *indicator = [[UIView alloc] init];
+		[indicator setTranslatesAutoresizingMaskIntoConstraints:NO];
+		
+		NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
+		NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant: - [self.indicatorWidth floatValue]];
+		NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:[self.indicatorWidth floatValue]];
+		NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.container attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.f];
+		NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:indicator attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:[self.indicatorWidth floatValue]];
+		
+		UIImageView *image;
+		
+		if (side == SNLSwipeSideLeft) {
+			self.indicatorImageViewLeft = [[UIImageView alloc] init];
+			image = self.indicatorImageViewLeft;
+			
+			self.indicatorLeft = indicator;
+			[self.contentView addSubview:self.indicatorLeft];
+			
+			[self.contentView addConstraints:@[top, left, height, width]];
+		}
+		else if (side == SNLSwipeSideRight) {
+			self.indicatorImageViewRight = [[UIImageView alloc] init];
+			image = self.indicatorImageViewRight;
+			
+			self.indicatorRight = indicator;
+			[self.contentView addSubview:self.indicatorRight];
+			[self.contentView addConstraints:@[top, right, height, width]];
+		}
+		
+		NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:indicator attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.f];
+		NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:image attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:indicator attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.f];
+		
+		[image setTranslatesAutoresizingMaskIntoConstraints:NO];
+		
+		[indicator addSubview:image];
+		[indicator addConstraints:@[centerX, centerY]];
+	}
 }
 
 - (void)updateIndicatorStyle:(SNLSwipeSide)side forSuccess:(BOOL)success {

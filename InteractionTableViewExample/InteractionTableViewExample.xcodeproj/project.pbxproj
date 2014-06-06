@@ -96,7 +96,7 @@
 		5A87C83818A3E75800928A4A = {
 			isa = PBXGroup;
 			children = (
-				5A87C87618A3E86F00928A4A /* SNInteractionTableView */,
+				5A87C87618A3E86F00928A4A /* SNLInteractionTableView */,
 				5A87C84A18A3E75800928A4A /* InteractionTableViewExample */,
 				5A87C85318A3E75800928A4A /* AppDelegate.h */,
 				5A87C85418A3E75800928A4A /* AppDelegate.m */,
@@ -171,7 +171,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5A87C87618A3E86F00928A4A /* SNInteractionTableView */ = {
+		5A87C87618A3E86F00928A4A /* SNLInteractionTableView */ = {
 			isa = PBXGroup;
 			children = (
 				5A867CB518A6CC9E002F43B8 /* SNLInteractionTableViewController.h */,
@@ -181,7 +181,7 @@
 				5A87C95D18A3FB1A00928A4A /* SNLInteractionCell.h */,
 				5A87C95E18A3FB1A00928A4A /* SNLInteractionCell.m */,
 			);
-			name = SNInteractionTableView;
+			name = SNLInteractionTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

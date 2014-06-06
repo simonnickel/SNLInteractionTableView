@@ -63,6 +63,12 @@ extern const double SNLToolbarHeight;
 @property (nonatomic, weak) id <SNLInteractionCellActionDelegate> delegate;
 
 /**
+ *  Swipe action indicator.
+ */
+@property (nonatomic) BOOL swipeActiveLeft;
+@property (nonatomic) BOOL swipeActiveRight;
+
+/**
  *  Toolbar.
  */
 @property (nonatomic) BOOL hasToolbar;
@@ -92,7 +98,7 @@ extern const double SNLToolbarHeight;
 /**
  *	Helper function to configure left and right swipe behaviour.
  */
-- (void)configureSwipeOn:(SNLSwipeSide)side withCancelAnimation:(SNLSwipeAnimation)animationCancel andSuccessAnimation:(SNLSwipeAnimation)animationSuccess andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess;
+- (void)configureSwipeOn:(SNLSwipeSide)side withCancelAnimation:(SNLSwipeAnimation)animationCancel successAnimation:(SNLSwipeAnimation)animationSuccess image:(UIImage *)image imageOnSuccess:(UIImage *)imageSuccess imageInactive:(UIImage *)imageDisabled;
 
 /**
  *	Called when a toolbar button is pressed.

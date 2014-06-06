@@ -33,6 +33,8 @@
 @property (nonatomic) UIImage *indicatorImageRight;
 @property (nonatomic) UIImage *indicatorImageSuccessLeft;
 @property (nonatomic) UIImage *indicatorImageSuccessRight;
+@property (nonatomic) UIImage *indicatorImageDisabledLeft;
+@property (nonatomic) UIImage *indicatorImageDisabledRight;
 
 @property (nonatomic) BOOL swipeSuccessLeft;
 @property (nonatomic) BOOL swipeSuccessRight;
@@ -83,18 +85,20 @@ const double SNLToolbarHeight = 44;
 	[self setupToolbar];
 }
 
-- (void)configureSwipeOn:(SNLSwipeSide)side withCancelAnimation:(SNLSwipeAnimation)animationCancel andSuccessAnimation:(SNLSwipeAnimation)animationSuccess andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess {
+- (void)configureSwipeOn:(SNLSwipeSide)side withCancelAnimation:(SNLSwipeAnimation)animationCancel successAnimation:(SNLSwipeAnimation)animationSuccess image:(UIImage *)image imageOnSuccess:(UIImage *)imageSuccess imageInactive:(UIImage *)imageDisabled {
 	if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
 		self.swipeAnimationCancelLeft = animationCancel;
 		self.swipeAnimationSuccessLeft = animationSuccess;
 		self.indicatorImageLeft = image;
 		self.indicatorImageSuccessLeft = imageSuccess;
+		self.indicatorImageDisabledLeft = imageDisabled;
 	}
 	if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
 		self.swipeAnimationCancelRight = animationCancel;
 		self.swipeAnimationSuccessRight = animationSuccess;
 		self.indicatorImageRight = image;
 		self.indicatorImageSuccessRight = imageSuccess;
+		self.indicatorImageDisabledRight = imageDisabled;
 	}
 }
 
@@ -133,11 +137,15 @@ const double SNLToolbarHeight = 44;
 - (void)updateIndicatorStyle:(SNLSwipeSide)side forSuccess:(BOOL)success {
 	if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
 		self.indicatorLeft.backgroundColor = success ? self.colorIndicatorSuccess : self.colorIndicator;
-		self.indicatorImageViewLeft.image = (success && self.indicatorImageSuccessLeft) ? self.indicatorImageSuccessLeft : self.indicatorImageLeft;
+		self.indicatorImageViewLeft.image = self.swipeActiveLeft ?
+			(success && self.indicatorImageSuccessLeft) ? self.indicatorImageSuccessLeft : self.indicatorImageLeft
+			: self.indicatorImageDisabledLeft;
 	}
 	if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
 		self.indicatorRight.backgroundColor = success ? self.colorIndicatorSuccess : self.colorIndicator;
-		self.indicatorImageViewRight.image = (success && self.indicatorImageSuccessRight) ? self.indicatorImageSuccessRight : self.indicatorImageRight;
+		self.indicatorImageViewRight.image = self.swipeActiveRight ?
+			(success && self.indicatorImageSuccessRight) ? self.indicatorImageSuccessRight : self.indicatorImageRight
+			: self.indicatorImageDisabledRight;
 	}
 }
 
@@ -150,18 +158,26 @@ const double SNLToolbarHeight = 44;
 }
 
 - (void)setSwipeSuccessLeft:(BOOL)success {
-	if (success != _swipeSuccessLeft) {
+	if (success != _swipeSuccessLeft && self.swipeActiveLeft) {
 		[self updateIndicatorStyle:SNLSwipeSideLeft forSuccess:success];
 	}
-    _swipeSuccessLeft = success;
+    _swipeSuccessLeft = success && self.swipeActiveLeft;
 }
 - (void)setSwipeSuccessRight:(BOOL)success {
-	if (success != _swipeSuccessRight) {
+	if (success != _swipeSuccessRight && self.swipeActiveRight) {
 		[self updateIndicatorStyle:SNLSwipeSideRight forSuccess:success];
 	}
-    _swipeSuccessRight = success;
+    _swipeSuccessRight = success && self.swipeActiveRight;
 }
 
+- (void)setSwipeActiveLeft:(BOOL)indicatorEnabledLeft {
+	_swipeActiveLeft = indicatorEnabledLeft;
+	[self updateIndicatorStyle:SNLSwipeSideLeft forSuccess:NO];
+}
+- (void)setSwipeActiveRight:(BOOL)indicatorEnabledRight {
+	_swipeActiveRight = indicatorEnabledRight;
+	[self updateIndicatorStyle:SNLSwipeSideRight forSuccess:NO];
+}
 
 #pragma mark - Setup Helper
 
@@ -262,6 +278,7 @@ const double SNLToolbarHeight = 44;
 		UIImageView *image;
 		
 		if (side == SNLSwipeSideLeft) {
+			self.swipeActiveLeft = YES;
 			self.indicatorImageViewLeft = [[UIImageView alloc] init];
 			image = self.indicatorImageViewLeft;
 			
@@ -271,6 +288,7 @@ const double SNLToolbarHeight = 44;
 			[self.contentView addConstraints:@[top, left, height, width]];
 		}
 		else if (side == SNLSwipeSideRight) {
+			self.swipeActiveRight = YES;
 			self.indicatorImageViewRight = [[UIImageView alloc] init];
 			image = self.indicatorImageViewRight;
 			
@@ -423,10 +441,10 @@ const double SNLToolbarHeight = 44;
 }
 
 - (void)performSwipeSuccessDelayAnimation:(BOOL)animationDelayed {
-	if (self.swipeSuccessLeft) {
+	if (self.swipeSuccessLeft && self.swipeActiveLeft) {
 		[self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
 	}
-	else if (self.swipeSuccessRight) {
+	else if (self.swipeSuccessRight && self.swipeActiveRight) {
 		[self.delegate swipeAction:SNLSwipeSideRight onCell:self];
 	}
 	[self resetIndicator:SNLSwipeSideBoth delayed:animationDelayed];

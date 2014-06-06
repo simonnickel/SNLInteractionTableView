@@ -42,15 +42,23 @@
 	// configure left and right swipe indicator
 	[self configureSwipeOn:SNLSwipeSideLeft
 	   withCancelAnimation:SNLSwipeAnimationDefault
-	   andSuccessAnimation:SNLSwipeAnimationSlideBack
-				  andImage:[UIImage imageNamed:@"indicator"]
-		 andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+		  successAnimation:SNLSwipeAnimationSlideBack
+					 image:[UIImage imageNamed:@"indicator"]
+			imageOnSuccess:[UIImage imageNamed:@"indicator_success"]
+			 imageInactive:[UIImage imageNamed:@"indicator_disabled"]];
+
 	
 	[self configureSwipeOn:SNLSwipeSideRight
 	   withCancelAnimation:SNLSwipeAnimationDefault
-	   andSuccessAnimation:SNLSwipeAnimationSlideOut
-				  andImage:[UIImage imageNamed:@"indicator"]
-		 andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+		  successAnimation:SNLSwipeAnimationSlideOut
+					 image:[UIImage imageNamed:@"indicator"]
+			imageOnSuccess:[UIImage imageNamed:@"indicator_success"]
+			 imageInactive:[UIImage imageNamed:@"indicator_disabled"]];
+	
+	/* to set swipe action inactive
+	 self.swipeEnabledLeft = NO;
+	 self.swipeEnabledRight = NO;
+	*/
 
 	
 	// setup toolbar, if toolbar is enabled (default)

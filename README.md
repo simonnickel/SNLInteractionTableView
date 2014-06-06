@@ -24,11 +24,14 @@ See example project in InteractionTableViewExample for more details.
 1. Copy SNInteractionTableView directory into your project (Controller, TableView and TableViewCell).
 2. Change classes of Controller, TableView and TableViewCell in your Storyboard to related SNInteraction-class or make your existing custom classes subclasses of related SNInteraction-class.
 3. Set cell delegate in tableView:cellForRowAtIndexPath: of your TableViewController.
-4. Configure cell in your SNLInteractionCell subclass.
-5. Add moveRowFromIndexPath:toIndexPath: to your TableViewController to update your data store when reordering.
+4. Configure your TableViewController to support reordering and cell actions.
+5. Configure cell in your SNLInteractionCell subclass.
 
 
+### 3. + 4. Configure TableViewController
 ```objective-c
+#pragma mark - Table view data source
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SNLExampleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
@@ -44,9 +47,57 @@ See example project in InteractionTableViewExample for more details.
     return cell;
 }
 
+
+
+#pragma mark - SNLInteractionTableView delegate - Reorder
+
+- (void)startedReorderAtIndexPath:(NSIndexPath *)indexPath {
+    // additional setup when reordering starts
+    NSLog(@"Reordering started");
+}
+
+// Update your data source when a cell is draged to a new position. This method is called every time 2 cells switch positions.
+- (void)moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+    // update DataSource when cells are switched
+    NSLog(@"Switched Cells");
+    
+    // Reorder example:
+    id object = [self.itemList objectAtIndex:fromIndexPath.row];
+    [self.itemList removeObjectAtIndex:fromIndexPath.row];
+    [self.itemList insertObject:object atIndex:toIndexPath.row];
+}
+
+- (void)finishedReorderAtIndexPath:(NSIndexPath *)indexPath; {
+    // additional cleanup when reordering ended
+    NSLog(@"Reordering ended");
+}
+
+
+
+#pragma mark - SNLInteractionCell delegate
+
+- (void)swipeAction:(SNLSwipeSide)swipeSide onCell:(SNLExampleTableViewCell *)cell {
+    // implement actions on successfull swipe gesture
+    if (swipeSide == SNLSwipeSideLeft) {
+        NSLog(@"Left on '%@'", cell.label.text);
+    }
+    else if (swipeSide == SNLSwipeSideRight) {
+        NSLog(@"Right on '%@'", cell.label.text);
+        [self performSegueWithIdentifier:@"detail" sender:self];
+    }
+}
+
+- (void)buttonActionWithTag:(NSInteger)tag onCell:(SNLExampleTableViewCell *)cell {
+    if (tag == 1) {
+        NSLog(@"First Button on '%@'", cell.label.text);
+    }
+    else if (tag == 2) {
+        NSLog(@"Second Button on '%@'", cell.label.text);
+    }
+}
 ```
 
-Example cell initialization:
+### 5. Cell initialization
 ```objective-c
     /*
     // to override default/storyboard colors use:

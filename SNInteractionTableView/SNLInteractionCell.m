@@ -306,17 +306,15 @@ const double SNLToolbarHeight = 44;
     [indicator addConstraints:@[centerX, centerY]];
 }
 
-- (void)resetIndicatorLeft:(BOOL)isLeft withDelay:(BOOL)withDelay {
-    float delay = 0.0;
-    if (withDelay)
-        delay = 0.7;
-    
-    [UIView animateWithDuration:0.3 delay:delay usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+- (void)resetIndicator:(SNLSwipeSide)side delayed:(BOOL)delayed {
+    [UIView animateWithDuration:0.3 delay:(delayed ? 0.7 : 0.0) usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
-                         if (isLeft)
+                         if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
                              self.indicatorLeft.center = CGPointMake(- self.indicatorLeft.frame.size.width/2, self.container.center.y);
-                         else
+						 }
+                         if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
                              self.indicatorRight.center = CGPointMake(self.contentView.frame.size.width + self.indicatorRight.frame.size.width/2, self.container.center.y);
+						 }
                      } completion:^(BOOL completed){}];
 }
 
@@ -399,7 +397,7 @@ const double SNLToolbarHeight = 44;
 								 [gestureRecognizer.view setCenter:outside];
 							 } completion:^(BOOL completed){
 								 [self.container setHidden:YES];
-								 [self performSwipeSuccessWithAnimationDelay:NO];
+								 [self performSwipeSuccessDelayAnimation:NO];
 							 }];
         }
 		else if ((self.swipeSuccessLeft &&
@@ -412,7 +410,7 @@ const double SNLToolbarHeight = 44;
 								 CGPoint center = CGPointMake(self.center.x, self.container.center.y);
 								 [gestureRecognizer.view setCenter:center];
 							 } completion:^(BOOL completed){
-								 [self performSwipeSuccessWithAnimationDelay:NO];
+								 [self performSwipeSuccessDelayAnimation:NO];
 							 }];
 		}
         // view has to bounce back
@@ -437,7 +435,7 @@ const double SNLToolbarHeight = 44;
                 [collision setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(0, 0, 0, space)];
             }
             
-			[self performSwipeSuccessWithAnimationDelay:(self.swipeSuccessLeft || self.swipeSuccessRight)];
+			[self performSwipeSuccessDelayAnimation:(self.swipeSuccessLeft || self.swipeSuccessRight)];
         }
     }
 }
@@ -473,15 +471,14 @@ const double SNLToolbarHeight = 44;
         [self.indicatorImageViewRight setImage:self.indicatorImageRight];
 }
 
-- (void)performSwipeSuccessWithAnimationDelay:(BOOL)animationDelay {
+- (void)performSwipeSuccessDelayAnimation:(BOOL)animationDelayed {
 	if (self.swipeSuccessLeft) {
 		[self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
-		[self resetIndicatorLeft:YES withDelay:animationDelay];
 	}
 	else if (self.swipeSuccessRight) {
 		[self.delegate swipeAction:SNLSwipeSideRight onCell:self];
-		[self resetIndicatorLeft:NO withDelay:animationDelay];
 	}
+	[self resetIndicator:SNLSwipeSideBoth delayed:animationDelayed];
 }
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {

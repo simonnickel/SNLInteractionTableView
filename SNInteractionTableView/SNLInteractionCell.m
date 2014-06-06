@@ -335,6 +335,10 @@ const double SNLToolbarHeight = 44;
 
 #pragma mark - Interaction
 
+- (void)buttonPressed:(UIButton *)sender {
+	[self.delegate buttonActionWithTag:sender.tag onCell:self];
+}
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     if ([gestureRecognizer isMemberOfClass:[UIPanGestureRecognizer class]]) {
         CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:self.contentView];
@@ -480,10 +484,6 @@ const double SNLToolbarHeight = 44;
     //reset weird 1/2px bounce rotation if seperator exists
     //[self.container setNeedsLayout];
     //[self.container layoutIfNeeded];
-}
-
-- (void)buttonPressed:(UIButton *)sender {
-	[self.delegate buttonActionWithTag:sender.tag onCell:self];
 }
 
 @end

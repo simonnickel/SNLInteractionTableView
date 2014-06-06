@@ -87,13 +87,13 @@ const double SNLToolbarHeight = 44;
     [self setupToolbar];
 }
 
-- (void)configureSwipeOn:(SNLSwipeAction)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess {
-	if (side == SNLSwipeActionLeft || side == SNLSwipeActionBoth) {
+- (void)configureSwipeOn:(SNLSwipeSide)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess {
+	if (side == SNLSwipeSideLeft || side == SNLSwipeSideBoth) {
 		self.swipeAnimationLeft = animation;
 		self.indicatorImageLeft = image;
 		self.indicatorImageSuccessLeft = imageSuccess;
 	}
-	if (side == SNLSwipeActionRight || side == SNLSwipeActionBoth) {
+	if (side == SNLSwipeSideRight || side == SNLSwipeSideBoth) {
 		self.swipeAnimationRight = animation;
 		self.indicatorImageRight = image;
 		self.indicatorImageSuccessRight = imageSuccess;
@@ -401,10 +401,10 @@ const double SNLToolbarHeight = 44;
 								 [self.container setHidden:YES];
 								 //[gestureRecognizer.view setCenter:centerReset];
 								 if (self.swipeSuccessLeft) {
-									 [self.delegate swipeAction:SNLSwipeActionLeft onCell:self];
+									 [self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
 								 }
 								 else if (self.swipeSuccessRight) {
-									 [self.delegate swipeAction:SNLSwipeActionRight onCell:self];
+									 [self.delegate swipeAction:SNLSwipeSideRight onCell:self];
 								 }
 							 }];
         }
@@ -432,7 +432,7 @@ const double SNLToolbarHeight = 44;
             
             // handle left action
             if (self.swipeSuccessLeft) {
-				[self.delegate swipeAction:SNLSwipeActionLeft onCell:self];
+				[self.delegate swipeAction:SNLSwipeSideLeft onCell:self];
                 [self resetIndicatorLeft:YES withDelay:YES];
             }
             else {
@@ -441,7 +441,7 @@ const double SNLToolbarHeight = 44;
             
             // handle right action
             if (self.swipeSuccessRight) {
-				[self.delegate swipeAction:SNLSwipeActionRight onCell:self];
+				[self.delegate swipeAction:SNLSwipeSideRight onCell:self];
                 [self resetIndicatorLeft:NO withDelay:YES];
             }
             else {

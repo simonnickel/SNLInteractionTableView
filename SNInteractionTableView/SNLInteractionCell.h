@@ -20,10 +20,10 @@
 
 @class SNLInteractionCell;
 
-typedef NS_ENUM(NSInteger, SNLSwipeAction){
-	SNLSwipeActionBoth,
-    SNLSwipeActionLeft,
-	SNLSwipeActionRight
+typedef NS_ENUM(NSInteger, SNLSwipeSide){
+	SNLSwipeSideBoth,
+    SNLSwipeSideLeft,
+	SNLSwipeSideRight
 };
 
 typedef NS_ENUM(NSInteger, SNLSwipeAnimation){
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, SNLSwipeAnimation){
  */
 @protocol SNLInteractionCellActionDelegate <NSObject>
 
-- (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLInteractionCell *)cell;
+- (void)swipeAction:(SNLSwipeSide)swipeAction onCell:(SNLInteractionCell *)cell;
 
 - (void)buttonActionWithTag:(NSInteger)tag onCell:(SNLInteractionCell *)cell;
 
@@ -78,7 +78,7 @@ extern const double SNLToolbarHeight;
 /**
  *	Helper function to configure left and right swipe behaviour.
  */
-- (void)configureSwipeOn:(SNLSwipeAction)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess;
+- (void)configureSwipeOn:(SNLSwipeSide)side withAnimation:(SNLSwipeAnimation)animation andImage:(UIImage *)image andImageOnSuccess:(UIImage *)imageSuccess;
 
 /**
  *	Called when a toolbar button is pressed.

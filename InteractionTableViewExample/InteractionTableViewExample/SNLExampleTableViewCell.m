@@ -41,10 +41,11 @@
     self.colorCustomSeparatorBottom = [UIColor grayColor];
 	
 	
-	// configure left and right swipe indicator
-	[self configureSwipeOn:SNLSwipeActionLeft withAnimation:SNLSwipeAnimationBounce andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
 	
-	[self configureSwipeOn:SNLSwipeActionRight withAnimation:SNLSwipeAnimationSlide andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+	// configure left and right swipe indicator
+	[self configureSwipeOn:SNLSwipeSideLeft withAnimation:SNLSwipeAnimationBounce andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
+	
+	[self configureSwipeOn:SNLSwipeSideRight withAnimation:SNLSwipeAnimationSlide andImage:[UIImage imageNamed:@"indicator"] andImageOnSuccess:[UIImage imageNamed:@"indicator_success"]];
 
 	
 	// setup toolbar, if toolbar is enabled (default)

@@ -115,13 +115,13 @@
 
 #pragma mark - SNLInteractionCell delegate
 
-- (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLInteractionCell *)cell {
-	// implement action for swipeAction == SNLSwipeActionLeft/SNLSwipeActionLeft in subclass
+- (void)swipeAction:(SNLSwipeSide)swipeAction onCell:(SNLInteractionCell *)cell {
+	// implement action for swipeAction == SNLSwipeSideLeft/SNLSwipeSideLeft in subclass
 	/*
-	if (swipeAction == SNLSwipeActionLeft) {
+	if (swipeAction == SNLSwipeSideLeft) {
 	
 	}
-	else if (swipeAction == SNLSwipeActionRight) {
+	else if (swipeAction == SNLSwipeSideRight) {
 	
 	}
 	*/

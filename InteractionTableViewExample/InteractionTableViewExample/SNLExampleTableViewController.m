@@ -82,12 +82,12 @@
 
 #pragma mark - SNLInteractionCell delegate
 
-- (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLExampleTableViewCell *)cell {
+- (void)swipeAction:(SNLSwipeSide)swipeSide onCell:(SNLExampleTableViewCell *)cell {
 	// implement actions on successfull swipe gesture
-	if (swipeAction == SNLSwipeActionLeft) {
+	if (swipeSide == SNLSwipeSideLeft) {
 		NSLog(@"Left on '%@'", cell.label.text);
 	}
-	else if (swipeAction == SNLSwipeActionRight) {
+	else if (swipeSide == SNLSwipeSideRight) {
 		NSLog(@"Right on '%@'", cell.label.text);
 		[self performSegueWithIdentifier:@"detail" sender:self];
 	}

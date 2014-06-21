@@ -6,32 +6,26 @@
 #
 Pod::Spec.new do |s|
   s.name             = "SNLInteractionTableView"
-  s.version          = File.read('VERSION')
-  s.summary          = "A short description of SNLInteractionTableView."
+  s.version          = 1.2
+  s.summary          = "Complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView."
   s.description      = <<-DESC
-                       An optional longer description of SNLInteractionTableView
+                       SNLInteractionTableView provides a complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView. It uses AutoLayout and extends an existing tableViewCell layout from your Storyboard with the following functionality:
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                        * Swipe Action - left and right, with bounce, slide-back or slide-out animation
+                        * Selection - with toolbar
+                        * Reordering - by long press
                        DESC
-  s.homepage         = "http://EXAMPLE/NAME"
-  s.screenshots      = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "http://simonnickel.de/devlog/projects/sninteractiontableview"
+  s.screenshots      = "http://simonnickel.de/wp-content/uploads/2014/02/snifinal1.gif"
   s.license          = 'MIT'
   s.author           = { "Simon Nickel" => "simonnickel@googlemail.com" }
-  s.source           = { :git => "http://EXAMPLE/NAME.git", :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/EXAMPLE'
+  s.source           = { :git => "https://github.com/simonnickel/SNLInteractionTableView.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/simonnickel_en'
 
-  # s.platform     = :ios, '5.0'
-  # s.ios.deployment_target = '5.0'
-  # s.osx.deployment_target = '10.7'
+  s.platform     = :ios, '7.0'
   s.requires_arc = true
 
-  s.source_files = 'Classes'
-  s.resources = 'Assets/*.png'
+  s.source_files = 'Classes/**/*.{h,m}'
+  s.resources = 'Assets/*.gif'
 
-  s.ios.exclude_files = 'Classes/osx'
-  s.osx.exclude_files = 'Classes/ios'
-  # s.public_header_files = 'Classes/**/*.h'
-  # s.frameworks = 'SomeFramework', 'AnotherFramework'
-  # s.dependency 'JSONKit', '~> 1.4'
 end

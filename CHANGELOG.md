@@ -1,9 +1,13 @@
 # SNLInteractionTableView CHANGELOG
 
 
-## 2.0.0
+## 1.3.1
 ### 21.06.2014
-- New file structure for cocoapods.
+- Updated readme + podspec
+
+## 1.3.0
+### 21.06.2014
+- New file structure for CocoaPods.
 
 
 ## 1.2

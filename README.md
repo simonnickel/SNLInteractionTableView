@@ -17,27 +17,20 @@ You can use this code completely free without any restrictions for whatever you 
 The reordering functionality is inspired/rebuild/copied by [BVReorderTableView](https://github.com/bvogelzang/BVReorderTableView) by Ben Vogelzang. If you just want reordering: use his code!
 
 
-![Example](https://github.com/simonnickel/SNLInteractionTableView/blob/master/example.gif?raw=true)
-
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
+![Example](https://raw.githubusercontent.com/simonnickel/SNLInteractionTableView/master/Assets/example.gif)
 
 ## Installation
 
-SNLInteractionTableView is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+SNLInteractionTableView is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
-    pod "SNLInteractionTableView"
+    pod "SNLInteractionTableView", "~> 1.3.0"
 
 
 ## Usage
 
 See example project in InteractionTableViewExample for more details.
 
-1. Copy SNLInteractionTableView directory into your project (Controller, TableView and TableViewCell).
+1. Install with CocoaPods.
 2. Change classes of Controller, TableView and TableViewCell in your Storyboard to related SNInteraction-class or make your existing custom classes subclasses of related SNInteraction-class.
 3. Set cell delegate in tableView:cellForRowAtIndexPath: of your TableViewController.
 4. Configure your TableViewController to support reordering and cell actions.

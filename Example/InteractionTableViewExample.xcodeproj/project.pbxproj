@@ -93,7 +93,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A6300B11941EF2E0010849F /* SNLInteractionTableView */ = {
+		5A6300B11941EF2E0010849F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				5A6300B61941EF2E0010849F /* SNLInteractionTableViewController.h */,
@@ -103,14 +103,14 @@
 				5A6300B21941EF2E0010849F /* SNLInteractionCell.h */,
 				5A6300B31941EF2E0010849F /* SNLInteractionCell.m */,
 			);
-			name = SNLInteractionTableView;
-			path = ../SNLInteractionTableView;
+			name = Classes;
+			path = ../Classes;
 			sourceTree = "<group>";
 		};
 		5A87C83818A3E75800928A4A = {
 			isa = PBXGroup;
 			children = (
-				5A6300B11941EF2E0010849F /* SNLInteractionTableView */,
+				5A6300B11941EF2E0010849F /* Classes */,
 				5A87C84A18A3E75800928A4A /* InteractionTableViewExample */,
 				5A87C85318A3E75800928A4A /* AppDelegate.h */,
 				5A87C85418A3E75800928A4A /* AppDelegate.m */,

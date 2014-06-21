@@ -39,12 +39,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5A6300B21941EF2E0010849F /* SNLInteractionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNLInteractionCell.h; sourceTree = "<group>"; };
-		5A6300B31941EF2E0010849F /* SNLInteractionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNLInteractionCell.m; sourceTree = "<group>"; };
-		5A6300B41941EF2E0010849F /* SNLInteractionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNLInteractionTableView.h; sourceTree = "<group>"; };
-		5A6300B51941EF2E0010849F /* SNLInteractionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNLInteractionTableView.m; sourceTree = "<group>"; };
-		5A6300B61941EF2E0010849F /* SNLInteractionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNLInteractionTableViewController.h; sourceTree = "<group>"; };
-		5A6300B71941EF2E0010849F /* SNLInteractionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNLInteractionTableViewController.m; sourceTree = "<group>"; };
+		5A6300B21941EF2E0010849F /* SNLInteractionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNLInteractionCell.h; path = ../Classes/ios/SNLInteractionCell.h; sourceTree = "<group>"; };
+		5A6300B31941EF2E0010849F /* SNLInteractionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNLInteractionCell.m; path = ../Classes/ios/SNLInteractionCell.m; sourceTree = "<group>"; };
+		5A6300B41941EF2E0010849F /* SNLInteractionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNLInteractionTableView.h; path = ../Classes/ios/SNLInteractionTableView.h; sourceTree = "<group>"; };
+		5A6300B51941EF2E0010849F /* SNLInteractionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNLInteractionTableView.m; path = ../Classes/ios/SNLInteractionTableView.m; sourceTree = "<group>"; };
+		5A6300B61941EF2E0010849F /* SNLInteractionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNLInteractionTableViewController.h; path = ../Classes/ios/SNLInteractionTableViewController.h; sourceTree = "<group>"; };
+		5A6300B71941EF2E0010849F /* SNLInteractionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNLInteractionTableViewController.m; path = ../Classes/ios/SNLInteractionTableViewController.m; sourceTree = "<group>"; };
 		5A87C84118A3E75800928A4A /* InteractionTableViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InteractionTableViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A87C84418A3E75800928A4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A87C84618A3E75800928A4A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };

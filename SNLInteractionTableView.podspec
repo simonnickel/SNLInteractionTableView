@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = "SNLInteractionTableView"
-  s.version          = "v1.3.0"
+  s.version          = "1.3.0"
   s.summary          = "Complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView."
   s.description      = <<-DESC
                        SNLInteractionTableView provides a complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView. It uses AutoLayout and extends an existing tableViewCell layout from your Storyboard with the following functionality:

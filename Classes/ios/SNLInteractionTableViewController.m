@@ -71,25 +71,27 @@ typedef NS_ENUM(NSInteger, SNLCustomSeparatorPosition){
 }
 
 - (void)setupCustomSeparator:(SNLCustomSeparatorPosition)position forView:(SNLInteractionCell *)cell {
-    UIView *view = [[UIView alloc] init];
-    [cell addSubview:view];
-    [view setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeLeft multiplier:1.0f constant:self.tableView.separatorInset.left];
-    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeRight multiplier:1.0f constant: - self.tableView.separatorInset.right];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: 0.5f];
-    
-    [cell addConstraints:@[right, left, height]];
-    
-    if (position == SNLCustomSeparatorPositionTop) {
-		[cell addConstraint:top];
-		cell.customSeparatorTop = view;
-	}
-    else if (position == SNLCustomSeparatorPositionBottom) {
-		[cell addConstraint:bottom];
-		cell.customSeparatorBottom = view;
+	if ([cell isKindOfClass:[SNLInteractionCell class]]) {
+		UIView *view = [[UIView alloc] init];
+		[cell addSubview:view];
+		[view setTranslatesAutoresizingMaskIntoConstraints:NO];
+		
+		NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.f];
+		NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.f];
+		NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeLeft multiplier:1.0f constant:self.tableView.separatorInset.left];
+		NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeRight multiplier:1.0f constant: - self.tableView.separatorInset.right];
+		NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: 0.5f];
+		
+		[cell addConstraints:@[right, left, height]];
+		
+		if (position == SNLCustomSeparatorPositionTop) {
+			[cell addConstraint:top];
+			cell.customSeparatorTop = view;
+		}
+		else if (position == SNLCustomSeparatorPositionBottom) {
+			[cell addConstraint:bottom];
+			cell.customSeparatorBottom = view;
+		}
 	}
 }
 

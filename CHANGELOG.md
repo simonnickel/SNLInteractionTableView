@@ -1,5 +1,8 @@
 # SNLInteractionTableView CHANGELOG
 
+## 1.3.2
+### 25.06.2014
+- Fixed crashing when used without SNLInteractionCell
 
 ## 1.3.1
 ### 21.06.2014

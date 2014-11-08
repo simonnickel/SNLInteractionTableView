@@ -71,7 +71,6 @@ extern const double SNLToolbarHeight;
 /**
  *  Toolbar.
  */
-@property (nonatomic) BOOL hasToolbar;
 @property (nonatomic) UIToolbar *toolbar;
 @property (nonatomic) NSArray *toolbarButtons;
 

@@ -111,9 +111,7 @@ typedef NS_ENUM(NSInteger, SNLCustomSeparatorPosition){
 		[tableView deselectSelectedRow];
         return nil;
     }
-    else if (tableView.toolbarEnabled) {
-        cell.hasToolbar = YES;
-    }
+
     return indexPath;
 }
 

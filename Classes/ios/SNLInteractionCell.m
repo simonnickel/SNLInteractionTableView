@@ -113,8 +113,6 @@ const double SNLToolbarHeight = 44;
     self.contentView.backgroundColor = self.colorBackground;
     if (self.isSelected) {
         self.container.backgroundColor = self.colorSelected;
-        if (self.hasToolbar)
-            self.heightContainer.constant = self.contentView.frame.size.height - SNLToolbarHeight;
     }
     else
         self.container.backgroundColor = self.colorContainer;
@@ -227,7 +225,7 @@ const double SNLToolbarHeight = 44;
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.f];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.f];
     
-    self.heightContainer = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant: self.contentView.frame.size.height];
+    self.heightContainer = [NSLayoutConstraint constraintWithItem:self.container attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:self.contentView.frame.size.height];
     
     [self.contentView addConstraints:@[top, right, left, self.heightContainer]];
     

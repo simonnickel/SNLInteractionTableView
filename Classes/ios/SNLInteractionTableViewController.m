@@ -35,9 +35,15 @@ typedef NS_ENUM(NSInteger, SNLCustomSeparatorPosition){
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
-        SNLInteractionCell *cell = (SNLInteractionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-        [cell prepareForReuse];
+    // reload cell, handle selection
+    NSIndexPath *selectedRow = [self.tableView indexPathForSelectedRow];
+    
+    if (self.clearsSelectionOnViewWillAppear) {
+        [self.tableView deselectRowAtIndexPath:selectedRow animated:NO];
+    }
+    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    if (!self.clearsSelectionOnViewWillAppear) {
+        [self.tableView selectRowAtIndexPath:selectedRow animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
 }
 

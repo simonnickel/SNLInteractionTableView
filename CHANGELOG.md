@@ -1,5 +1,10 @@
 # SNLInteractionTableView CHANGELOG
 
+## 1.3.3
+### 09.11.2014
+- Added support for iPhone 6 native resolution.
+- Fixed cell resizing and selection bugs.
+
 ## 1.3.2
 ### 25.06.2014
 - Fixed crashing when used without SNLInteractionCell

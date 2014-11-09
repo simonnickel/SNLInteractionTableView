@@ -58,6 +58,8 @@
  */
 @property (nonatomic) BOOL toolbarEnabled;
 
+
+#pragma mark - Functionality
 /**
  *  Custom separator is enabled. Inherited from Storyboard.
  *
@@ -70,5 +72,10 @@
  *	tableView:didDeselectRowAtIndexPath of delegate.
  */
 - (void)deselectSelectedRow;
+
+/**
+ *  Reloads rows at indexPath like normal tableView does, but maintans selection.
+ */
+- (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths andKeepSelection:(BOOL)keepSelection;
 
 @end

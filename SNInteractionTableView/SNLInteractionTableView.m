@@ -69,7 +69,7 @@
 }
 
 
-#pragma mark - Selection
+#pragma mark - Functionality
 
 - (void)deselectSelectedRow {
     NSIndexPath *selected = [self indexPathForSelectedRow];
@@ -77,6 +77,17 @@
         [self.delegate tableView:self willDeselectRowAtIndexPath:selected];
         [self deselectRowAtIndexPath:selected animated:YES];
         [self.delegate tableView:self didDeselectRowAtIndexPath:selected];
+    }
+}
+
+- (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths andKeepSelection:(BOOL)keepSelection {
+    NSIndexPath *selectedRow = [self indexPathForSelectedRow];
+    if (!keepSelection) [self deselectSelectedRow];
+    
+    [self reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    
+    if (selectedRow && keepSelection) {
+        [self selectRowAtIndexPath:selectedRow animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
 }
 

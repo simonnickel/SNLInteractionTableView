@@ -58,10 +58,17 @@
  */
 @property (nonatomic) BOOL toolbarEnabled;
 
+
+#pragma mark - Functionality
 /**
  *  Deselect selected cell and calls tableView:willDeselectRowAtIndexPath and
  *	tableView:didDeselectRowAtIndexPath of delegate.
  */
 - (void)deselectSelectedRow;
+
+/**
+ *  Reloads rows at indexPath like normal tableView does, but maintans selection.
+ */
+- (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths andKeepSelection:(BOOL)keepSelection;
 
 @end

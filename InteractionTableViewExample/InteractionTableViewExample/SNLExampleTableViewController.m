@@ -83,6 +83,8 @@
 #pragma mark - SNLInteractionCell delegate
 
 - (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLExampleTableViewCell *)cell {
+    [super swipeAction:swipeAction onCell:cell];
+    
 	// implement actions on successfull swipe gesture
 	if (swipeAction == SNLSwipeActionLeft) {
 		NSLog(@"Left on '%@'", cell.label.text);

@@ -20,26 +20,27 @@
 #import "SNLInteractionTableView.h"
 #import "SNLInteractionCell.h"
 
+#define SYSTEM_VERSION_LESS_THAN(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+
 @interface SNLInteractionTableViewController ()
 
+@property (nonatomic) NSIndexPath *indexPathForActiveCell;
+
 @end
+
 
 @implementation SNLInteractionTableViewController
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    // reload cell, handle selection
-    NSIndexPath *selectedRow = [self.tableView indexPathForSelectedRow];
-    
-    if (self.clearsSelectionOnViewWillAppear) {
-        [self.tableView deselectRowAtIndexPath:selectedRow animated:NO];
-    }
-    [self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
-    if (!self.clearsSelectionOnViewWillAppear) {
-        [self.tableView selectRowAtIndexPath:selectedRow animated:NO scrollPosition:UITableViewScrollPositionNone];
+    if (self.indexPathForActiveCell) {
+        [(SNLInteractionTableView *)self.tableView reloadRowsAtIndexPaths:@[self.indexPathForActiveCell] andKeepSelection:!self.clearsSelectionOnViewWillAppear];
     }
 }
+
+
 
 
 #pragma mark - Table view delegate
@@ -60,8 +61,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
+    // smoother selection animation for iOS 7
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0")) {
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+    }
+    // iOS 8 needs explicit reloading
+    else {
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+    }
 }
 
 - (NSIndexPath *)tableView:(SNLInteractionTableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,15 +130,15 @@
 #pragma mark - SNLInteractionCell delegate
 
 - (void)swipeAction:(SNLSwipeAction)swipeAction onCell:(SNLInteractionCell *)cell {
-	// implement action for swipeAction == SNLSwipeActionLeft/SNLSwipeActionLeft in subclass
-	/*
-	if (swipeAction == SNLSwipeActionLeft) {
-	
+    self.indexPathForActiveCell = [self.tableView indexPathForCell:cell];
+    /*
+    if (swipeAction == SNLSwipeActionLeft) {
+
 	}
 	else if (swipeAction == SNLSwipeActionRight) {
-	
+
 	}
-	*/
+    */
 }
 
 - (void)buttonActionWithTag:(NSInteger)tag onCell:(SNLInteractionCell *)cell {

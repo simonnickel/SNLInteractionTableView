@@ -128,6 +128,7 @@ const double SNLToolbarHeight = 44;
 }
 
 - (void)prepareForReuse {
+    [super prepareForReuse];
     self.container.hidden = NO;
 	self.hidden = NO;
 }

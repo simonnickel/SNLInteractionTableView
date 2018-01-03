@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "SNLInteractionTableView"
-  s.version          = "1.3.3"
+  s.version          = "1.3.4"
   s.summary          = "Complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView."
   s.description      = <<-DESC
                        SNLInteractionTableView provides a complete tableView stack (controller, tableView and cell) to easily add more interaction to your tableView. It uses AutoLayout and extends an existing tableViewCell layout from your Storyboard with the following functionality:
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                         * Reordering - by long press
                        DESC
   s.homepage         = "https://github.com/simonnickel/SNLInteractionTableView"
-  s.screenshots      = "http://simonnickel.de/wp-content/uploads/2014/02/snifinal1.gif"
+  s.screenshots      = "https://raw.githubusercontent.com/simonnickel/SNLInteractionTableView/master/Assets/example.gif"
   s.license          = 'MIT'
   s.author           = { "Simon Nickel" => "simonnickel@googlemail.com" }
   s.source           = { :git => "https://github.com/simonnickel/SNLInteractionTableView.git", :tag => s.version.to_s }

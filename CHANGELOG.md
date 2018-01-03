@@ -1,5 +1,10 @@
 # SNLInteractionTableView CHANGELOG
 
+## 1.3.4
+### 03.01.2018
+- Updated to current settings.
+- Fixed warnings.
+
 ## 1.3.3
 ### 09.11.2014
 - Added support for iPhone 6 native resolution.

@@ -36,6 +36,8 @@
 
 @implementation SNLInteractionTableView
 
+@dynamic delegate;
+
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
